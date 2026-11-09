@@ -190,7 +190,7 @@ class TaskPrism(gl.Contract):
         def leader_fn():
             try:
                 response = gl.nondet.web.get(url)
-                need(response.status_code>=200 and response.status_code<300, 'DELIVERY_UNREACHABLE_RETRYABLE')
+                need(response.status>=200 and response.status<300, 'DELIVERY_UNREACHABLE_RETRYABLE')
                 body = response.body
             except Exception:
                 raise Exception('DELIVERY_UNREACHABLE_RETRYABLE')

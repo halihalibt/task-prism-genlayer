@@ -1,5 +1,6 @@
 """LOCAL MOCK tests. No network consensus is simulated as deployment evidence."""
 import copy
+from dataclasses import dataclass
 import hashlib
 import importlib.util
 import json
@@ -8,6 +9,12 @@ import random
 import sys
 import types
 import unittest
+
+@dataclass
+class Response:
+    status: int
+    headers: dict
+    body: bytes | None
 
 class Return:
     def __init__(self, value): self.calldata = value
@@ -20,11 +27,12 @@ class Runtime:
         self.validator = None
         self.proposal = None
         self.unreachable = False
+        self.http_status = 200
     def get(self,url):
         if self.unreachable: raise Exception('unreachable')
         body = self.bodies[min(self.fetches,len(self.bodies)-1)]
         self.fetches += 1
-        return types.SimpleNamespace(status_code=200,body=body)
+        return Response(status=self.http_status,headers={},body=body)
     def prompt(self,prompt):
         s = self.scores.pop(0) if len(self.scores)>1 else self.scores[0]
         return json.dumps({'scores':s,'rationale':'Grounded local mock assessment.','contradictions':['A retained local mock witness.']})
@@ -101,6 +109,14 @@ class LocalMockTests(unittest.TestCase):
         self.nochange(lambda:self.c.evaluate_delivery('task'),'UNREACHABLE_RETRYABLE')
         self.assertEqual(self.task()['rounds'],[])
         runtime.unreachable=False; self.c.evaluate_delivery('task'); self.assertEqual(self.task()['status'],'EVALUATING')
+    def test_sdk_response_uses_status_field_and_rejects_http_errors(self):
+        self.submit()
+        for status in [404,500]:
+            runtime.http_status=status
+            self.nochange(lambda:self.c.evaluate_delivery('task'),'UNREACHABLE_RETRYABLE')
+        runtime.http_status=200
+        self.c.evaluate_delivery('task')
+        self.assertEqual(self.task()['status'],'EVALUATING')
     def test_first_round_pending_without_settlement(self):
         self.pending(); t=self.task(); self.assertEqual(t['status'],'EVALUATING'); self.assertIsNone(t['settlement']); self.assertEqual(self.state()['balances'][B],9000); self.conserve()
     def test_accept_full_settlement_any_caller(self):
