@@ -1,0 +1,9 @@
+Public source review: a three-step verification runbook
+
+1. Capture the evidence. Save the exact UTF-8 response bytes from the public HTTPS delivery URL. Compute SHA-256 before submitting the manifest. Avoid a page that changes on each request.
+2. Compare the commitment. Match the fetched body hash to the submitted delivery hash. A mismatch means the bytes changed; do not use the summary as a substitute for the delivery.
+3. Inspect the outcome. Read all three scores, the rationale and any contradiction witnesses. Wait for transaction FINALIZED, then read latest-final contract state before reporting settlement.
+
+Example: a report initially hashes to H1. The publisher adds a sentence, creating H2. Even if the summary is unchanged, H2 does not match H1. Publish a new task rather than rewriting a finalized verdict.
+
+Limitations: this runbook checks delivery integrity and review procedure; it does not prove every factual statement in a report. Public URLs may disappear. The task market uses a simulated mGEN ledger; no real GEN moves.
