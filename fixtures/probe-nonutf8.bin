@@ -1,0 +1,4 @@
+Delivery with invalid UTF-8 bytes.
+Valid ASCII line.
+ÿş€
+More text after invalid bytes.

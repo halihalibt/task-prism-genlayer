@@ -1,4 +1,11 @@
-"""LOCAL MOCK tests. No network consensus is simulated as deployment evidence."""
+"""LOCAL MOCK tests. No network consensus is simulated as deployment evidence.
+
+Money is real testnet GEN in wei in the contract under test. The mock
+simulates value flow: the harness sets gl.message.value before each payable
+call, Runtime records external transfers, and TaskPrism.balance is the
+accounting sum (escrow + stakes + withdrawable + treasury), which the
+conservation check ties to value in minus value out.
+"""
 import copy
 from dataclasses import dataclass
 import hashlib
@@ -28,6 +35,9 @@ class Runtime:
         self.proposal = None
         self.unreachable = False
         self.http_status = 200
+        self.value_in = 0
+        self.external_transfers = []
+        self.eoa_balances = {}
     def get(self,url):
         if self.unreachable: raise Exception('unreachable')
         body = self.bodies[min(self.fetches,len(self.bodies)-1)]
@@ -44,25 +54,66 @@ class Runtime:
         return r
 
 runtime = Runtime()
-gl = types.SimpleNamespace(Contract=object,public=types.SimpleNamespace(write=lambda f:f,view=lambda f:f),message=types.SimpleNamespace(sender_address='0x'+ 'a'*40),vm=types.SimpleNamespace(Return=Return,run_nondet_unsafe=lambda a,b:runtime.run(a,b)),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:runtime.get(url)),exec_prompt=lambda prompt:runtime.prompt(prompt)))
-sys.modules['genlayer'] = types.SimpleNamespace(gl=gl)
+
+class _EoaProxy:
+    def __init__(self, address):
+        self.address = str(address).lower()
+    def emit_transfer(self, value=0, **kw):
+        runtime.external_transfers.append({'to': self.address, 'value': int(value)})
+        runtime.eoa_balances[self.address] = runtime.eoa_balances.get(self.address, 0) + int(value)
+
+def _contract_interface(cls):
+    def factory(address):
+        return _EoaProxy(address)
+    return factory
+
+class Address(str):
+    pass
+
+class _Write:
+    def __call__(self, f):
+        return f
+    def payable(self, f):
+        return f
+
+gl = types.SimpleNamespace(Contract=object,public=types.SimpleNamespace(write=_Write(),view=lambda f:f),message=types.SimpleNamespace(sender_address='0x'+ 'a'*40, value=0),vm=types.SimpleNamespace(Return=Return,run_nondet_unsafe=lambda a,b:runtime.run(a,b)),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:runtime.get(url)),exec_prompt=lambda prompt:runtime.prompt(prompt)),evm=types.SimpleNamespace(contract_interface=_contract_interface))
+sys.modules['genlayer'] = types.SimpleNamespace(gl=gl, Address=Address, u256=int)
 spec = importlib.util.spec_from_file_location('contract',Path(__file__).parents[1]/'contracts/task_prism.py')
 contract = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(contract)
+
+def _mock_balance(self):
+    s = json.loads(self.state_json)
+    escrow = sum(t['bounty'] for t in s['tasks'].values() if t['origin']!='seed_demo' and t['status'] not in ('FINALIZED','EXPIRED'))
+    stakes = sum(a['stake'] for a in s['agents'].values() if a['origin']!='seed_demo')
+    return escrow + stakes + sum(s['withdrawable'].values()) + s['treasury']
+contract.TaskPrism.balance = property(_mock_balance)
+
 A,B,C = ['0x'+x*40 for x in 'abc']
 SPEC='Deliver a correct, complete and useful evidence brief.'
+BOUNTY = 2 * 10**17
+STAKE = 10**18
+SLASH = 10**17
 
 class LocalMockTests(unittest.TestCase):
     def setUp(self):
         global runtime
         runtime=Runtime()
         self.c=contract.TaskPrism()
-        for addr in [A,B,C]: self.as_(addr).claim_demo_funds()
-        self.as_(B).register_agent('agent',1000,'research')
+        gl.message.value = 0
+        self.pay(STAKE); self.as_(B).register_agent('agent',STAKE,'research'); runtime.value_in += STAKE
     def as_(self,addr): gl.message.sender_address=addr; return self.c
+    def pay(self,amount):
+        # Sets the value the next payable call carries. Value only counts
+        # as received once the call succeeds; helpers credit value_in
+        # after the call returns.
+        gl.message.value = amount
+        return self.c
     def state(self): return json.loads(self.c.get_state())
     def task(self,name='task'): return json.loads(self.c.get_task(name))
-    def post(self,name='task',bounty=200): self.as_(A).post_task(name,'Evidence brief',bounty,contract.sha256(SPEC.encode()),SPEC)
+    def account(self,addr): return json.loads(self.c.get_account(addr))
+    def post(self,name='task',bounty=BOUNTY):
+        self.pay(bounty); self.as_(A).post_task(name,'Evidence brief',bounty,contract.sha256(SPEC.encode()),SPEC); runtime.value_in += bounty
     def submit(self):
         self.post(); self.as_(B).claim_task('task','agent')
         self.c.submit_delivery('task','https://example.com/evidence.txt',hashlib.sha256(runtime.bodies[0]).hexdigest(),'A delivery manifest.')
@@ -72,10 +123,11 @@ class LocalMockTests(unittest.TestCase):
         self.as_(C).evaluate_delivery('task')
     def conserve(self):
         s=self.state()
-        wallets=sum(s['balances'].values())
-        stakes=sum(x['stake'] for x in s['agents'].values() if x['origin']!='seed_demo')
         escrow=sum(x['bounty'] for x in s['tasks'].values() if x['origin']!='seed_demo' and x['status'] not in ['FINALIZED','EXPIRED'])
-        self.assertEqual(s['issued'],wallets+stakes+escrow+s['treasury'])
+        stakes=sum(x['stake'] for x in s['agents'].values() if x['origin']!='seed_demo')
+        withdrawable=sum(s['withdrawable'].values())
+        self.assertEqual(self.c.balance,escrow+stakes+withdrawable+s['treasury'])
+        self.assertEqual(runtime.value_in,self.c.balance+sum(x['value'] for x in runtime.external_transfers))
     def nochange(self,call,error):
         before=self.c.state_json
         with self.assertRaisesRegex(Exception,error): call()
@@ -84,15 +136,19 @@ class LocalMockTests(unittest.TestCase):
         for n in [-2,0,1,3,True,'200']:
             self.nochange(lambda:self.post('x',n),'INVALID_INTEGER|BOUNTY_MUST_BE_POSITIVE_EVEN')
         self.post(bounty=2); self.conserve()
-    def test_faucet_once_per_address(self):
-        self.as_(A); self.nochange(self.c.claim_demo_funds,'ALREADY_CLAIMED'); self.conserve()
-    def test_registration_debits_balance_and_shared_reputation(self):
-        s=self.state(); self.assertEqual(s['balances'][B],9000); self.assertEqual(s['reputation'][B],100)
+    def test_value_must_equal_stake_and_bounty(self):
+        self.pay(STAKE-1); self.as_(B)
+        self.nochange(lambda:self.c.register_agent('agent2',STAKE,'research'),'VALUE_MUST_EQUAL_STAKE')
+        self.pay(BOUNTY-1); self.as_(A)
+        self.nochange(lambda:self.c.post_task('x','Bad',BOUNTY,contract.sha256(SPEC.encode()),SPEC),'VALUE_MUST_EQUAL_BOUNTY')
+        self.conserve()
+    def test_registration_locks_stake_and_reputation(self):
+        s=self.state(); self.assertEqual(s['agents']['agent']['stake'],STAKE); self.assertEqual(s['reputation'][B],100)
         self.post(); self.assertEqual(self.state()['reputation'][A],100); self.conserve()
     def test_post_escrow(self):
-        self.post(); self.assertEqual(self.state()['balances'][A],9800); self.conserve()
+        self.post(); self.assertEqual(self.task()['status'],'OPEN'); self.conserve()
     def test_requirements_hash_mismatch(self):
-        self.as_(A); self.nochange(lambda:self.c.post_task('bad','Bad',200,'0'*64,SPEC),'REQUIREMENTS_HASH_MISMATCH')
+        self.pay(BOUNTY); self.as_(A); self.nochange(lambda:self.c.post_task('bad','Bad',BOUNTY,'0'*64,SPEC),'REQUIREMENTS_HASH_MISMATCH')
     def test_duplicate_task(self):
         self.post(); self.nochange(self.post,'TASK_ALREADY_EXISTS')
     def test_claim_owner_binding(self):
@@ -100,10 +156,36 @@ class LocalMockTests(unittest.TestCase):
     def test_one_open_claim_and_locked_stake(self):
         self.post(); self.post('other'); self.as_(B).claim_task('task','agent')
         self.nochange(lambda:self.c.claim_task('other','agent'),'OPEN_CLAIM')
-        self.nochange(lambda:self.c.top_up_stake('agent',100),'STAKE_LOCKED')
+        self.pay(100); self.nochange(lambda:self.c.top_up_stake('agent',100),'STAKE_LOCKED')
     def test_submit_owner_binding(self):
         self.post(); self.as_(B).claim_task('task','agent'); self.as_(A)
         self.nochange(lambda:self.c.submit_delivery('task','https://example.com','0'*64,'manifest'),'CALLER_ADDRESS_MISMATCH')
+    def test_submit_validates_delivery_before_write(self):
+        self.post(); self.as_(B).claim_task('task','agent')
+        runtime.bodies=[b'x'*24001]
+        self.nochange(lambda:self.c.submit_delivery('task','https://example.com/big.txt',hashlib.sha256(runtime.bodies[0]).hexdigest(),'too big'),'DELIVERY_TOO_LARGE')
+        self.assertEqual(self.task()['status'],'CLAIMED'); self.assertIsNone(self.task()['delivery'])
+        runtime.bodies=[b'Complete evidence.']
+        self.nochange(lambda:self.c.submit_delivery('task','https://example.com/evidence.txt','0'*64,'wrong hash'),'DELIVERY_HASH_MISMATCH')
+        self.assertEqual(self.task()['status'],'CLAIMED')
+        runtime.bodies=[b'Bad \xff\xfe bytes']
+        self.nochange(lambda:self.c.submit_delivery('task','https://example.com/bad.bin',hashlib.sha256(runtime.bodies[0]).hexdigest(),'not utf-8'),'DELIVERY_NOT_UTF8')
+        self.assertEqual(self.task()['status'],'CLAIMED')
+        runtime.unreachable=True
+        self.nochange(lambda:self.c.submit_delivery('task','https://example.com/evidence.txt',hashlib.sha256(b'Complete evidence.').hexdigest(),'unreachable'),'DELIVERY_UNREACHABLE_RETRYABLE')
+        runtime.unreachable=False; runtime.bodies=[b'Complete evidence.']
+        self.c.submit_delivery('task','https://example.com/evidence.txt',hashlib.sha256(b'Complete evidence.').hexdigest(),'A delivery manifest.')
+        self.assertEqual(self.task()['status'],'SUBMITTED'); self.conserve()
+    def test_resubmit_before_evaluation_replaces_delivery(self):
+        self.submit()
+        runtime.bodies=[b'Revised complete evidence.']
+        self.as_(B).submit_delivery('task','https://example.com/revised.txt',hashlib.sha256(runtime.bodies[0]).hexdigest(),'Revised delivery.')
+        t=self.task(); self.assertEqual(t['status'],'SUBMITTED'); self.assertEqual(t['delivery']['url'],'https://example.com/revised.txt')
+        self.assertEqual(t['events'][-1]['event'],'DELIVERY_RESUBMITTED'); self.conserve()
+    def test_resubmit_after_evaluation_forbidden(self):
+        self.pending()
+        runtime.bodies=[b'Revised complete evidence.']
+        self.as_(B); self.nochange(lambda:self.c.submit_delivery('task','https://example.com/revised.txt',hashlib.sha256(runtime.bodies[0]).hexdigest(),'Too late.'),'TASK_NOT_CLAIMABLE_FOR_DELIVERY')
     def test_unreachable_before_write_retryable(self):
         self.submit(); runtime.unreachable=True
         self.nochange(lambda:self.c.evaluate_delivery('task'),'UNREACHABLE_RETRYABLE')
@@ -118,16 +200,21 @@ class LocalMockTests(unittest.TestCase):
         self.c.evaluate_delivery('task')
         self.assertEqual(self.task()['status'],'EVALUATING')
     def test_first_round_pending_without_settlement(self):
-        self.pending(); t=self.task(); self.assertEqual(t['status'],'EVALUATING'); self.assertIsNone(t['settlement']); self.assertEqual(self.state()['balances'][B],9000); self.conserve()
-    def test_accept_full_settlement_any_caller(self):
+        self.pending(); t=self.task(); self.assertEqual(t['status'],'EVALUATING'); self.assertIsNone(t['settlement']); self.assertEqual(self.state()['withdrawable'].get(B,0),0); self.conserve()
+    def test_accept_full_settlement_and_withdraw(self):
         self.pending(); self.as_(C).finalize_delivery('task'); s=self.state()
-        self.assertEqual(s['balances'][B],9200); self.assertEqual(s['reputation'][B],110); self.assertEqual(s['agents']['agent']['stake'],1000); self.conserve()
+        self.assertEqual(s['withdrawable'][B],BOUNTY); self.assertEqual(s['reputation'][B],110); self.assertEqual(s['agents']['agent']['stake'],STAKE); self.conserve()
+        self.as_(B).withdraw()
+        self.assertEqual(self.state()['withdrawable'].get(B,0),0)
+        self.assertEqual(runtime.external_transfers,[{'to':B,'value':BOUNTY}])
+        self.assertEqual(runtime.eoa_balances[B],BOUNTY); self.conserve()
+        self.nochange(lambda:self.c.withdraw(),'NOTHING_WITHDRAWABLE')
     def test_partial_exact_split(self):
         self.pending([70,69,40]); self.c.finalize_delivery('task'); s=self.state()
-        self.assertEqual(s['balances'][B],9100); self.assertEqual(s['balances'][A],9900); self.assertEqual(s['reputation'][B],102); self.conserve()
+        self.assertEqual(s['withdrawable'][B],BOUNTY//2); self.assertEqual(s['withdrawable'][A],BOUNTY//2); self.assertEqual(s['reputation'][B],102); self.conserve()
     def test_reject_refund_slash_reputation(self):
         self.pending([100,39,100]); self.c.finalize_delivery('task'); s=self.state()
-        self.assertEqual(s['balances'][A],10000); self.assertEqual(s['treasury'],100); self.assertEqual(s['agents']['agent']['stake'],900); self.assertEqual(s['reputation'][B],85); self.conserve()
+        self.assertEqual(s['withdrawable'][A],BOUNTY); self.assertEqual(s['treasury'],SLASH); self.assertEqual(s['agents']['agent']['stake'],STAKE-SLASH); self.assertEqual(s['reputation'][B],85); self.conserve()
     def test_hash_mismatch_is_pending_reject(self):
         self.submit(); runtime.bodies=[b'Changed bytes']; self.c.evaluate_delivery('task'); t=self.task()
         self.assertEqual(t['status'],'EVALUATING'); self.assertEqual(t['rounds'][0]['scores'],[0,0,0]); self.assertIsNone(t['settlement'])
@@ -154,16 +241,20 @@ class LocalMockTests(unittest.TestCase):
     def test_top_up_after_slash_enables_next_claim(self):
         self.pending([0,0,0]); self.c.finalize_delivery('task'); self.post('next'); self.as_(B)
         self.nochange(lambda:self.c.claim_task('next','agent'),'STAKE_BELOW_MINIMUM')
-        self.c.top_up_stake('agent',100); self.assertEqual(self.state()['balances'][B],8900)
+        self.pay(SLASH); self.c.top_up_stake('agent',SLASH); runtime.value_in += SLASH; self.assertEqual(self.state()['agents']['agent']['stake'],STAKE)
         self.c.claim_task('next','agent'); self.assertEqual(self.task('next')['status'],'CLAIMED'); self.conserve()
     def test_expire_open_refunds_once(self):
-        self.post(); self.c.expire_task('task'); self.assertEqual(self.task()['status'],'EXPIRED'); self.conserve()
+        self.post(); self.c.expire_task('task'); self.assertEqual(self.task()['status'],'EXPIRED'); self.assertEqual(self.state()['withdrawable'][A],BOUNTY); self.conserve()
         self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
     def test_expire_claimed_unlocks_agent(self):
         self.post(); self.as_(B).claim_task('task','agent'); self.as_(A).expire_task('task')
+        self.assertEqual(self.state()['agents']['agent']['open_claim'],''); self.assertEqual(self.state()['withdrawable'][A],BOUNTY); self.conserve()
+    def test_expire_submitted_without_rounds_refunds(self):
+        self.submit(); self.as_(A).expire_task('task')
+        self.assertEqual(self.task()['status'],'EXPIRED'); self.assertEqual(self.state()['withdrawable'][A],BOUNTY)
         self.assertEqual(self.state()['agents']['agent']['open_claim'],''); self.conserve()
-    def test_expire_after_submit_forbidden(self):
-        self.submit(); self.as_(A); self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
+    def test_expire_after_evaluation_forbidden(self):
+        self.pending(); self.as_(A); self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
     def test_seed_fixtures_are_not_consensus_evidence(self):
         s=self.state(); self.assertEqual(len([a for a in s['agents'].values() if a['origin']=='seed_demo']),3)
         for t in s['tasks'].values(): self.assertEqual(t['rounds'],[]); self.assertEqual(t['origin'],'seed_demo')
@@ -173,9 +264,12 @@ class LocalMockTests(unittest.TestCase):
         for scores in [[True,90,90],[101,90,90],[-1,90,90],[70,70]]:
             with self.assertRaises(Exception): contract.verdict(scores)
     def test_validator_refetch_and_hash_disagreement(self):
-        self.submit(); runtime.bodies=[b'Complete evidence.',b'Changed bytes']
+        # Submit validation consumes fetches 0-1 (both see the same bytes);
+        # at evaluate time the leader sees the original bytes and the
+        # validator sees changed bytes, so consensus must reject.
+        self.submit(); runtime.bodies=[b'Complete evidence.',b'Complete evidence.',b'Complete evidence.',b'Changed bytes']
         self.nochange(lambda:self.c.evaluate_delivery('task'),'CONSENSUS_REJECTED')
-        self.assertEqual(runtime.fetches,2)
+        self.assertEqual(runtime.fetches,4)
     def test_validator_score_tolerance_and_threshold_gate(self):
         self.submit(); runtime.scores=[[70,80,80],[69,80,80]]
         self.nochange(lambda:self.c.evaluate_delivery('task'),'CONSENSUS_REJECTED')

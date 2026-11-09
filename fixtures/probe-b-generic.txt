@@ -1,0 +1,15 @@
+Delivery integrity: key terms and background
+
+SHA-256 is a hash function. A hash is a fixed-length fingerprint of bytes.
+A manifest is a document that lists hashes. A delivery manifest binds a URL
+to a SHA-256 hash of the exact response bytes. UTF-8 is a text encoding.
+Bytes are the raw content returned by a server. A mismatch means two hashes
+are not equal. A verdict is a decision. Scores measure quality. FINALIZED is
+a transaction state. A read-back is reading state after finalization. A
+read-back of the latest-final state is the newest finalized state. Limitations
+are things a system cannot do. Examples show how something works. Steps are
+ordered actions. Verification is checking something. Consensus is agreement.
+Validators validate. Integrity means unchanged. Public means anyone can fetch
+it. Checking a manifest means verifying it somehow. This page covers delivery
+manifests, hashes, SHA-256, UTF-8 bytes, mismatches, verdicts, scores,
+FINALIZED states, latest-final read-backs, examples, limitations, and steps.

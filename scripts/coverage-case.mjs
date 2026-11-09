@@ -19,30 +19,38 @@
 // that introduced it, so the bytes are immutable. The script verifies the
 // pinned URL serves the exact local bytes before submitting.
 //
-// Flow (fresh ephemeral accounts, keys in ignored .local/):
-//   poster claims funds, agent claims funds, agent registers, poster posts
-//   the task, agent claims, agent submits the delivery, observer evaluates
-//   (up to 3 attempts; a failed consensus writes no state and is recorded
-//   honestly), observer finalizes. Every step asserts ledger conservation.
-//   The verdict is recorded as observed, not assumed: the case passes only
-//   if the pending verdict is PARTIAL and settlement is 100/100 with +2
-//   reputation.
+// Money is real testnet GEN (wei): the poster locks a 0.2 GEN bounty, the
+// agent stakes 1 GEN, settlement is withdrawable GEN, and both parties pull
+// their halves at the end. Conservation is checked against the contract's
+// on-chain GEN balance after every step.
 //
-// Run: node scripts/coverage-case.mjs
+// Flow (fresh ephemeral accounts, keys in ignored .local/):
+//   poster + agent funded from the Studio faucet, agent registers, poster
+//   posts the task, agent claims, agent submits the delivery, observer
+//   evaluates (up to 3 attempts; a failed consensus writes no state and
+//   is recorded honestly), observer finalizes, both parties withdraw.
+//   The verdict is recorded as observed, not assumed: the case passes only
+//   if the pending verdict is PARTIAL and settlement is 0.1/0.1 GEN with
+//   +2 reputation.
+//
+// Run: node scripts/coverage-case.mjs <commit>
 // Output: evidence/coverage-partial.json (full log with receipts and
-// read-backs), evidence/COVERAGE_PARTIAL.md (summary),
-// evidence/final-state.json (last finalized read-back).
+// read-backs), evidence/COVERAGE_PARTIAL.md (summary, written by hand
+// after the run), evidence/final-state.json (last finalized read-back).
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { createAccount, generatePrivateKey } from 'genlayer-js';
-import { rpc, reader, readFinal, sendLocal, encoded, validateChain } from './network.js';
+import { rpc, reader, readFinal, sendLocal, encoded, validateChain, fundAccount, contractBalance } from './network.js';
 
 const deployment = JSON.parse(fs.readFileSync('evidence/deployment.json', 'utf8'));
 const address = deployment.contract_address;
 assert(address, 'No contract address in evidence/deployment.json');
 await validateChain();
 const hash = (s) => createHash('sha256').update(s).digest('hex');
+const GEN = 10n ** 18n;
+const BOUNTY = 2n * 10n ** 17n; // 0.2 GEN
+const STAKE = 10n ** 18n; // 1 GEN
 
 function loadAccountSync(name) {
   fs.mkdirSync('.local', { recursive: true, mode: 0o700 });
@@ -77,8 +85,9 @@ const log = fs.existsSync(logFile)
       network: 'Stable Studionet',
       chain_id: 61999,
       contract: address,
+      money: 'Real testnet GEN, amounts in wei (1 GEN = 10^18 wei). No simulated ledger.',
       started_at: new Date().toISOString(),
-      scope: 'Coverage-style partial delivery against the active consensus-compatible deployment. Live signed transactions with finalized receipts and latest-final read-back. No user-wallet path is implied.',
+      scope: 'Coverage-style partial delivery against the active deployment. Live signed transactions with finalized receipts and latest-final read-back. No user-wallet path is implied.',
       case: {
         task_id: taskId,
         agent_id: agentId,
@@ -97,11 +106,27 @@ const log = fs.existsSync(logFile)
     };
 const save = () => fs.writeFileSync(logFile, JSON.stringify(log, null, 2) + '\n');
 const read = async () => JSON.parse(await readFinal(address));
-function conserved(s) {
-  const wallets = Object.values(s.balances).reduce((x, y) => x + y, 0);
-  const stakes = Object.values(s.agents).filter((x) => x.origin !== 'seed_demo').reduce((x, a) => x + a.stake, 0);
-  const escrow = Object.values(s.tasks).filter((t) => t.origin !== 'seed_demo' && !['FINALIZED', 'EXPIRED'].includes(t.status)).reduce((x, t) => x + t.bounty, 0);
-  assert.equal(s.issued, wallets + stakes + escrow + s.treasury, 'LEDGER_CONSERVATION');
+const readContractBalance = async () => {
+  const onchain = await contractBalance(address);
+  const view = await readFinal(address, 'get_contract_balance', []);
+  assert.equal(BigInt(onchain), BigInt(JSON.parse(view)), 'CONTRACT_BALANCE_VIEW_MISMATCH');
+  return BigInt(onchain);
+};
+async function fund(account, amount) {
+  await fundAccount(account.address, amount);
+  for (let i = 0; i < 30; i++) {
+    const bal = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
+    if (bal >= amount) return;
+    await new Promise((r) => setTimeout(r, 2000));
+  }
+  throw Error('FAUCET_FUND_TIMEOUT');
+}
+async function conserved(s) {
+  const escrow = Object.values(s.tasks).filter((t) => t.origin !== 'seed_demo' && !['FINALIZED', 'EXPIRED'].includes(t.status)).reduce((x, t) => x + BigInt(t.bounty), 0n);
+  const stakes = Object.values(s.agents).filter((x) => x.origin !== 'seed_demo').reduce((x, a) => x + BigInt(a.stake), 0n);
+  const withdrawable = Object.values(s.withdrawable || {}).reduce((x, y) => x + BigInt(y), 0n);
+  const contractWei = await readContractBalance();
+  assert.equal(contractWei, escrow + stakes + withdrawable + BigInt(s.treasury), 'GEN_CONSERVATION');
 }
 const isIdle = (r) => {
   try {
@@ -116,13 +141,13 @@ function leaderOutcome(receipt) {
   const leader = list.find((r) => r.mode === 'leader') || list[0];
   return { leader, list };
 }
-async function run(account, method, args = [], check = () => {}) {
+async function run(account, method, args = [], check = () => {}, value = 0n) {
   const matches = (x) => x.sender === account.address && x.method === method && JSON.stringify(x.args) === JSON.stringify(args);
   const done = log.transactions.find((x) => matches(x) && x.verified);
   if (done) return done;
   let item = log.transactions.findLast((x) => matches(x) && !x.verified && (x.receipt?.status !== 'FINALIZED' || x.receipt?.result_name === 'MAJORITY_AGREE'));
   if (!item) {
-    const tx = await sendLocal(account, address, encoded(method, args));
+    const tx = await sendLocal(account, address, encoded(method, args), value);
     item = { method, args, sender: account.address, hash: tx, submitted_at: new Date().toISOString(), expect_error: false, verified: false };
     log.transactions.push(item);
     save();
@@ -140,6 +165,7 @@ async function run(account, method, args = [], check = () => {}) {
   item.consensus = item.receipt.result_name;
   item.read_back = await read();
   item.read_back_at = new Date().toISOString();
+  item.contract_balance_wei = (await readContractBalance()).toString();
   item.verification = 'SUCCESS';
   save();
   assert.equal(item.receipt.result_name, 'MAJORITY_AGREE', 'CONSENSUS_NOT_REACHED');
@@ -149,20 +175,28 @@ async function run(account, method, args = [], check = () => {}) {
     console.log(method, 'FINALIZED with an idle-validator receipt entry; leader execution SUCCESS');
   }
   check(item.read_back);
-  conserved(item.read_back);
+  await conserved(item.read_back);
   item.verified = true;
   save();
   console.log(method, 'FINALIZED', item.execution);
   return item;
 }
+async function withdrawAndCheck(account, expectedWei) {
+  const before = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
+  await run(account, 'withdraw', [], (s) => {
+    assert.equal(BigInt(s.withdrawable[account.address.toLowerCase()] || 0), 0n);
+  });
+  const after = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
+  assert.equal(after - before, BigInt(expectedWei), 'WITHDRAW_EOA_DELTA');
+  console.log('withdraw', account.address.slice(0, 10), 'received', expectedWei.toString(), 'wei');
+}
 
 async function main() {
-  await run(poster, 'claim_demo_funds', [], (s) => assert.equal(s.balances[poster.address.toLowerCase()], 10000));
-  await run(agentOwner, 'claim_demo_funds', [], (s) => assert.equal(s.balances[agentOwner.address.toLowerCase()], 10000));
-  await run(agentOwner, 'register_agent', [agentId, 1000, 'integration, technical writing'], (s) => {
-    assert.equal(s.agents[agentId].stake, 1000);
-    conserved(s);
-  });
+  await fund(poster, 2n * GEN);
+  await fund(agentOwner, 2n * GEN);
+  await run(agentOwner, 'register_agent', [agentId, STAKE, 'integration, technical writing'], (s) => {
+    assert.equal(BigInt(s.agents[agentId].stake), STAKE);
+  }, STAKE);
 
   // The pinned delivery URL must serve the exact local bytes before anything
   // is submitted; validators hash the fetched body.
@@ -173,10 +207,9 @@ async function main() {
   if (hash(body) !== deliveryHash) throw Error('DELIVERY_BYTES_MISMATCH: pinned URL does not serve the local fixture');
   console.log('delivery URL serves the exact fixture bytes:', deliveryUrl);
 
-  await run(poster, 'post_task', [taskId, title, 200, hash(spec), spec], (s) => {
+  await run(poster, 'post_task', [taskId, title, BOUNTY, hash(spec), spec], (s) => {
     assert.equal(s.tasks[taskId].status, 'OPEN');
-    conserved(s);
-  });
+  }, BOUNTY);
   await run(agentOwner, 'claim_task', [taskId, agentId], (s) => assert.equal(s.tasks[taskId].status, 'CLAIMED'));
   await run(agentOwner, 'submit_delivery', [taskId, deliveryUrl, deliveryHash, summary], (s) => assert.equal(s.tasks[taskId].status, 'SUBMITTED'));
 
@@ -211,6 +244,7 @@ async function main() {
     attemptRecord.execution = leader?.execution_result;
     attemptRecord.read_back = await read();
     attemptRecord.read_back_at = new Date().toISOString();
+    attemptRecord.contract_balance_wei = (await readContractBalance()).toString();
     save();
     const stateAfter = attemptRecord.read_back;
     const taskAfter = stateAfter.tasks[taskId];
@@ -218,7 +252,7 @@ async function main() {
       assert.equal(taskAfter.status, 'EVALUATING');
       assert.equal(taskAfter.rounds.length, 1);
       assert.equal(taskAfter.settlement, null);
-      conserved(stateAfter);
+      await conserved(stateAfter);
       attemptRecord.verification = 'SUCCESS';
       attemptRecord.verdict = taskAfter.pending_verdict;
       attemptRecord.scores = taskAfter.rounds[0].scores;
@@ -240,11 +274,16 @@ async function main() {
     const t = s.tasks[taskId];
     assert.equal(t.status, 'FINALIZED');
     assert.equal(t.final_verdict, pendingVerdict);
-    if (pendingVerdict === 'ACCEPT') assert.deepEqual(t.settlement, { paid_to_agent: 200, refunded_to_poster: 0, slashed_to_treasury: 0, agent_reputation_delta: 10 });
-    else if (pendingVerdict === 'PARTIAL') assert.deepEqual(t.settlement, { paid_to_agent: 100, refunded_to_poster: 100, slashed_to_treasury: 0, agent_reputation_delta: 2 });
-    else assert.deepEqual(t.settlement, { paid_to_agent: 0, refunded_to_poster: 200, slashed_to_treasury: 100, agent_reputation_delta: -15 });
-    conserved(s);
+    const st = t.settlement;
+    assert.equal(BigInt(st.slashed_to_treasury), pendingVerdict === 'REJECT' ? 10n ** 17n : 0n);
+    if (pendingVerdict === 'ACCEPT') { assert.equal(BigInt(st.paid_to_agent), BOUNTY); assert.equal(BigInt(st.refunded_to_poster), 0n); assert.equal(st.agent_reputation_delta, 10); }
+    else if (pendingVerdict === 'PARTIAL') { assert.equal(BigInt(st.paid_to_agent), BOUNTY / 2n); assert.equal(BigInt(st.refunded_to_poster), BOUNTY / 2n); assert.equal(st.agent_reputation_delta, 2); }
+    else { assert.equal(BigInt(st.paid_to_agent), 0n); assert.equal(BigInt(st.refunded_to_poster), BOUNTY); assert.equal(st.agent_reputation_delta, -15); }
   });
+
+  // Pull-payment: both parties withdraw their halves as real GEN.
+  await withdrawAndCheck(agentOwner, BOUNTY / 2n);
+  await withdrawAndCheck(poster, BOUNTY / 2n);
 
   const finalState = await read();
   log.completed_at = new Date().toISOString();

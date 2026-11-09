@@ -95,17 +95,17 @@ if supplement.exists():
  assert p['rounds']==t['rounds'] and len(t['rounds'])==1
  scores=t['rounds'][0]['scores']
  assert all(type(x)is int and 40<=x<=100 for x in scores) and any(x<70 for x in scores)
- assert t['settlement']=={'paid_to_agent':100,'refunded_to_poster':100,'slashed_to_treasury':0,'agent_reputation_delta':2}
+ assert t['settlement']=={'paid_to_agent':10**17,'refunded_to_poster':10**17,'slashed_to_treasury':0,'agent_reputation_delta':2}
  owner=after['agents'][t['agent_id']]['owner'];poster=t['poster']
- assert after['balances'][owner]-before['balances'][owner]==100
- assert after['balances'][poster]-before['balances'][poster]==100
+ assert after['withdrawable'][owner]-before['withdrawable'][owner]==10**17
+ assert after['withdrawable'][poster]-before['withdrawable'][poster]==10**17
  assert after['reputation'][owner]-before['reputation'][owner]==2
- assert before['agents'][t['agent_id']]['stake']==after['agents'][t['agent_id']]['stake']==1000
+ assert before['agents'][t['agent_id']]['stake']==after['agents'][t['agent_id']]['stake']==10**18
  assert after['agents'][t['agent_id']]['open_claim']==''
  assert after['treasury']==before['treasury']
- for state in (before,after):
+ for state,balance_wei in ((before,int(pending['contract_balance_wei'])),(after,int(final['contract_balance_wei']))):
   escrow=sum(t['bounty'] for t in state['tasks'].values() if t['origin']!='seed_demo' and t['status'] not in ('FINALIZED','EXPIRED'))
   stake=sum(a['stake'] for a in state['agents'].values() if a['origin']!='seed_demo')
-  assert sum(state['balances'].values())+stake+escrow+state['treasury']==state['issued']
+  assert sum(state.get('withdrawable',{}).values())+stake+escrow+state['treasury']==balance_wei
  assert manifest['scenario_verified'] is True
- print('Browser PARTIAL consensus, immutable round, 100/100 settlement and +2 reputation match saved read-backs.')
+ print('Browser PARTIAL consensus, immutable round, 0.1/0.1 GEN settlement and +2 reputation match saved read-backs.')

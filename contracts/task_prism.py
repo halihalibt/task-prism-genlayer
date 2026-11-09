@@ -5,6 +5,14 @@ import json
 # SHA-256 implemented with Python integers, bytes, and bitwise operations only.
 K = (0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2)
 
+# Money is real testnet GEN, denominated in wei (1 GEN = 10**18 wei).
+# Amounts below are wei. The previous release used simulated demo credits
+# at 1 unit = 10**15 wei; the economics are unchanged, only the unit moved.
+WEI_PER_GEN = 10 ** 18
+MIN_STAKE_WEI = 10 ** 18
+SLASH_WEI = 10 ** 17
+MAX_AMOUNT_WEI = 10 ** 21
+
 def rr(x: int, n: int) -> int:
     return ((x >> n) | (x << (32 - n))) & 0xffffffff
 
@@ -30,8 +38,8 @@ def need(test: bool, code: str):
     if not test:
         raise Exception(code)
 
-def integer(n, minimum: int = 0):
-    need(type(n) is int and n >= minimum and n <= 1000000000, 'INVALID_INTEGER')
+def integer(n, minimum: int = 0, maximum: int = MAX_AMOUNT_WEI):
+    need(type(n) is int and n >= minimum and n <= maximum, 'INVALID_INTEGER')
 
 def text(s: str, limit: int):
     need(isinstance(s,str) and 0 < len(s.strip()) <= limit, 'INVALID_TEXT')
@@ -63,22 +71,29 @@ def model_object(raw):
 def pack(value) -> str:
     return json.dumps(value, sort_keys=True, separators=(',',':'))
 
+@gl.evm.contract_interface
+class _EoaRecipient:
+    class View:
+        pass
+    class Write:
+        pass
+
 class TaskPrism(gl.Contract):
     state_json: str
 
     def __init__(self):
-        s = {'balances':{},'funded':[],'reputation':{},'agents':{},'agent_by_owner':{},'tasks':{},'treasury':0,'issued':0,'sequence':0}
+        s = {'withdrawable':{},'reputation':{},'agents':{},'agent_by_owner':{},'tasks':{},'treasury':0,'sequence':0}
         # Reserved fixture addresses have no privileged execution path.
         for i, name in enumerate(['VECTOR','RELAY','PATCH']):
             owner = '0x' + str(i+1).rjust(40,'0')
             agent_id = 'seed-'+name.lower()
-            s['agents'][agent_id] = {'agent_id':agent_id,'owner':owner,'stake':1000,'skill_tags':['research','writing','code'][i],'open_claim':'','origin':'seed_demo'}
+            s['agents'][agent_id] = {'agent_id':agent_id,'owner':owner,'stake':MIN_STAKE_WEI,'skill_tags':['research','writing','code'][i],'open_claim':'','origin':'seed_demo'}
             s['reputation'][owner] = 100
             s['agent_by_owner'][owner] = agent_id
         for i, title in enumerate(['Evidence brief','Integration notes','Delivery review']):
             task_id = 'seed-'+str(i+1)
             spec = 'Labelled fixture. Seed demo data, not consensus evidence.'
-            s['tasks'][task_id] = {'task_id':task_id,'title':title,'bounty':(i+1)*200,'poster':'0x'+'0'*40,'requirements_hash':sha256(spec.encode()),'deliverable_spec':spec,'status':'OPEN','agent_id':'','delivery':None,'rounds':[],'pending_verdict':None,'final_verdict':None,'challenger':'','challenge_reason':'','settlement':None,'origin':'seed_demo','events':[]}
+            s['tasks'][task_id] = {'task_id':task_id,'title':title,'bounty':(i+1)*2*10**17,'poster':'0x'+'0'*40,'requirements_hash':sha256(spec.encode()),'deliverable_spec':spec,'status':'OPEN','agent_id':'','delivery':None,'rounds':[],'pending_verdict':None,'final_verdict':None,'challenger':'','challenge_reason':'','settlement':None,'origin':'seed_demo','events':[]}
         self.state_json = pack(s)
 
     def _load(self) -> dict:
@@ -110,54 +125,74 @@ class TaskPrism(gl.Contract):
         need(a['owner']==self._sender(), 'CALLER_ADDRESS_MISMATCH')
         return a
 
-    @gl.public.write
-    def claim_demo_funds(self):
-        s, owner = self._load(), self._sender()
-        need(owner not in s['funded'], 'DEMO_FUNDS_ALREADY_CLAIMED')
-        s['funded'].append(owner)
-        s['balances'][owner] = s['balances'].get(owner,0) + 10000
-        s['issued'] += 10000
-        self._save(s)
+    def _validate_delivery(self, url: str, expected_hash: str) -> None:
+        # A bad delivery fails here, at submit time, before any state is
+        # written — the agent can fix the delivery and resubmit instead of
+        # leaving the task stuck in SUBMITTED with the bounty locked.
+        def leader_fn():
+            try:
+                response = gl.nondet.web.get(url)
+                need(response.status>=200 and response.status<300, 'DELIVERY_UNREACHABLE_RETRYABLE')
+                body = response.body or b''
+            except Exception:
+                raise Exception('DELIVERY_UNREACHABLE_RETRYABLE')
+            need(len(body)<=24000, 'DELIVERY_TOO_LARGE')
+            actual = sha256(body)
+            need(actual==expected_hash, 'DELIVERY_HASH_MISMATCH')
+            try:
+                body.decode('utf-8')
+            except Exception:
+                raise Exception('DELIVERY_NOT_UTF8')
+            return {'ok':True,'evidence_hash':actual,'url':url}
+        def validator_fn(result):
+            if not isinstance(result,gl.vm.Return):
+                return False
+            try:
+                mine = leader_fn()
+            except Exception:
+                return False
+            proposed = result.calldata
+            return proposed.get('ok') is True and proposed.get('evidence_hash')==mine['evidence_hash'] and proposed.get('url')==mine['url']
+        gl.vm.run_nondet_unsafe(leader_fn,validator_fn)
 
-    @gl.public.write
+    @gl.public.write.payable
     def register_agent(self, agent_id: str, stake_amount: int, skill_tags: str):
         text(agent_id,64)
         text(skill_tags,160)
-        integer(stake_amount,1000)
+        integer(stake_amount,MIN_STAKE_WEI)
+        v = gl.message.value
+        need(int(v)==stake_amount, 'VALUE_MUST_EQUAL_STAKE')
         s, owner = self._load(), self._sender()
         need(agent_id not in s['agents'] and owner not in s['agent_by_owner'], 'AGENT_ALREADY_REGISTERED')
-        need(s['balances'].get(owner,0)>=stake_amount, 'INSUFFICIENT_BALANCE')
-        s['balances'][owner] -= stake_amount
         self._participant(s,owner)
         s['agent_by_owner'][owner] = agent_id
         s['agents'][agent_id] = {'agent_id':agent_id,'owner':owner,'stake':stake_amount,'skill_tags':skill_tags,'open_claim':'','origin':'user'}
         self._save(s)
 
-    @gl.public.write
+    @gl.public.write.payable
     def top_up_stake(self, agent_id: str, amount: int):
         integer(amount,1)
+        v = gl.message.value
+        need(int(v)==amount, 'VALUE_MUST_EQUAL_TOPUP')
         s = self._load()
         a = self._agent(s,agent_id)
         need(not a['open_claim'], 'STAKE_LOCKED')
-        owner = a['owner']
-        need(s['balances'].get(owner,0)>=amount, 'INSUFFICIENT_BALANCE')
-        s['balances'][owner] -= amount
         a['stake'] += amount
         self._save(s)
 
-    @gl.public.write
+    @gl.public.write.payable
     def post_task(self, task_id: str, title: str, bounty: int, requirements_hash: str, deliverable_spec: str):
-        integer(bounty,1)
+        integer(bounty,2)
         need(bounty%2==0, 'BOUNTY_MUST_BE_POSITIVE_EVEN')
         text(task_id,64)
         text(title,160)
         text(deliverable_spec,4000)
         digest(requirements_hash)
         need(sha256(deliverable_spec.encode('utf-8'))==requirements_hash, 'REQUIREMENTS_HASH_MISMATCH')
+        v = gl.message.value
+        need(int(v)==bounty, 'VALUE_MUST_EQUAL_BOUNTY')
         s, owner = self._load(), self._sender()
         need(task_id not in s['tasks'], 'TASK_ALREADY_EXISTS')
-        need(s['balances'].get(owner,0)>=bounty, 'INSUFFICIENT_BALANCE')
-        s['balances'][owner] -= bounty
         self._participant(s,owner)
         t = {'task_id':task_id,'title':title,'bounty':bounty,'poster':owner,'requirements_hash':requirements_hash,'deliverable_spec':deliverable_spec,'status':'OPEN','agent_id':'','delivery':None,'rounds':[],'pending_verdict':None,'final_verdict':None,'challenger':'','challenge_reason':'','settlement':None,'origin':'user','events':[]}
         self._event(s,t,'POSTED')
@@ -169,7 +204,7 @@ class TaskPrism(gl.Contract):
         s = self._load()
         t, a = self._task(s,task_id), self._agent(s,agent_id)
         need(t['status']=='OPEN', 'TASK_NOT_OPEN')
-        need(a['stake']>=1000, 'STAKE_BELOW_MINIMUM')
+        need(a['stake']>=MIN_STAKE_WEI, 'STAKE_BELOW_MINIMUM')
         need(not a['open_claim'], 'AGENT_HAS_OPEN_CLAIM')
         need(t['poster']!=a['owner'], 'SELF_CLAIM_FORBIDDEN')
         a['open_claim'], t['agent_id'], t['status'] = task_id, agent_id, 'CLAIMED'
@@ -184,11 +219,14 @@ class TaskPrism(gl.Contract):
         text(summary,2000)
         s = self._load()
         t = self._task(s,task_id)
-        need(t['status']=='CLAIMED', 'TASK_NOT_CLAIMED')
+        need(t['status'] in ('CLAIMED','SUBMITTED'), 'TASK_NOT_CLAIMABLE_FOR_DELIVERY')
+        need(not t['rounds'], 'EVALUATION_ALREADY_STARTED')
         self._agent(s,t['agent_id'])
+        self._validate_delivery(delivery_url,delivery_hash)
+        resubmitted = t['status']=='SUBMITTED'
         t['delivery'] = {'url':delivery_url,'sha256':delivery_hash,'summary':summary}
         t['status'] = 'SUBMITTED'
-        self._event(s,t,'SUBMITTED')
+        self._event(s,t,'DELIVERY_RESUBMITTED' if resubmitted else 'SUBMITTED')
         self._save(s)
 
     def _evaluate(self, t: dict, reason: str) -> dict:
@@ -256,11 +294,11 @@ class TaskPrism(gl.Contract):
         elif v=='PARTIAL':
             paid, refund, rep = bounty//2,bounty//2,2
         else:
-            refund, slash, rep = bounty,100,-15
+            refund, slash, rep = bounty,SLASH_WEI,-15
             a['stake'] -= slash
             s['treasury'] += slash
-        s['balances'][owner] = s['balances'].get(owner,0)+paid
-        s['balances'][poster] = s['balances'].get(poster,0)+refund
+        s['withdrawable'][owner] = s['withdrawable'].get(owner,0)+paid
+        s['withdrawable'][poster] = s['withdrawable'].get(poster,0)+refund
         s['reputation'][owner] += rep
         a['open_claim'] = ''
         t['settlement'] = {'paid_to_agent':paid,'refunded_to_poster':refund,'slashed_to_treasury':slash,'agent_reputation_delta':rep}
@@ -296,12 +334,29 @@ class TaskPrism(gl.Contract):
         self._save(s)
 
     @gl.public.write
+    def withdraw(self):
+        # Pull payment: settlement only records what an address may pull.
+        # The value leaves the contract here, as an external message that
+        # executes on finalization. The withdrawable amount is zeroed before
+        # the transfer is emitted, so a failed call keeps the full amount.
+        s, owner = self._load(), self._sender()
+        amount = s['withdrawable'].get(owner,0)
+        need(amount>0, 'NOTHING_WITHDRAWABLE')
+        s['withdrawable'][owner] = 0
+        self._save(s)
+        _EoaRecipient(Address(owner)).emit_transfer(value=u256(amount))
+
+    @gl.public.write
     def expire_task(self, task_id: str):
         s = self._load()
         t = self._task(s,task_id)
         need(t['poster']==self._sender(), 'CALLER_ADDRESS_MISMATCH')
-        need(t['status'] in ['OPEN','CLAIMED'] and t['delivery'] is None, 'TASK_NOT_EXPIRABLE')
-        s['balances'][t['poster']] += t['bounty']
+        # OPEN / CLAIMED with no delivery, or SUBMITTED but never
+        # successfully evaluated (no rounds): the bounty is refundable and
+        # the agent claim is released. A task with a recorded round has a
+        # pending verdict and must go through finalize / challenge instead.
+        need(t['status'] in ['OPEN','CLAIMED'] or (t['status']=='SUBMITTED' and not t['rounds']), 'TASK_NOT_EXPIRABLE')
+        s['withdrawable'][t['poster']] = s['withdrawable'].get(t['poster'],0)+t['bounty']
         if t['agent_id']:
             s['agents'][t['agent_id']]['open_claim'] = ''
         t['status'] = 'EXPIRED'
@@ -314,6 +369,10 @@ class TaskPrism(gl.Contract):
         return self.state_json
 
     @gl.public.view
+    def get_contract_balance(self) -> str:
+        return str(int(self.balance))
+
+    @gl.public.view
     def get_task(self, task_id: str) -> str:
         s = self._load()
         need(task_id in s['tasks'], 'TASK_NOT_FOUND')
@@ -323,4 +382,4 @@ class TaskPrism(gl.Contract):
     def get_account(self, address: str) -> str:
         s, owner = self._load(), address.lower()
         agent = s['agents'].get(s['agent_by_owner'].get(owner,''))
-        return pack({'address':owner,'balance':s['balances'].get(owner,0),'reputation':s['reputation'].get(owner,100),'funded':owner in s['funded'],'agent':agent})
+        return pack({'address':owner,'withdrawable':s['withdrawable'].get(owner,0),'reputation':s['reputation'].get(owner,100),'agent':agent})

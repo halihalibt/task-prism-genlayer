@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
-    "test": "python -m unittest discover -s tests -v",
+    "test": "python3 -m unittest discover -s tests -v",
     "check": "node scripts/check.js"
   },
   "keywords": [],

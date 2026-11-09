@@ -1,5 +1,5 @@
 import {createClient,abi} from 'genlayer-js';
-import {encodeFunctionData} from 'viem';
+import {encodeFunctionData,getAddress} from 'viem';
 import {studionet} from 'genlayer-js/chains';
 const {calldata,transactions}=abi;
 export const RPC='https://studio.genlayer.com/api';
@@ -18,7 +18,13 @@ export async function rpc(method,params=[]){
 export async function validateChain(request=rpc){const id=await request('eth_chainId');if(Number(BigInt(id))!==61999)throw Error('WRONG_CHAIN');return id;}
 export function encoded(method,args=[]){return transactions.serialize([calldata.encode(calldata.makeCalldataObject(method,args,{})),false]);}
 export function envelope(sender,to,data){const entry=chain.consensusMainContract.abi.find(x=>x.type==='function'&&x.name==='addTransaction');const args=[sender,to,5,3,data];if(entry.inputs.length===6)args.push(BigInt(Math.floor(Date.now()/1000)+3600));return encodeFunctionData({abi:[entry],functionName:'addTransaction',args});}
-export async function sendLocal(account,to,data){await validateChain();const nonce=await rpc('eth_getTransactionCount',[account.address,'latest']);const serialized=await account.signTransaction({chainId:61999,type:'legacy',to:chain.consensusMainContract.address,data:envelope(account.address,to,data),nonce:Number(BigInt(nonce)),gas:20000000n,gasPrice:0n,value:0n});return rpc('eth_sendRawTransaction',[serialized]);}
+export async function sendLocal(account,to,data,value=0n){await validateChain();const nonce=await rpc('eth_getTransactionCount',[account.address,'latest']);const serialized=await account.signTransaction({chainId:61999,type:'legacy',to:chain.consensusMainContract.address,data:envelope(account.address,to,data),nonce:Number(BigInt(nonce)),gas:20000000n,gasPrice:0n,value:BigInt(value)});return rpc('eth_sendRawTransaction',[serialized]);}
+// Studio faucet: sim_fundAccount funds any address with real testnet GEN.
+// The address MUST be EIP-55 checksummed; a lowercase address is silently
+// ignored (the call succeeds and the balance stays 0). Amount is a JSON
+// number of wei; keep it within the exact-integer range of a double.
+export async function fundAccount(address,amountWei){const checksummed=getAddress(address);return rpc('sim_fundAccount',[checksummed,Number(amountWei)]);}
+export async function contractBalance(address){return rpc('eth_getBalance',[address,'latest']);}
 
 export async function readFinal(address,functionName='get_state',args=[]){
  const result=await rpc('gen_call',[{type:'read',to:address,from:'0x0000000000000000000000000000000000000000',data:encoded(functionName,args),transaction_hash_variant:'latest-final'}]);
