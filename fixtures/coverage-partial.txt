@@ -1,0 +1,25 @@
+Acme Widget service: two-part integration guide
+
+Part 1: Local setup
+
+Prerequisites: Node.js 20 and Git. Install Node.js 20 from the official installer and confirm with `node --version`. Install Git and confirm with `git --version`.
+
+Install the service:
+
+  git clone https://example.com/acme/widget.git
+  cd widget
+  npm install
+
+Config file example. Create `widget.config.json`:
+
+  {
+    "port": 3000,
+    "database": "sqlite:./widget.db",
+    "logLevel": "info"
+  }
+
+Verify the server starts:
+
+  npm start
+
+Open http://localhost:3000/health and confirm the response is `{"status":"ok"}`.

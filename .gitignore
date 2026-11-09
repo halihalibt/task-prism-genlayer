@@ -1,6 +1,5 @@
 node_modules/
 __pycache__/
-.openai/
 dist/
 *.log
 assets/app.bundle.js
