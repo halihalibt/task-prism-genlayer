@@ -44,4 +44,6 @@ Tests in `tests/test_task_prism.py` are **LOCAL MOCK** tests, not on-chain conse
 
 Only Chain ID **61999**, RPC `https://studio.genlayer.com/api`, is supported. `deploy.py --dry-validate` checks the chain, schema, source hash and wrong-chain rejection without transactions. `deploy.py` deploys using genlayer-js 1.1.8 and a newly generated in-memory signing account via `eth_sendRawTransaction`. It never accepts or saves a private key. Transaction evidence records public addresses and receipts only.
 
+The [read-only review path](evidence/REVIEWER_QUICK_PATH.md) explains how to inspect evidence without signing. [Live transaction records](evidence/LIVE_VERIFICATION.md) distinguish majority agreement, execution results and state read-backs.
+
 See [known limitations](KNOWN_LIMITATIONS.md), [contract source](contracts/task_prism.py), and [evidence](evidence/).

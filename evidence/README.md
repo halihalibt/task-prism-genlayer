@@ -25,3 +25,9 @@ The initial encoding attempt sent the inner payload directly to the zero address
 The initial contract at `0xdbfA1b3EfFd0fcB38A5f6f208D3247a5C77Ab1b3` used `Response.status_code`. The pinned GenVM SDK exposes `Response.status`. Its first live delivery evaluation ended FINALIZED with ERROR execution and left the task SUBMITTED, with no verdict or settlement. The complete failed evaluation and prior transactions are retained in `sdk-compatibility-attempt.json`; the initial deployment manifest, source hash, receipt and read-back are retained under `history/initial-contract/`.
 
 The active contract uses the SDK's documented `status` field. The SDK-matching local response fixture checks HTTP 200, 404 and 500 handling. Verdict thresholds, ledger accounting, challenge rules and state transitions are unchanged.
+
+## Recorded live transactions
+
+[Live verification](LIVE_VERIFICATION.md) lists finalized receipts and state read-backs by method. The [JSON index](live-verification.json) separates consensus-accepted execution from rejected consensus. Complete original receipts and full state read-backs are retained in the linked lossless archive. The [browser ledger write](browser-ledger-write.json) records an actual temporary-account transaction submitted through the Pages application.
+
+Transaction FINALIZED, leader execution SUCCESS and MAJORITY_AGREE are separate checks. Clients only report a confirmed state-changing transaction when all required checks pass and latest-final state has been read back.

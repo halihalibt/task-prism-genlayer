@@ -22,7 +22,7 @@ if(!process.argv.includes('--dry-validate')){
  fs.writeFileSync('evidence/deploy-receipt.json',JSON.stringify(receipt,null,2)+'\n');
  if(receipt?.status!=='FINALIZED')throw Error('DEPLOYMENT_PENDING');
  const leaders=receipt.consensus_data?.leader_receipt;const leader=Array.isArray(leaders)?leaders.find(x=>x.mode==='leader')||leaders[0]:leaders;
- if(leader?.execution_result!=='SUCCESS'||!receipt.to_address||receipt.to_address==='0x0000000000000000000000000000000000000000')throw Error('DEPLOYMENT_EXECUTION_FAILED');
+ if(receipt.result_name!=='MAJORITY_AGREE'||leader?.execution_result!=='SUCCESS'||!receipt.to_address||receipt.to_address==='0x0000000000000000000000000000000000000000')throw Error('DEPLOYMENT_EXECUTION_FAILED');
  record.contract_address=receipt.to_address;record.finalized_status='FINALIZED';
  fs.writeFileSync('evidence/deployment.json',JSON.stringify(record,null,2)+'\n');
  const state=await readFinal(record.contract_address);

@@ -1,41 +1,79 @@
 {
-  "scope": "Browser iframe viewport audit of the task market.",
+  "scope": "Browser iframe CSS viewport audit using actual finalized contract records and two adjudication rounds.",
+  "contract": "0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE",
+  "recorded_at": "2026-11-09T08:20:37.766585+00:00",
   "viewports": [
     {
-      "width": 375,
+      "viewport_width": 375,
+      "language": "zh-CN",
       "client_width": 360,
       "scroll_width": 360,
-      "clipped_controls": 0,
-      "language": "en"
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
     },
     {
-      "width": 768,
+      "viewport_width": 768,
+      "language": "zh-CN",
       "client_width": 753,
       "scroll_width": 753,
-      "clipped_controls": 0,
-      "language": "en"
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
     },
     {
-      "width": 1024,
+      "viewport_width": 1024,
+      "language": "zh-CN",
       "client_width": 1009,
       "scroll_width": 1009,
-      "clipped_controls": 0,
-      "language": "en"
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
     },
     {
-      "width": 1920,
+      "viewport_width": 1920,
+      "language": "zh-CN",
       "client_width": 1905,
       "scroll_width": 1905,
-      "clipped_controls": 0,
-      "language": "en"
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
     },
     {
-      "width": 375,
+      "viewport_width": 375,
+      "language": "en",
       "client_width": 360,
       "scroll_width": 360,
-      "clipped_controls": 0,
-      "language": "zh-CN"
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
+    },
+    {
+      "viewport_width": 768,
+      "language": "en",
+      "client_width": 753,
+      "scroll_width": 753,
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
+    },
+    {
+      "viewport_width": 1024,
+      "language": "en",
+      "client_width": 1009,
+      "scroll_width": 1009,
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
+    },
+    {
+      "viewport_width": 1920,
+      "language": "en",
+      "client_width": 1905,
+      "scroll_width": 1905,
+      "clipped_controls": [],
+      "roster_rows": 7,
+      "round_cards": 2
     }
-  ],
-  "recorded_at": "2026-11-09T06:47:37.548343+00:00"
+  ]
 }
