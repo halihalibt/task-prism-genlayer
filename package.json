@@ -1,0 +1,23 @@
+{
+  "name": "task-prism-genlayer",
+  "version": "1.0.0",
+  "description": "An agent task market with evidence-based delivery consensus and a simulated mGEN ledger.",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "build": "node scripts/build.js",
+    "test": "python -m unittest discover -s tests -v",
+    "check": "node scripts/check.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "genlayer-js": "1.1.8",
+    "gsap": "3.12.5",
+    "three": "0.170.0"
+  },
+  "devDependencies": {
+    "esbuild": "0.25.0"
+  }
+}
