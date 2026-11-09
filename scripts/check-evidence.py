@@ -52,3 +52,55 @@ if (root/'evidence/live-verification.json').exists():
  if any(tx['receipt']['result_name']!='MAJORITY_AGREE' for tx in log['transactions']):
   assert index.get('all_scenarios_passed') is False
  print('Saved verified core transactions:',sum(bool(x.get('verified')) for x in log['transactions']))
+
+supplement=root/'evidence/browser-adjudication-manifest.json'
+if supplement.exists():
+ manifest=json.loads(supplement.read_text())
+ assert manifest['contract'].lower()==d['contract_address'].lower()
+ def load_archive(key):
+  item=manifest[key]
+  raw=gzip.decompress((root/'evidence'/item['archive']).read_bytes())
+  assert hashlib.sha256(raw).hexdigest()==item['sha256']
+  return json.loads(raw)
+ setup=load_archive('setup')
+ browser=load_archive('browser')
+ task_id=manifest['task_id']
+ assert setup.get('task',setup.get('awaiting_browser_adjudication',{}).get('task_id'))==task_id
+ for record in (setup,browser):
+  assert record['contract'].lower()==d['contract_address'].lower()
+  for tx in record['transactions']:
+   receipt=tx['receipt']
+   assert receipt['hash']==tx['hash'] and receipt['status']=='FINALIZED'
+   assert receipt['to_address'].lower()==d['contract_address'].lower()
+   leaders=receipt['consensus_data']['leader_receipt']
+   leader=next(x for x in leaders if x['mode']=='leader') if isinstance(leaders,list) else leaders
+   if tx.get('verified'):
+    assert receipt['result_name']=='MAJORITY_AGREE' and leader['execution_result']=='SUCCESS'
+    assert tx.get('read_back') and tx.get('read_back_at')
+   else:
+    assert tx.get('verified') is False
+    assert receipt['result_name']!='MAJORITY_AGREE' or leader['execution_result']!='SUCCESS'
+ pending=next(x for x in browser['transactions'] if x['method']=='evaluate_delivery' and x['args']==[task_id] and x['verified'])
+ final=next(x for x in browser['transactions'] if x['method']=='finalize_delivery' and x['args']==[task_id] and x['verified'])
+ assert pending['phase']==final['phase']=='confirmed'
+ before=pending['read_back'];after=final['read_back']
+ p=before['tasks'][task_id];t=after['tasks'][task_id]
+ assert p['status']=='EVALUATING' and p['pending_verdict']=='PARTIAL' and p['settlement'] is None
+ assert t['status']=='FINALIZED' and t['final_verdict']=='PARTIAL'
+ assert p['rounds']==t['rounds'] and len(t['rounds'])==1
+ scores=t['rounds'][0]['scores']
+ assert all(type(x)is int and 40<=x<=100 for x in scores) and any(x<70 for x in scores)
+ assert t['settlement']=={'paid_to_agent':100,'refunded_to_poster':100,'slashed_to_treasury':0,'agent_reputation_delta':2}
+ owner=after['agents'][t['agent_id']]['owner'];poster=t['poster']
+ assert after['balances'][owner]-before['balances'][owner]==100
+ assert after['balances'][poster]-before['balances'][poster]==100
+ assert after['reputation'][owner]-before['reputation'][owner]==2
+ assert before['agents'][t['agent_id']]['stake']==after['agents'][t['agent_id']]['stake']==1000
+ assert after['agents'][t['agent_id']]['open_claim']==''
+ assert after['treasury']==before['treasury']
+ for state in (before,after):
+  escrow=sum(t['bounty'] for t in state['tasks'].values() if t['origin']!='seed_demo' and t['status'] not in ('FINALIZED','EXPIRED'))
+  stake=sum(a['stake'] for a in state['agents'].values() if a['origin']!='seed_demo')
+  assert sum(state['balances'].values())+stake+escrow+state['treasury']==state['issued']
+ assert manifest['scenario_verified'] is True
+ print('Browser PARTIAL consensus, immutable round, 100/100 settlement and +2 reputation match saved read-backs.')

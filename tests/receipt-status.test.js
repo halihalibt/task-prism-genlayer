@@ -5,8 +5,7 @@ import {gunzipSync} from 'node:zlib';
 import {test} from 'node:test';
 import {receiptOutcome,reconcileTransaction} from '../scripts/receipt-status.js';
 
-const index=JSON.parse(fs.readFileSync(new URL('../evidence/live-verification.json',import.meta.url)));
-const log=JSON.parse(gunzipSync(fs.readFileSync(new URL('../evidence/'+index.archive,import.meta.url))));
+const log=JSON.parse(gunzipSync(fs.readFileSync(new URL('../evidence/history/strict-score-contract/live-verification.full.json.gz',import.meta.url))));
 const accepted=log.transactions.find(x=>x.verified&&x.execution==='SUCCESS');
 const rejected=log.transactions.filter(x=>x.receipt.result_name!=='MAJORITY_AGREE');
 

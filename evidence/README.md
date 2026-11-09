@@ -2,15 +2,17 @@
 
 This directory records actual signed transactions submitted to Stable Studionet, Chain ID 61999, and reads from `latest-final` state. Test-only fixtures and LOCAL MOCK results are not deployment evidence.
 
+See the [deployment list](DEPLOYMENTS.md) for addresses, transactions and source identities across versions.
+
 ## Deployment
 
-Contract: `0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE`
+Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c`
 
-Deployment transaction: [`0x39eb3e9b257cd31b2ff6046168ca6c2b66358167060d83c8fd52a7d8ec4962db`](https://explorer-studio.genlayer.com/tx/0x39eb3e9b257cd31b2ff6046168ca6c2b66358167060d83c8fd52a7d8ec4962db)
+Deployment transaction: [`0x48dd22f470d04f9939e1a97b037282f5149d2ba09d849e7232e5694be1e594ae`](https://explorer-studio.genlayer.com/tx/0x48dd22f470d04f9939e1a97b037282f5149d2ba09d849e7232e5694be1e594ae)
 
-Canonical deployed source commit: `4df9c7a38753809dae7c87f878396d9107e77813`
+Canonical deployed source commit: `356c398101b1e3ff7549a98c341add0e20ee90d2`
 
-Source SHA-256: `54437c822d51540a422fb2679dc4f322b234b3c7fbeaf1989b10973851ff8877`
+Source SHA-256: `37dbb612c3619b350bfa5a045db7e5246b1f8f72c9a97361d7eb9741379393f6`
 
 The raw receipt reports FINALIZED, MAJORITY_AGREE and SUCCESS execution. `deploy-read-back.json` contains the initial state read from the contract, including its three labelled agents and three labelled tasks. They contain no consensus verdicts.
 
@@ -28,6 +30,12 @@ The active contract uses the SDK's documented `status` field. The SDK-matching l
 
 ## Recorded live transactions
 
-[Live verification](LIVE_VERIFICATION.md) lists finalized receipts and state read-backs by method. The [JSON index](live-verification.json) separates consensus-accepted execution from rejected consensus. Complete original receipts and full state read-backs are retained in the linked lossless archive. The [browser ledger write](browser-ledger-write.json) records an actual temporary-account transaction submitted through the Pages application.
+[Live verification](LIVE_VERIFICATION.md) lists finalized receipts and state read-backs by method. The [JSON index](live-verification.json) separates consensus-accepted execution from rejected consensus. Complete original receipts and full state read-backs are retained in the linked lossless archive. The historical [browser ledger write](history/strict-score-contract/browser-ledger-write.json) records a temporary-account transaction submitted through the Pages application on the preceding contract.
 
 Transaction FINALIZED, leader execution SUCCESS and MAJORITY_AGREE are separate checks. Clients only report a confirmed state-changing transaction when all required checks pass and latest-final state has been read back.
+
+## Consensus compatibility
+
+The preceding contract at `0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE` required matching threshold bands for every dimension as well as matching overall verdicts and a maximum ten-point score difference. For example, `[60,100,70]` and `[60,100,60]` both imply PARTIAL but failed that additional band comparison. Its deployment, original source, successful ledger paths and unsuccessful consensus attempts are preserved under [history/strict-score-contract](history/strict-score-contract/). No old task or verdict was migrated or overwritten.
+
+The active contract compares the same independently computed verdict, hashes, URL and basis, retaining the ten-point score tolerance. JSON output may have a single outer code fence; malformed JSON and non-integer values remain errors before storage changes. Ledger amounts, verdict thresholds, challenge rules and settlement effects are unchanged. Local regression tests cover the nondecisive boundary case and continued rejection of different verdicts or scores over the tolerance. These local tests are separate from live receipts.

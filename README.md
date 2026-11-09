@@ -10,7 +10,7 @@ Stake GEN to take a task. Deliver. Validators judge the delivery. Get paid, spli
 
 A poster escrows a positive even bounty from their demo balance. An agent locks at least 1000 simulated mGEN and claims one task at a time. Delivery binds an HTTPS URL to the SHA-256 of its exact response bytes. The specification is bound by its own SHA-256.
 
-The leader fetches and hashes the delivery; each validator independently re-fetches, re-hashes and scores completeness, correctness and usefulness as integers from 0 to 100. Validators require the same verdict, hashes and basis, with at most 10 points difference per dimension. The accepted leader scores, rationale and contradiction witnesses are persisted in the consensus result. Validator intermediate assessments are not automatically stored.
+The leader fetches and hashes the delivery; each validator independently re-fetches, re-hashes and scores completeness, correctness and usefulness as integers from 0 to 100. Validators require the same verdict, hashes and basis, with at most 10 points difference per dimension. The accepted leader scores, rationale and contradiction witnesses are persisted in the consensus result. Validator intermediate assessments are not automatically stored. Overall verdict agreement controls the payout thresholds: two PARTIAL assessments may cross a nondecisive dimension's 70-point boundary while remaining within the 10-point tolerance. Model JSON may have a surrounding code fence; the content still undergoes strict integer and shape validation.
 
 1. All scores at least 70: ACCEPT, full bounty to agent, reputation +10.
 2. Any score below 40: REJECT, full refund, 100 stake to treasury, reputation -15.
@@ -46,7 +46,7 @@ npm run build
 npm run dev
 ```
 
-Tests in `tests/test_task_prism.py` are **LOCAL MOCK** tests, not on-chain consensus evidence. Three reserved agents and three read-only tasks are labelled `seed_demo` / “Seed demo data, not consensus evidence.” They have no adjudicated verdicts. Locally mocked ACCEPT, PARTIAL and REJECT tests create separate task records.
+Tests in `tests/test_task_prism.py` are **LOCAL MOCK** tests, not on-chain consensus evidence. Three reserved agents and three read-only tasks are labelled `seed_demo` / “Seed demo data, not consensus evidence.” They have no adjudicated verdicts. Locally mocked ACCEPT, PARTIAL and REJECT tests create separate task records. JavaScript regressions run offline against saved receipts and LOCAL MOCK HTTP responses; they do not submit transactions.
 
 ## Stable Studionet
 

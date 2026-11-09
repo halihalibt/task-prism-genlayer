@@ -2,12 +2,12 @@
   "network": "Stable Studionet",
   "chain_id": 61999,
   "rpc": "https://studio.genlayer.com/api",
-  "deploy_tx": "0x39eb3e9b257cd31b2ff6046168ca6c2b66358167060d83c8fd52a7d8ec4962db",
-  "deployer": "0xe484763e2100f606333233F94C8FaB632552545c",
-  "source_commit": "4df9c7a38753809dae7c87f878396d9107e77813",
+  "deploy_tx": "0x48dd22f470d04f9939e1a97b037282f5149d2ba09d849e7232e5694be1e594ae",
+  "deployer": "0x99928Be862724DcbA25CD5bDd4A6292A59e97478",
+  "source_commit": "356c398101b1e3ff7549a98c341add0e20ee90d2",
   "source_path": "contracts/task_prism.py",
-  "source_sha256": "54437c822d51540a422fb2679dc4f322b234b3c7fbeaf1989b10973851ff8877",
-  "submitted_at": "2026-11-09T07:23:05.831Z",
-  "contract_address": "0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE",
+  "source_sha256": "37dbb612c3619b350bfa5a045db7e5246b1f8f72c9a97361d7eb9741379393f6",
+  "submitted_at": "2026-11-09T12:11:11.232Z",
+  "contract_address": "0x2D5d39cE2414F154D0D2cd574079167B26deA68c",
   "finalized_status": "FINALIZED"
 }

@@ -1,0 +1,1757 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "contract": "0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE",
+  "started_at": "2026-11-09T07:24:50.909Z",
+  "scope": "Live signed transactions with finalized receipts and latest-final read-back. No user-wallet path is implied.",
+  "public_accounts": {
+    "poster": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+    "agent": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+    "observer": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604"
+  },
+  "run_finished_at": "2026-11-09T08:19:02.881144+00:00",
+  "all_scenarios_passed": false,
+  "core_methods_verified": true,
+  "archive": "live-verification.full.json.gz",
+  "original_json_sha256": "ea4310194f7544a4544f34f7b9af9084dd672918e58fb9facfb53579180f1cea",
+  "archive_scope": "Complete original FINALIZED receipts and full latest-final read-backs for every transaction below.",
+  "transactions": [
+    {
+      "method": "claim_demo_funds",
+      "args": [],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0x410f7badb066ecefbf67d12694419a9518c757a7c8b89f763db7b68a0fa68525",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x410f7badb066ecefbf67d12694419a9518c757a7c8b89f763db7b68a0fa68525",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:25:51.023Z",
+      "read_back": {
+        "task": null,
+        "agents": {},
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100
+        },
+        "treasury": 0,
+        "issued": 10000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_demo_funds",
+      "args": [],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0xaf5b68935d98de5c2ccbb893a1dbef5352057f33920eed479d1bad534a5827cc",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xaf5b68935d98de5c2ccbb893a1dbef5352057f33920eed479d1bad534a5827cc",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:26:54.620Z",
+      "read_back": {
+        "task": null,
+        "agents": {},
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 10000,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100
+        },
+        "treasury": 0,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "register_agent",
+      "args": [
+        "runbook-agent-20261109072450",
+        1000,
+        "integrity, evidence, technical writing"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0xb0cf22778b9e115382225cd6fac68d9af92a9fb5fed1a349a542d31a98e4e18f",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xb0cf22778b9e115382225cd6fac68d9af92a9fb5fed1a349a542d31a98e4e18f",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:27:55.611Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 10000,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 100
+        },
+        "treasury": 0,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "runbook-20261109072450",
+        "A source-integrity verification runbook",
+        200,
+        "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+        "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required."
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0xc5e4df2f083ff9fe9c0c81fb17c5eb83a3577fa815650ac126fad85ffcc93f72",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xc5e4df2f083ff9fe9c0c81fb17c5eb83a3577fa815650ac126fad85ffcc93f72",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:28:57.585Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 1
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "runbook-20261109072450",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 100,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 100
+        },
+        "treasury": 0,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "runbook-20261109072450",
+        "runbook-agent-20261109072450"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x2b5a9f176cc30269c8e65b030201b7158caeef319e318d4ab7c5947e3cf9510a",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x2b5a9f176cc30269c8e65b030201b7158caeef319e318d4ab7c5947e3cf9510a",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:29:59.383Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 1
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 2
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "runbook-20261109072450",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "runbook-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 100,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 100
+        },
+        "treasury": 0,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "runbook-20261109072450",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+        "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "A public UTF-8 runbook with three numbered steps, an example and limitations."
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x6dca354272a57db2a00032e7f01586493d52d0a9ede8d1e6c22ae4ec019c0dca",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x6dca354272a57db2a00032e7f01586493d52d0a9ede8d1e6c22ae4ec019c0dca",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:31:00.207Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 1
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 2
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 3
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "runbook-20261109072450",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "runbook-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 100,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 100
+        },
+        "treasury": 0,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "runbook-20261109072450"
+      ],
+      "sender": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604",
+      "hash": "0x303a914e7e0b0eb0e9953710666c5a6b65ef5eb429741b55d0ba28e418c60d0a",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x303a914e7e0b0eb0e9953710666c5a6b65ef5eb429741b55d0ba28e418c60d0a",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:32:00.330Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 1
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 2
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 3
+            },
+            {
+              "actor": "0x7fbaf037623167005c2aa8839a07d9aa3b7a1604",
+              "event": "PENDING_VERDICT",
+              "sequence": 4
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "ACCEPT",
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "Delivered content closely matches the specification: concise English runbook, exactly three numbered steps, includes UTF-8 byte capture and SHA-256, hash comparison, verdict inspection with FINALIZED and latest-final, one hash-change example, and explicit limitations. It is self-contained and actionable.",
+              "round": 1,
+              "scores": [
+                98,
+                98,
+                97
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "runbook-20261109072450",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "runbook-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9000,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 100,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 100
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "challenge_delivery",
+      "args": [
+        "runbook-20261109072450",
+        "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text."
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0xf1945950a657af85bc1298b679879730a14bc41f0f6f6fb4372c0780dcdc2e18",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xf1945950a657af85bc1298b679879730a14bc41f0f6f6fb4372c0780dcdc2e18",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:34:19.783Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_failed": true,
+          "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+          "challenger": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 1
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 2
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 3
+            },
+            {
+              "actor": "0x7fbaf037623167005c2aa8839a07d9aa3b7a1604",
+              "event": "PENDING_VERDICT",
+              "sequence": 4
+            },
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "DISPUTED",
+              "sequence": 5
+            },
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "FINALIZED",
+              "sequence": 6
+            }
+          ],
+          "final_verdict": "ACCEPT",
+          "origin": "user",
+          "pending_verdict": "ACCEPT",
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "Delivered content closely matches the specification: concise English runbook, exactly three numbered steps, includes UTF-8 byte capture and SHA-256, hash comparison, verdict inspection with FINALIZED and latest-final, one hash-change example, and explicit limitations. It is self-contained and actionable.",
+              "round": 1,
+              "scores": [
+                98,
+                98,
+                97
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            },
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Specification says to wait for FINALIZED and latest-final; delivered text says 'Wait for transaction FINALIZED, then read latest-final contract state,' which is slightly more specific than the exact phrasing."
+              ],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "Delivered text matches the requested concise English runbook format. It includes exactly three numbered steps covering exact UTF-8 bytes plus SHA-256, comparison to the submitted hash, and inspection of verdict scores with FINALIZED and latest-final state. It also includes one hash-change example and explicit limitations. Content is internally consistent and directly actionable. Minor wording variance exists around 'latest-final contract state' versus the specification's 'latest-final'.",
+              "round": 2,
+              "scores": [
+                100,
+                99,
+                98
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": 10,
+            "paid_to_agent": 200,
+            "refunded_to_poster": 0,
+            "slashed_to_treasury": 0
+          },
+          "status": "FINALIZED",
+          "task_id": "runbook-20261109072450",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 110
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "integrity-20261109072450",
+        "Byte-integrity negative control",
+        200,
+        "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+        "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations."
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0x81db946895550f161bf66b58014bef07158b28155965d7413ae16b7c0249b2f1",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x81db946895550f161bf66b58014bef07158b28155965d7413ae16b7c0249b2f1",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:35:07.770Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 7
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "integrity-20261109072450",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 110
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "integrity-20261109072450",
+        "runbook-agent-20261109072450"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x1a7e11136ed2edb310e528c372f180e84cd32ea1adf2b59bdbf1ccbd881a1778",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x1a7e11136ed2edb310e528c372f180e84cd32ea1adf2b59bdbf1ccbd881a1778",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:36:09.365Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 7
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 8
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "integrity-20261109072450",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "integrity-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 110
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "integrity-20261109072450",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+        "0000000000000000000000000000000000000000000000000000000000000000",
+        "A public UTF-8 runbook with three numbered steps, an example and limitations."
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0xddbead123d2f9e21d1978268b1b81adf29568f96401dbfbd955b87f18999af75",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xddbead123d2f9e21d1978268b1b81adf29568f96401dbfbd955b87f18999af75",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:36:57.379Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 7
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 8
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 9
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "integrity-20261109072450",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "integrity-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 110
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "integrity-20261109072450"
+      ],
+      "sender": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604",
+      "hash": "0x7de307317a064c78dc41fa92f8fc489838c2a2c498c84539d9af9d671d11e29c",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x7de307317a064c78dc41fa92f8fc489838c2a2c498c84539d9af9d671d11e29c",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:37:58.496Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 7
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 8
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 9
+            },
+            {
+              "actor": "0x7fbaf037623167005c2aa8839a07d9aa3b7a1604",
+              "event": "PENDING_VERDICT",
+              "sequence": 10
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "REJECT",
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [
+            {
+              "basis": "HASH_MISMATCH",
+              "contradictions": [
+                "Delivery content contradicts its immutable manifest hash."
+              ],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "rationale": "Fetched bytes do not match the submitted SHA-256.",
+              "round": 1,
+              "scores": [
+                0,
+                0,
+                0
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "REJECT"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "integrity-20261109072450",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "integrity-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 110
+        },
+        "treasury": 0,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "finalize_delivery",
+      "args": [
+        "integrity-20261109072450"
+      ],
+      "sender": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604",
+      "hash": "0x4d97c5b2f9339882574c98c4b6448fddb6036aef6677d375e06f5bac5e5350eb",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x4d97c5b2f9339882574c98c4b6448fddb6036aef6677d375e06f5bac5e5350eb",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:38:59.758Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 7
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 8
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 9
+            },
+            {
+              "actor": "0x7fbaf037623167005c2aa8839a07d9aa3b7a1604",
+              "event": "PENDING_VERDICT",
+              "sequence": 10
+            },
+            {
+              "actor": "0x7fbaf037623167005c2aa8839a07d9aa3b7a1604",
+              "event": "FINALIZED",
+              "sequence": 11
+            }
+          ],
+          "final_verdict": "REJECT",
+          "origin": "user",
+          "pending_verdict": "REJECT",
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [
+            {
+              "basis": "HASH_MISMATCH",
+              "contradictions": [
+                "Delivery content contradicts its immutable manifest hash."
+              ],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+              "rationale": "Fetched bytes do not match the submitted SHA-256.",
+              "round": 1,
+              "scores": [
+                0,
+                0,
+                0
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "REJECT"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": -15,
+            "paid_to_agent": 0,
+            "refunded_to_poster": 200,
+            "slashed_to_treasury": 100
+          },
+          "status": "FINALIZED",
+          "task_id": "integrity-20261109072450",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "pipeline-20261109072450",
+        "An explicitly expired pipeline task",
+        200,
+        "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+        "Provide a short review of a delivery integrity manifest."
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0xf5db96f6a4ca63486b5af764c1d74f0839a3cdd5930a9bef7374b600bc50101e",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xf5db96f6a4ca63486b5af764c1d74f0839a3cdd5930a9bef7374b600bc50101e",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:40:00.426Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 12
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "pipeline-20261109072450",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "pipeline-20261109072450",
+        "runbook-agent-20261109072450"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x55d9b5d882fefbb53f998c79cd1496a9c3976fa258cd844d19a10dbe13576aaf",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x55d9b5d882fefbb53f998c79cd1496a9c3976fa258cd844d19a10dbe13576aaf",
+      "transaction_status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": "STAKE_BELOW_MINIMUM",
+      "read_back_at": "2026-11-09T07:41:02.260Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 12
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "pipeline-20261109072450",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9200,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "EXPECTED_REJECTION",
+      "verified": true
+    },
+    {
+      "method": "top_up_stake",
+      "args": [
+        "runbook-agent-20261109072450",
+        100
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x7201477a920e69d4f08476b8ba930141f7d3df94b4c3f1f4646335214ee8bb74",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x7201477a920e69d4f08476b8ba930141f7d3df94b4c3f1f4646335214ee8bb74",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:42:03.292Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "pipeline-20261109072450",
+        "runbook-agent-20261109072450"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0xd850a021906dd5425bdcf8d94d5b47287135b8cc2746b909237c1f290cbd710e",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xd850a021906dd5425bdcf8d94d5b47287135b8cc2746b909237c1f290cbd710e",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:43:04.541Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 12
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 13
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "pipeline-20261109072450",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "pipeline-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "expire_task",
+      "args": [
+        "pipeline-20261109072450"
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0xf0c4f5507d8a7029016274f29c14450df928a4141a1380af6367d9d4c8076abf",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xf0c4f5507d8a7029016274f29c14450df928a4141a1380af6367d9d4c8076abf",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:44:05.766Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 12
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 13
+            },
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "EXPIRED",
+              "sequence": 14
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": {
+            "agent_reputation_delta": 0,
+            "paid_to_agent": 0,
+            "refunded_to_poster": 200,
+            "slashed_to_treasury": 0
+          },
+          "status": "EXPIRED",
+          "task_id": "pipeline-20261109072450",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9800,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "coverage-20261109072450",
+        "A two-part integrity and incident runbook",
+        200,
+        "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+        "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional."
+      ],
+      "sender": "0x4F1070d9f621372D223669ba6597b6B1F70A8AE4",
+      "hash": "0xa729d2c969d60bc3bb2c655b7236141928e37d778554ea816f12a9ce9669b4c6",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xa729d2c969d60bc3bb2c655b7236141928e37d778554ea816f12a9ce9669b4c6",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:45:07.279Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 15
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "coverage-20261109072450",
+          "title": "A two-part integrity and incident runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "coverage-20261109072450",
+        "runbook-agent-20261109072450"
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x23579ee9247f1b64848a05f126a2e9d0e82440ae48f49865cb0fb94869cba636",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x23579ee9247f1b64848a05f126a2e9d0e82440ae48f49865cb0fb94869cba636",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:46:08.764Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 16
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "coverage-20261109072450",
+          "title": "A two-part integrity and incident runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "coverage-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "coverage-20261109072450",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+        "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "A public UTF-8 runbook with three numbered steps, an example and limitations."
+      ],
+      "sender": "0x66be3c15F6f0F85A8c98b0135e40BcE36c13b86A",
+      "hash": "0x8453fea6758ccd2b4c5c66f6c1c2fa45a6763a55dd094927e1ae803da271e231",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x8453fea6758ccd2b4c5c66f6c1c2fa45a6763a55dd094927e1ae803da271e231",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T07:47:09.880Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 16
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 17
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "coverage-20261109072450",
+          "title": "A two-part integrity and incident runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "coverage-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "coverage-20261109072450"
+      ],
+      "sender": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604",
+      "hash": "0x3d0098eb2c12ba1376a2b49362b70ecc0011ac54b049b693947c4da302ed8691",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x3d0098eb2c12ba1376a2b49362b70ecc0011ac54b049b693947c4da302ed8691",
+      "transaction_status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_DISAGREE",
+      "expected_error": "CONSENSUS_NOT_REACHED",
+      "read_back_at": "2026-11-09T07:51:44.356Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 16
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 17
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "coverage-20261109072450",
+          "title": "A two-part integrity and incident runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "coverage-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "CONSENSUS_NOT_REACHED",
+      "verified": false
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "coverage-20261109072450"
+      ],
+      "sender": "0x7fBAF037623167005C2aA8839a07d9AA3b7a1604",
+      "hash": "0x28b9ef109ec61653b838dad151e516704fc9766d0650534652fcdc727c10d053",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x28b9ef109ec61653b838dad151e516704fc9766d0650534652fcdc727c10d053",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_DISAGREE",
+      "expected_error": "CONSENSUS_NOT_REACHED",
+      "read_back_at": "2026-11-09T07:58:14.246Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109072450",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "CLAIMED",
+              "sequence": 16
+            },
+            {
+              "actor": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+              "event": "SUBMITTED",
+              "sequence": 17
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4",
+          "requirements_hash": "7c3568d577f907a120aaefd056c36118fcd0c01ff32362337146b82d2b986e1d",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "coverage-20261109072450",
+          "title": "A two-part integrity and incident runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109072450": {
+            "agent_id": "runbook-agent-20261109072450",
+            "open_claim": "coverage-20261109072450",
+            "origin": "user",
+            "owner": "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 9600,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 9100,
+          "0xdbf9338f25db2d5d0dc8efea00f4d2f726a27be5": 10000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x4f1070d9f621372d223669ba6597b6b1f70a8ae4": 95,
+          "0x66be3c15f6f0f85a8c98b0135e40bce36c13b86a": 95
+        },
+        "treasury": 100,
+        "issued": 30000
+      },
+      "verification": "CONSENSUS_NOT_REACHED",
+      "verified": false
+    }
+  ]
+}
