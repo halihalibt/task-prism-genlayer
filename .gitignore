@@ -3,3 +3,8 @@ __pycache__/
 .openai/
 dist/
 *.log
+assets/app.bundle.js
+assets/app.bundle.js.LEGAL.txt
+assets/app.css
+
+audit.html

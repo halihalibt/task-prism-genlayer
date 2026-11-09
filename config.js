@@ -1,0 +1,1 @@
+export const CONFIG=Object.freeze({name:'TASK PRISM',repository:'task-prism-genlayer',owner:'halihalibt',chainId:61999,rpc:'https://studio.genlayer.com/api',explorer:'https://explorer-studio.genlayer.com',contract:'0xdbfA1b3EfFd0fcB38A5f6f208D3247a5C77Ab1b3',sourceCommit:'4174a5a996e3e41c5994f990e018289cd6cd3f7f'});
