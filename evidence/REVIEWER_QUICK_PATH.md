@@ -10,6 +10,16 @@
 4. Inspect the settlement panel: agent payment, poster refund and treasury slash are simulated mGEN ledger movements.
 5. Open **Chain evidence** for the raw finalized receipts and read-backs. Transaction FINALIZED is checked separately from successful contract execution.
 
+## Recorded verdict paths
+
+| Path | Task | Inspect |
+| --- | --- | --- |
+| ACCEPT · two retained rounds · 200 to agent | `runbook-20261109121251` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=runbook-20261109121251#adjudication) |
+| PARTIAL · 100 to agent · 100 refund | `support-20261109121251` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=support-20261109121251#adjudication) |
+| REJECT · 200 refund · 100 stake slash | `integrity-20261109121251` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=integrity-20261109121251#adjudication) |
+
+[Browser receipts and screenshots](BROWSER_ADJUDICATION.md) show the real pending-to-final settlement flow. [Live verification](LIVE_VERIFICATION.md) contains the complete current-contract transaction list.
+
 ## Try a new task
 
 1. Choose **Connect**, then an injected EVM wallet or the explicitly labelled **temporary test account**. Temporary accounts disappear from browser memory on reload; do not use them for work you need to control later.

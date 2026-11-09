@@ -2,7 +2,7 @@
 
 Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c` on Stable Studionet, Chain ID 61999.
 
-21 signed transactions have FINALIZED receipts and latest-final read-backs. These include 20 consensus-accepted successful executions, 1 intentional stake-threshold rejection and 0 consensus-rejected evaluation attempts with unchanged state. Amounts are simulated mGEN; no real GEN moves.
+23 signed transactions have FINALIZED receipts and latest-final read-backs. These include 22 consensus-accepted successful executions, 1 intentional stake-threshold rejection and 0 consensus-rejected evaluation attempts with unchanged state. Amounts are simulated mGEN; no real GEN moves.
 
 ## Task outcomes
 
@@ -11,7 +11,7 @@ Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c` on Stable Studionet, Chai
 | integrity-20261109121251 | FINALIZED | REJECT | 0/0/0 | 0 | 200 | 100 |
 | pipeline-20261109121251 | EXPIRED | — | — | 0 | 200 | 0 |
 | runbook-20261109121251 | FINALIZED | ACCEPT | 100/99/99; 97/96/95 | 200 | 0 | 0 |
-| support-20261109121251 | SUBMITTED | — | — | 0 | 0 | 0 |
+| support-20261109121251 | FINALIZED | PARTIAL | 60/95/60 | 100 | 100 | 0 |
 
 ## Transaction receipts and read-backs
 
@@ -38,6 +38,8 @@ Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c` on Stable Studionet, Chai
 | `post_task` | [0x38b50357…](https://explorer-studio.genlayer.com/tx/0x38b50357e864facf08f75013832c1e7a49a3ccc6386fc5d0766da68cfaba6df1) | FINALIZED | SUCCESS · MAJORITY_AGREE |
 | `claim_task` | [0xff763ea1…](https://explorer-studio.genlayer.com/tx/0xff763ea190dbddc4cd9a00e8994d564f476b3427aa5124bca61608746787a932) | FINALIZED | SUCCESS · MAJORITY_AGREE |
 | `submit_delivery` | [0x7a2bbce4…](https://explorer-studio.genlayer.com/tx/0x7a2bbce494c903eb591ff1f9bf533ee9af6015840cca7539a40bcb489578f9fd) | FINALIZED | SUCCESS · MAJORITY_AGREE |
+| `evaluate_delivery` | [0x42352c32…](https://explorer-studio.genlayer.com/tx/0x42352c32ee18417d9898f1ba16b96a3584a662993303dcf98c718afad41ea693) | FINALIZED | SUCCESS · MAJORITY_AGREE |
+| `finalize_delivery` | [0x90e9aa9f…](https://explorer-studio.genlayer.com/tx/0x90e9aa9f3b1ad58400dda15e950f1099f097f8669b29158452c8500893227046) | FINALIZED | SUCCESS · MAJORITY_AGREE |
 
 The readable per-transaction state projections are in [live-verification.json](live-verification.json). Complete original receipts and full read-backs are preserved losslessly in [live-verification.full.json.gz](live-verification.full.json.gz); its uncompressed SHA-256 is recorded in the index. [final-state.json](final-state.json) is the last finalized read-back.
 

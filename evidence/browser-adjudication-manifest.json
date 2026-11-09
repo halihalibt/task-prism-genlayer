@@ -1,0 +1,23 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "contract": "0x2D5d39cE2414F154D0D2cd574079167B26deA68c",
+  "task_id": "support-20261109121251",
+  "scope": "Actual Pages application, labelled in-memory temporary test account; no injected-wallet or physical-phone claim.",
+  "setup": {
+    "archive": "cli-core.full.json.gz",
+    "sha256": "04e5bc61aedf27bc0c204f171aa19eaf2e428b1ed05a8b5d5c2421b32a4e2b12"
+  },
+  "browser": {
+    "archive": "browser-adjudication.json.gz",
+    "sha256": "fbe65f46b5da8b513e5940f57e4db04ed285f34246b825a11c8ee815695db6fb"
+  },
+  "pending_tx": "0x42352c32ee18417d9898f1ba16b96a3584a662993303dcf98c718afad41ea693",
+  "finalize_tx": "0x90e9aa9f3b1ad58400dda15e950f1099f097f8669b29158452c8500893227046",
+  "scores": [
+    60,
+    95,
+    60
+  ],
+  "scenario_verified": true
+}

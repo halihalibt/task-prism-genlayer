@@ -7,16 +7,17 @@
   "public_accounts": {
     "poster": "0xc1BBdEbab5933B2B1c4b9AfB56f0555AA3f12Cf8",
     "agent": "0xC3b7C3dC755829d4eEeB158F2b169f4d1725C106",
-    "observer": "0x270676a645Cf3933969185e89a641b7634e89d22"
+    "observer": "0x270676a645Cf3933969185e89a641b7634e89d22",
+    "browser_observer": "0x991E30d3162b02EC601AcfE0F20d0e4a87f63d06"
   },
-  "all_scenarios_passed": false,
-  "awaiting_browser_adjudication": {
-    "task_id": "support-20261109121251"
-  },
-  "run_finished_at": "2026-11-09T12:34:28.371Z",
+  "all_scenarios_passed": true,
   "core_methods_verified": true,
+  "browser_task_id": "support-20261109121251",
+  "cli_finished_at": "2026-11-09T12:34:28.371Z",
+  "completed_at": "2026-11-09T12:42:25.243Z",
+  "browser_evidence": "browser-adjudication-manifest.json",
   "archive": "live-verification.full.json.gz",
-  "original_json_sha256": "04e5bc61aedf27bc0c204f171aa19eaf2e428b1ed05a8b5d5c2421b32a4e2b12",
+  "original_json_sha256": "a12c7f77d8f6528eb7252d38dc0ada7d42251cee3373d17fc626d10ce2cfd15e",
   "archive_scope": "Complete original FINALIZED receipts and full latest-final read-backs for every transaction below.",
   "transactions": [
     {
@@ -1577,6 +1578,226 @@
           "0x0000000000000000000000000000000000000003": 100,
           "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 95,
           "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 95
+        },
+        "treasury": 100,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "support-20261109121251"
+      ],
+      "sender": "0x991E30d3162b02EC601AcfE0F20d0e4a87f63d06",
+      "hash": "0x42352c32ee18417d9898f1ba16b96a3584a662993303dcf98c718afad41ea693",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x42352c32ee18417d9898f1ba16b96a3584a662993303dcf98c718afad41ea693",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T12:40:31.879Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109121251",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": {
+            "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+            "summary": "Three numbered English-to-Spanish support replies.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+              "event": "CLAIMED",
+              "sequence": 16
+            },
+            {
+              "actor": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+              "event": "SUBMITTED",
+              "sequence": 17
+            },
+            {
+              "actor": "0x991e30d3162b02ec601acfe0f20d0e4a87f63d06",
+              "event": "PENDING_VERDICT",
+              "sequence": 18
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "PARTIAL",
+          "poster": "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Specification requested five source messages, but only three were delivered.",
+                "Missing translation for: 'Your appointment is on Monday.'",
+                "Missing translation for: 'Your order has been canceled.'"
+              ],
+              "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "rationale": "The agent provided high-quality, natural translations for the first three items. However, it failed to translate items 4 and 5 as required by the specification, resulting in a significant completeness gap.",
+              "round": 1,
+              "scores": [
+                60,
+                95,
+                60
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+              "verdict": "PARTIAL"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "support-20261109121251",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109121251": {
+            "agent_id": "runbook-agent-20261109121251",
+            "open_claim": "support-20261109121251",
+            "origin": "user",
+            "owner": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 9600,
+          "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 9100
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 95,
+          "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 95
+        },
+        "treasury": 100,
+        "issued": 20000
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "finalize_delivery",
+      "args": [
+        "support-20261109121251"
+      ],
+      "sender": "0x991E30d3162b02EC601AcfE0F20d0e4a87f63d06",
+      "hash": "0x90e9aa9f3b1ad58400dda15e950f1099f097f8669b29158452c8500893227046",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x90e9aa9f3b1ad58400dda15e950f1099f097f8669b29158452c8500893227046",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T12:42:25.243Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109121251",
+          "bounty": 200,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": {
+            "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+            "summary": "Three numbered English-to-Spanish support replies.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8",
+              "event": "POSTED",
+              "sequence": 15
+            },
+            {
+              "actor": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+              "event": "CLAIMED",
+              "sequence": 16
+            },
+            {
+              "actor": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+              "event": "SUBMITTED",
+              "sequence": 17
+            },
+            {
+              "actor": "0x991e30d3162b02ec601acfe0f20d0e4a87f63d06",
+              "event": "PENDING_VERDICT",
+              "sequence": 18
+            },
+            {
+              "actor": "0x991e30d3162b02ec601acfe0f20d0e4a87f63d06",
+              "event": "FINALIZED",
+              "sequence": 19
+            }
+          ],
+          "final_verdict": "PARTIAL",
+          "origin": "user",
+          "pending_verdict": "PARTIAL",
+          "poster": "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Specification requested five source messages, but only three were delivered.",
+                "Missing translation for: 'Your appointment is on Monday.'",
+                "Missing translation for: 'Your order has been canceled.'"
+              ],
+              "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "rationale": "The agent provided high-quality, natural translations for the first three items. However, it failed to translate items 4 and 5 as required by the specification, resulting in a significant completeness gap.",
+              "round": 1,
+              "scores": [
+                60,
+                95,
+                60
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+              "verdict": "PARTIAL"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": 2,
+            "paid_to_agent": 100,
+            "refunded_to_poster": 100,
+            "slashed_to_treasury": 0
+          },
+          "status": "FINALIZED",
+          "task_id": "support-20261109121251",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109121251": {
+            "agent_id": "runbook-agent-20261109121251",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000
+          }
+        },
+        "balances": {
+          "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 9700,
+          "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 9200
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 95,
+          "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 97
         },
         "treasury": 100,
         "issued": 20000

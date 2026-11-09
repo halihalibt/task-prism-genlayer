@@ -75,7 +75,12 @@ if supplement.exists():
    leaders=receipt['consensus_data']['leader_receipt']
    leader=next(x for x in leaders if x['mode']=='leader') if isinstance(leaders,list) else leaders
    if tx.get('verified'):
-    assert receipt['result_name']=='MAJORITY_AGREE' and leader['execution_result']=='SUCCESS'
+    assert receipt['result_name']=='MAJORITY_AGREE'
+    if record is setup and tx.get('expect_error'):
+     assert tx['method']=='claim_task' and leader['execution_result']=='ERROR'
+     assert 'STAKE_BELOW_MINIMUM' in leader['genvm_result']['stderr']
+    else:
+     assert leader['execution_result']=='SUCCESS'
     assert tx.get('read_back') and tx.get('read_back_at')
    else:
     assert tx.get('verified') is False
