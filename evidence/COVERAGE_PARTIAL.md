@@ -1,55 +1,54 @@
 # Coverage-style partial delivery
 
-[Open this finalized task](https://halihalibt.github.io/task-prism-genlayer/?task=coverage-20261109154647#adjudication).
+[Open this finalized task](https://halihalibt.github.io/task-prism-genlayer/?task=coverage-20261109192338#adjudication).
 
-Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c` on Stable Studionet, Chain ID 61999.
+Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chain ID 61999. Real testnet GEN (1 GEN = 10^18 wei); no simulated ledger.
 
 ## Why this case
 
-Under the strict same-band rule, validators split twice on a two-section delivery and left it stuck SUBMITTED. The relaxed rule (same verdict, at most 10 points per dimension) is mock-tested, and the new contract had already finalized a PARTIAL verdict for a five-item support sheet — but it had never been tested live on a two-section delivery where one whole section is absent. This case is that exact shape:
+Under the strict same-band rule, validators split twice on a two-section delivery and left it stuck SUBMITTED. The relaxed rule (same verdict, at most 10 points per dimension) is mock-tested, and the contract had already finalized a PARTIAL verdict for a five-item support sheet — but it had never been tested live on a two-section delivery where one whole section is absent. This case is that exact shape:
 
 - Specification: two equally important parts. Part 1: local setup guide. Part 2: version 1 to version 2 migration guide.
 - Delivery: Part 1 complete (prerequisites, install commands, config example, server-start verification); Part 2 entirely absent.
-- Delivery bytes: [fixtures/coverage-partial.txt](https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/54c38580ffabec404e8e3ac4aeae293adc63b5e4/fixtures/coverage-partial.txt), fetched and hashed by validators from a commit-pinned URL (sha256 `63db7fb3bbddc6fa14a68cdffc2cbaea80f96a268e1130b871320d26a56cfe27`).
+- Delivery bytes: [fixtures/coverage-partial.txt](https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/coverage-partial.txt), fetched and hashed by validators from a commit-pinned URL (sha256 `63db7fb3bbddc6fa14a68cdffc2cbaea80f96a268e1130b871320d26a56cfe27`).
 
 ## Transactions
 
-All nine transactions are FINALIZED. The first evaluation attempt did not reach consensus and wrote no state; the second did.
+All transactions below are FINALIZED. The first two evaluation attempts did not reach consensus and wrote no state; the third did.
 
 | Operation | Transaction | Consensus | Execution | Read-back |
 | --- | --- | --- | --- | --- |
-| `claim_demo_funds` (poster) | [0x06c62ae3e7001073523f351723f76f658d4b6f430edc38f7dbf0a027cdd925a7](https://explorer-studio.genlayer.com/tx/0x06c62ae3e7001073523f351723f76f658d4b6f430edc38f7dbf0a027cdd925a7) | MAJORITY_AGREE | SUCCESS · FINALIZED | poster 10000 |
-| `claim_demo_funds` (agent) | [0xdfa0c0f5c046cbada5905c7c3a6f8790dc5be88c81e67da76e9f131f4d631b66](https://explorer-studio.genlayer.com/tx/0xdfa0c0f5c046cbada5905c7c3a6f8790dc5be88c81e67da76e9f131f4d631b66) | MAJORITY_AGREE | SUCCESS · FINALIZED | agent 10000 |
-| `register_agent` | [0x6c3d5933165bd145106e614efc22e6b6b7dcd5855cd353956254178efa665be3](https://explorer-studio.genlayer.com/tx/0x6c3d5933165bd145106e614efc22e6b6b7dcd5855cd353956254178efa665be3) | MAJORITY_AGREE | SUCCESS · FINALIZED | stake 1000 |
-| `post_task` | [0xf9a16229d3e997e23f7c252edbf3d02332bef7b1b6d64cdbccf63b82ac54002e](https://explorer-studio.genlayer.com/tx/0xf9a16229d3e997e23f7c252edbf3d02332bef7b1b6d64cdbccf63b82ac54002e) | MAJORITY_AGREE | SUCCESS · FINALIZED | OPEN |
-| `claim_task` | [0xfd4d9f842cba12f823c642476fd154df4c6e0440a5929c5b4644131fc8ac5742](https://explorer-studio.genlayer.com/tx/0xfd4d9f842cba12f823c642476fd154df4c6e0440a5929c5b4644131fc8ac5742) | MAJORITY_AGREE | SUCCESS · FINALIZED | CLAIMED |
-| `submit_delivery` | [0x37fa2a56f7bbc9773807d68212358ac19d0687debe37d38f53dfd6a0977f47d6](https://explorer-studio.genlayer.com/tx/0x37fa2a56f7bbc9773807d68212358ac19d0687debe37d38f53dfd6a0977f47d6) | MAJORITY_AGREE | SUCCESS · FINALIZED | SUBMITTED |
-| `evaluate_delivery` attempt 1 | [0x7429d49d6f3f47847caf60f2b32a117ec7d0dab3ea67ab9071826446adfae293](https://explorer-studio.genlayer.com/tx/0x7429d49d6f3f47847caf60f2b32a117ec7d0dab3ea67ab9071826446adfae293) | MAJORITY_DISAGREE | SUCCESS · FINALIZED | SUBMITTED (unchanged) |
-| `evaluate_delivery` attempt 2 | [0x0705a02e0daabdb1f53315ce24d4088c69decffb78a1cee95babbc582a66b403](https://explorer-studio.genlayer.com/tx/0x0705a02e0daabdb1f53315ce24d4088c69decffb78a1cee95babbc582a66b403) | MAJORITY_AGREE | SUCCESS · FINALIZED | EVALUATING |
-| `finalize_delivery` | [0xfafee84de53eb702da99f5c4047a3e0622bef79446a1b52a6c4c2fbbc9349f87](https://explorer-studio.genlayer.com/tx/0xfafee84de53eb702da99f5c4047a3e0622bef79446a1b52a6c4c2fbbc9349f87) | MAJORITY_AGREE | SUCCESS · FINALIZED | FINALIZED |
+| `register_agent` | [0x4fdb92e13ac4edc27ba0fbd2a9d6a2d090084f7228db3f8934005b3fab774e32](https://explorer-studio.genlayer.com/tx/0x4fdb92e13ac4edc27ba0fbd2a9d6a2d090084f7228db3f8934005b3fab774e32) | MAJORITY_AGREE | SUCCESS · FINALIZED | stake 1 GEN |
+| `post_task` | [0x352e003aead2e4b319ed455278bc4c1bbf7073e6425e67d9f77a92fe19c85900](https://explorer-studio.genlayer.com/tx/0x352e003aead2e4b319ed455278bc4c1bbf7073e6425e67d9f77a92fe19c85900) | MAJORITY_AGREE | SUCCESS · FINALIZED | OPEN |
+| `claim_task` | [0xab33925dc7ea7388b62db217bbb41e507d58c889d0601556ad1d9df65a7c8901](https://explorer-studio.genlayer.com/tx/0xab33925dc7ea7388b62db217bbb41e507d58c889d0601556ad1d9df65a7c8901) | MAJORITY_AGREE | SUCCESS · FINALIZED | CLAIMED |
+| `submit_delivery` | [0xed5af38802e4198f355f64d0fa37cf19bd92e88461387fa70eddcaf27ec8785f](https://explorer-studio.genlayer.com/tx/0xed5af38802e4198f355f64d0fa37cf19bd92e88461387fa70eddcaf27ec8785f) | MAJORITY_AGREE | SUCCESS · FINALIZED | SUBMITTED |
+| `evaluate_delivery` attempt 1 | [0x1b4e6ea1c2595df8d1d68229a2280bb715e8ed291af3ece6790c59132acf8cf5](https://explorer-studio.genlayer.com/tx/0x1b4e6ea1c2595df8d1d68229a2280bb715e8ed291af3ece6790c59132acf8cf5) | MAJORITY_DISAGREE | SUCCESS · FINALIZED | SUBMITTED (unchanged) |
+| `evaluate_delivery` attempt 2 | [0xf33b3f6bee60808f659aeeafd3d1189cb26467d650ecd49efb33f94a21236894](https://explorer-studio.genlayer.com/tx/0xf33b3f6bee60808f659aeeafd3d1189cb26467d650ecd49efb33f94a21236894) | MAJORITY_DISAGREE | SUCCESS · FINALIZED | SUBMITTED (unchanged) |
+| `evaluate_delivery` attempt 3 | [0x8f41dd65ebdeb592c76394474de6e3f21c98d43eb9cbcfc501b94150b7b0daee](https://explorer-studio.genlayer.com/tx/0x8f41dd65ebdeb592c76394474de6e3f21c98d43eb9cbcfc501b94150b7b0daee) | MAJORITY_AGREE | SUCCESS · FINALIZED | EVALUATING |
+| `finalize_delivery` | [0x535f2486b08deb79636d54e74c8c6ad3e455ac67106637fb5d164c767c79f0ca](https://explorer-studio.genlayer.com/tx/0x535f2486b08deb79636d54e74c8c6ad3e455ac67106637fb5d164c767c79f0ca) | MAJORITY_AGREE | SUCCESS · FINALIZED | FINALIZED |
+| `withdraw` (agent) | [0xc4397505f066224509e2926c0f64258cd9cc1c47d953014d8b82bc7b2d44144a](https://explorer-studio.genlayer.com/tx/0xc4397505f066224509e2926c0f64258cd9cc1c47d953014d8b82bc7b2d44144a) | MAJORITY_AGREE | SUCCESS · FINALIZED | 0.1 GEN received |
+| `withdraw` (poster) | [0x76dfb0dc4b519fa17e09baaa5ca926178dcd1aede70d1b4db5507d06afcb7843](https://explorer-studio.genlayer.com/tx/0x76dfb0dc4b519fa17e09baaa5ca926178dcd1aede70d1b4db5507d06afcb7843) | MAJORITY_AGREE | SUCCESS · FINALIZED | 0.1 GEN received |
 
-The first attempt is recorded honestly: validators still split on a coverage-style delivery sometimes. The relaxed rule did not eliminate disagreement — it made consensus reachable on retry, and the failed attempt wrote no state, so the retry was safe.
+The first two attempts are recorded honestly: validators still split on a coverage-style delivery sometimes. The relaxed rule did not eliminate disagreement — it made consensus reachable on retry, and the failed attempts wrote no state, so the retries were safe.
 
 ## Verdict
 
-Completeness, correctness and usefulness were **50 / 90 / 50**, verdict **PARTIAL**, one round, basis `CONTENT_REVIEW`. The accepted rationale: "The delivered bytes contain a complete Part 1 local setup guide (prerequisites, install commands, config example, and server-start verification) but omit Part 2 entirely. The heading calls it a two-part integration guide, yet no version 1-to-2 migration steps are provided, so the document does not substantively meet the full specification."
+Completeness, correctness and usefulness were **50 / 100 / 50**, verdict **PARTIAL**, one round, basis `CONTENT_REVIEW`. The accepted rationale: "The delivered content fully meets the requirements for Part 1 of the specification, including prerequisites (Node.js 20 and Git), install commands, a config file example, and verification steps. However, Part 2 (migration guide) is entirely absent, which is a critical gap as the specification explicitly requires both parts to be present and complete."
 
-Contradiction witnesses:
+Contradiction witness:
 
-- "Title claims a 'two-part integration guide' but only Part 1 is present."
-- "Specification requires a complete Part 2 migration guide (backup step, migration command, rollback step, and migration verification), none of which appear in the delivered content."
+- "Part 2 (version 1 to version 2 migration guide) is missing, despite the specification requiring it to include backup, migration command, rollback, and verification steps."
 
 ## Settlement
 
-| Ledger field | Before settlement | After settlement |
+| Field | Before settlement | After settlement |
 | --- | ---: | ---: |
-| Agent balance · mGEN | 9000 | 9100 |
-| Poster balance · mGEN | 9800 | 9900 |
+| Agent withdrawable · GEN | 0 | 0.1 (withdrawn) |
+| Poster withdrawable · GEN | 0 | 0.1 (withdrawn) |
 | Agent reputation | 100 | 102 |
-| Agent stake · mGEN | 1000 | 1000 |
-| Treasury · mGEN | 100 | 100 |
-| Issued · mGEN | 40000 | 40000 |
+| Agent stake · GEN | 1 | 1 |
+| Treasury · GEN (contract-wide, from earlier REJECT slashes) | 0.3 | 0.3 |
 
-The agent received 100 and the poster received 100. The claim was unlocked, with no slash. Ledger conservation holds at every step: issued = wallets + stakes + escrow + treasury.
+The agent received 0.1 GEN and the poster received 0.1 GEN (exact half each). The claim was unlocked, with no slash. GEN conservation holds at every step: contract GEN balance = escrow + stakes + withdrawable + treasury (+ 1 GEN stranded by a failed payable call — see PROBES.md).
 
-Simulated mGEN ledger, no real GEN moves. Full log with receipts and read-backs: [coverage-partial.json](coverage-partial.json). Runner: `scripts/coverage-case.mjs`.
+Real testnet GEN; the agent and poster pulled their settlements with `withdraw` and the EOA deltas match exactly. Full log with receipts and read-backs: [coverage-partial.json](coverage-partial.json). Runner: `scripts/coverage-case.mjs`.

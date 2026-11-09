@@ -1,0 +1,3322 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "contract": "0x0BC304C168D14B8f4928f622e971B532D30d7268",
+  "label": "20261109190501",
+  "started_at": "2026-11-09T19:05:01.187Z",
+  "scope": "Live signed transactions with finalized receipts and latest-final read-back. Real testnet GEN (wei); no simulated ledger. No user-wallet path is implied.",
+  "public_accounts": {
+    "poster": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+    "agent": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+    "observer": "0xB4aB583014f004f25343052BF6A03828c00f0AA2"
+  },
+  "all_scenarios_passed": true,
+  "completed_at": "2026-11-09T19:23:27.991Z",
+  "archive": "live-verification.full.json.gz",
+  "original_json_sha256": "62a21a1282a9b0616631a07d60c32a9b6751bf545ecaf841b4aaf3bc70ab853d",
+  "archive_scope": "Complete original FINALIZED receipts and full latest-final read-backs for every transaction below.",
+  "transactions": [
+    {
+      "method": "register_agent",
+      "args": [
+        "runbook-agent-20261109190501",
+        "1000000000000000000",
+        "integrity, evidence, technical writing"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0xae43327b5d9bc8546f7494a4417428123417874e4c09bdfa239c8a70bc0cf06a",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xae43327b5d9bc8546f7494a4417428123417874e4c09bdfa239c8a70bc0cf06a",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:05:41.146Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "6900000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "runbook-20261109190501",
+        "A source-integrity verification runbook",
+        "200000000000000000",
+        "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+        "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required."
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0xd85061a171acd1c2a21a4645ae4e7d3fff40b26edda8b7466a55ec75053bf01c",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xd85061a171acd1c2a21a4645ae4e7d3fff40b26edda8b7466a55ec75053bf01c",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:06:22.952Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 42
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "runbook-20261109190501",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "runbook-20261109190501",
+        "runbook-agent-20261109190501"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x6bfb4c171e907cbc37e44028d2b9b84d9d691cd2a6d3bba90a43425e6f8c398d",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x6bfb4c171e907cbc37e44028d2b9b84d9d691cd2a6d3bba90a43425e6f8c398d",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:07:03.808Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 42
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 43
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "runbook-20261109190501",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "runbook-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "runbook-20261109190501",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+        "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "A public UTF-8 runbook with three numbered steps, an example and limitations."
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x893ccb1c90ffbee0a917fd8e34619d9074d0971a4247ea76267a2fe3ad90214a",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x893ccb1c90ffbee0a917fd8e34619d9074d0971a4247ea76267a2fe3ad90214a",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:07:57.916Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 42
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 43
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 44
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "runbook-20261109190501",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "runbook-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "runbook-20261109190501"
+      ],
+      "sender": "0xB4aB583014f004f25343052BF6A03828c00f0AA2",
+      "hash": "0xf25417462371ef483965e035687f673287d9c6ccc9d2974c5f9af714c1d47507",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xf25417462371ef483965e035687f673287d9c6ccc9d2974c5f9af714c1d47507",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:08:51.243Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 42
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 43
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 44
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 45
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "ACCEPT",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "The agent followed all instructions, providing a three-step runbook covering byte capture, hash comparison, and verdict inspection. It included the required hash-change example and a limitations section.",
+              "round": 1,
+              "scores": [
+                100,
+                100,
+                100
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "runbook-20261109190501",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "runbook-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "challenge_delivery",
+      "args": [
+        "runbook-20261109190501",
+        "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text."
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0x11e7e6caf42f563ca985be1e461526df0b496afdfe3fdd3474c3046709a3c857",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x11e7e6caf42f563ca985be1e461526df0b496afdfe3fdd3474c3046709a3c857",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:09:45.047Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_failed": true,
+          "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+          "challenger": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+          "delivery": {
+            "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+            "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 42
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 43
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 44
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 45
+            },
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "DISPUTED",
+              "sequence": 46
+            },
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "FINALIZED",
+              "sequence": 47
+            }
+          ],
+          "final_verdict": "ACCEPT",
+          "origin": "user",
+          "pending_verdict": "ACCEPT",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "The agent followed all instructions, providing a three-step runbook covering byte capture, hash comparison, and verdict inspection. It included the required hash-change example and a limitations section.",
+              "round": 1,
+              "scores": [
+                100,
+                100,
+                100
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            },
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [],
+              "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+              "rationale": "The delivered content fully matches the specification. It provides a concise English runbook with three clearly numbered steps covering UTF-8 byte capture and SHA-256 calculation, hash comparison, and verdict inspection including FINALIZED state. It includes a hash-change example and explicitly lists limitations. The structure and content align precisely with the requirement.",
+              "round": 2,
+              "scores": [
+                100,
+                100,
+                100
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+              "verdict": "ACCEPT"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": 10,
+            "paid_to_agent": 200000000000000000,
+            "refunded_to_poster": 0,
+            "slashed_to_treasury": 0
+          },
+          "status": "FINALIZED",
+          "task_id": "runbook-20261109190501",
+          "title": "A source-integrity verification runbook"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 200000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "withdraw",
+      "args": [],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x0a92ce49683deea9f01e1efaf1012f3f6dfaa8ce0aaf139798a251dd6f7ed502",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x0a92ce49683deea9f01e1efaf1012f3f6dfaa8ce0aaf139798a251dd6f7ed502",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:10:25.786Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "6900000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "integrity-20261109190501",
+        "Byte-integrity negative control",
+        "200000000000000000",
+        "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+        "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations."
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0xc5dad8d04e42dee32a4ac57161354f819b38ebae31817c667f3b11a468eb3ae4",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xc5dad8d04e42dee32a4ac57161354f819b38ebae31817c667f3b11a468eb3ae4",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:11:07.593Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 48
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "integrity-20261109190501",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "integrity-20261109190501",
+        "runbook-agent-20261109190501"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0xc9a1bb52b0d617ca7cb563fcf14ea5e2ae1b3a92448e647447548bba6201c3f8",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xc9a1bb52b0d617ca7cb563fcf14ea5e2ae1b3a92448e647447548bba6201c3f8",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:11:48.512Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 48
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 49
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "integrity-20261109190501",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "integrity-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "integrity-20261109190501",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+        "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+        "A chocolate cake recipe, unrelated to the requested runbook."
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x6956fc1e511fea5252e0c154919c20bc83a827fce39a2c433bbd6b85768ec3e3",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x6956fc1e511fea5252e0c154919c20bc83a827fce39a2c433bbd6b85768ec3e3",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:12:29.250Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+            "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 48
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 49
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 50
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "integrity-20261109190501",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "integrity-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "integrity-20261109190501"
+      ],
+      "sender": "0xB4aB583014f004f25343052BF6A03828c00f0AA2",
+      "hash": "0x93d14ed822eea9cfc2d60021a9238a2747860e79eb889e59cad5da856e7eff5f",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x93d14ed822eea9cfc2d60021a9238a2747860e79eb889e59cad5da856e7eff5f",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:13:23.002Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+            "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 48
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 49
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 50
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 51
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "REJECT",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Delivered content is unrelated to checking a public delivery manifest.",
+                "No three-step runbook is provided.",
+                "No hash-change example is included.",
+                "No limitations section is included.",
+                "Content is a recipe rather than a concise English operational runbook."
+              ],
+              "evidence_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+              "expected_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+              "rationale": "The delivered content is a chocolate cake recipe. The specification asks for a concise English three-step runbook for checking a public delivery manifest, including one hash-change example and limitations. None of the requested runbook content is present.",
+              "round": 1,
+              "scores": [
+                0,
+                0,
+                0
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+              "verdict": "REJECT"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "integrity-20261109190501",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "integrity-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 110,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 200000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "finalize_delivery",
+      "args": [
+        "integrity-20261109190501"
+      ],
+      "sender": "0xB4aB583014f004f25343052BF6A03828c00f0AA2",
+      "hash": "0x81522654db1ed05de55408a865256d9d16073f0f6c7ebae6a3cf257920bec40c",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x81522654db1ed05de55408a865256d9d16073f0f6c7ebae6a3cf257920bec40c",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:14:05.251Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+          "delivery": {
+            "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+            "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 48
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 49
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 50
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 51
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "FINALIZED",
+              "sequence": 52
+            }
+          ],
+          "final_verdict": "REJECT",
+          "origin": "user",
+          "pending_verdict": "REJECT",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Delivered content is unrelated to checking a public delivery manifest.",
+                "No three-step runbook is provided.",
+                "No hash-change example is included.",
+                "No limitations section is included.",
+                "Content is a recipe rather than a concise English operational runbook."
+              ],
+              "evidence_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+              "expected_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+              "rationale": "The delivered content is a chocolate cake recipe. The specification asks for a concise English three-step runbook for checking a public delivery manifest, including one hash-change example and limitations. None of the requested runbook content is present.",
+              "round": 1,
+              "scores": [
+                0,
+                0,
+                0
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+              "verdict": "REJECT"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": -15,
+            "paid_to_agent": 0,
+            "refunded_to_poster": 200000000000000000,
+            "slashed_to_treasury": 100000000000000000
+          },
+          "status": "FINALIZED",
+          "task_id": "integrity-20261109190501",
+          "title": "Byte-integrity negative control"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 200000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "pipeline-20261109190501",
+        "An explicitly expired pipeline task",
+        "200000000000000000",
+        "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+        "Provide a short review of a delivery integrity manifest."
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0x4540446ffcc80162762071b882e6b3f0694b17f02d82384c2b96bbc94f35a6d6",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x4540446ffcc80162762071b882e6b3f0694b17f02d82384c2b96bbc94f35a6d6",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:14:46.163Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 53
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "pipeline-20261109190501",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 200000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7300000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "pipeline-20261109190501",
+        "runbook-agent-20261109190501"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x9d23f8050528c4011a89491008c2a1b453a646a95aba679ec54891a4d3e460a1",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x9d23f8050528c4011a89491008c2a1b453a646a95aba679ec54891a4d3e460a1",
+      "transaction_status": "FINALIZED",
+      "execution": "ERROR",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": "STAKE_BELOW_MINIMUM",
+      "read_back_at": "2026-11-09T19:15:27.277Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 53
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "pipeline-20261109190501",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 200000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7300000000000000000"
+      },
+      "verification": "EXPECTED_REJECTION",
+      "verified": true
+    },
+    {
+      "method": "top_up_stake",
+      "args": [
+        "runbook-agent-20261109190501",
+        "100000000000000000"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0xde8227542103f540114084f8bc321cf9f28ee2016ad1b40e5673ceae3b6c5017",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xde8227542103f540114084f8bc321cf9f28ee2016ad1b40e5673ceae3b6c5017",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:16:07.723Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 200000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7400000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "pipeline-20261109190501",
+        "runbook-agent-20261109190501"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x5d7cda6852ed21441d521ecf8e906d5b2e716715f1345c9b04f5651448d8056f",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x5d7cda6852ed21441d521ecf8e906d5b2e716715f1345c9b04f5651448d8056f",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:16:48.803Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 53
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 54
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "pipeline-20261109190501",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "pipeline-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 200000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7400000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "expire_task",
+      "args": [
+        "pipeline-20261109190501"
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0xe49a67cc574a0268dec5b9f701efe4d92bfa4bfc038f5f00f30fd979eda85843",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xe49a67cc574a0268dec5b9f701efe4d92bfa4bfc038f5f00f30fd979eda85843",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:17:29.838Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 53
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 54
+            },
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "EXPIRED",
+              "sequence": 55
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+          "rounds": [],
+          "settlement": {
+            "agent_reputation_delta": 0,
+            "paid_to_agent": 0,
+            "refunded_to_poster": 200000000000000000,
+            "slashed_to_treasury": 0
+          },
+          "status": "EXPIRED",
+          "task_id": "pipeline-20261109190501",
+          "title": "An explicitly expired pipeline task"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 400000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7400000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "withdraw",
+      "args": [],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0x2f060664cb74b20da8e88c01097065eecb9d05b0d9fb6e842bd0723fa628933a",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x2f060664cb74b20da8e88c01097065eecb9d05b0d9fb6e842bd0723fa628933a",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:18:11.321Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7000000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "post_task",
+      "args": [
+        "support-20261109190501",
+        "Spanish customer support reply sheet",
+        "200000000000000000",
+        "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+        "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed."
+      ],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0x25e925f03e10493f9f0bcad39f82d09489a05af7bff23866bb91481c024730ea",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x25e925f03e10493f9f0bcad39f82d09489a05af7bff23866bb91481c024730ea",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:18:52.650Z",
+      "read_back": {
+        "task": {
+          "agent_id": "",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 56
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [],
+          "settlement": null,
+          "status": "OPEN",
+          "task_id": "support-20261109190501",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7200000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "claim_task",
+      "args": [
+        "support-20261109190501",
+        "runbook-agent-20261109190501"
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x430bc3ffb4ad5176a3fc4efee2db72d024af0f88465fdef7a26d018767059226",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x430bc3ffb4ad5176a3fc4efee2db72d024af0f88465fdef7a26d018767059226",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:19:33.528Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": null,
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 56
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 57
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [],
+          "settlement": null,
+          "status": "CLAIMED",
+          "task_id": "support-20261109190501",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "support-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7200000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "submit_delivery",
+      "args": [
+        "support-20261109190501",
+        "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+        "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+        "Three numbered English-to-Spanish support replies."
+      ],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x79bd22deacd199752b83a3324334cc8d1a3d8d51fbec7641ad2507d0e32ac2b9",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x79bd22deacd199752b83a3324334cc8d1a3d8d51fbec7641ad2507d0e32ac2b9",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:20:27.390Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": {
+            "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+            "summary": "Three numbered English-to-Spanish support replies.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 56
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 57
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 58
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": null,
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [],
+          "settlement": null,
+          "status": "SUBMITTED",
+          "task_id": "support-20261109190501",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "support-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7200000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "evaluate_delivery",
+      "args": [
+        "support-20261109190501"
+      ],
+      "sender": "0xB4aB583014f004f25343052BF6A03828c00f0AA2",
+      "hash": "0x19d97176249093e83ed6f41aefc2ce36f782125ad36855bdf488184b09a27f0d",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x19d97176249093e83ed6f41aefc2ce36f782125ad36855bdf488184b09a27f0d",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:21:21.436Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": {
+            "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+            "summary": "Three numbered English-to-Spanish support replies.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 56
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 57
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 58
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 59
+            }
+          ],
+          "final_verdict": null,
+          "origin": "user",
+          "pending_verdict": "PARTIAL",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Missing translation for item 4: 'Your appointment is on Monday.'",
+                "Missing translation for item 5: 'Your order has been canceled.'"
+              ],
+              "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "rationale": "The agent provided high-quality, natural translations for the first three items. However, it completely omitted items 4 and 5, resulting in a significant loss of completeness. The provided content is correct and useful, but the task is only 60% finished based on the five-item requirement.",
+              "round": 1,
+              "scores": [
+                60,
+                95,
+                60
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+              "verdict": "PARTIAL"
+            }
+          ],
+          "settlement": null,
+          "status": "EVALUATING",
+          "task_id": "support-20261109190501",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "support-20261109190501",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 95,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7200000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "finalize_delivery",
+      "args": [
+        "support-20261109190501"
+      ],
+      "sender": "0xB4aB583014f004f25343052BF6A03828c00f0AA2",
+      "hash": "0x7300b30c65f1fd0ba531628270af3b89edbd188a7e516cb89196bd1348f209a4",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x7300b30c65f1fd0ba531628270af3b89edbd188a7e516cb89196bd1348f209a4",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:22:03.621Z",
+      "read_back": {
+        "task": {
+          "agent_id": "runbook-agent-20261109190501",
+          "bounty": 200000000000000000,
+          "challenge_reason": "",
+          "challenger": "",
+          "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+          "delivery": {
+            "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+            "summary": "Three numbered English-to-Spanish support replies.",
+            "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+          },
+          "events": [
+            {
+              "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+              "event": "POSTED",
+              "sequence": 56
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "CLAIMED",
+              "sequence": 57
+            },
+            {
+              "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+              "event": "SUBMITTED",
+              "sequence": 58
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "PENDING_VERDICT",
+              "sequence": 59
+            },
+            {
+              "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+              "event": "FINALIZED",
+              "sequence": 60
+            }
+          ],
+          "final_verdict": "PARTIAL",
+          "origin": "user",
+          "pending_verdict": "PARTIAL",
+          "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+          "rounds": [
+            {
+              "basis": "CONTENT_REVIEW",
+              "contradictions": [
+                "Missing translation for item 4: 'Your appointment is on Monday.'",
+                "Missing translation for item 5: 'Your order has been canceled.'"
+              ],
+              "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+              "rationale": "The agent provided high-quality, natural translations for the first three items. However, it completely omitted items 4 and 5, resulting in a significant loss of completeness. The provided content is correct and useful, but the task is only 60% finished based on the five-item requirement.",
+              "round": 1,
+              "scores": [
+                60,
+                95,
+                60
+              ],
+              "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+              "verdict": "PARTIAL"
+            }
+          ],
+          "settlement": {
+            "agent_reputation_delta": 2,
+            "paid_to_agent": 100000000000000000,
+            "refunded_to_poster": 100000000000000000,
+            "slashed_to_treasury": 0
+          },
+          "status": "FINALIZED",
+          "task_id": "support-20261109190501",
+          "title": "Spanish customer support reply sheet"
+        },
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 100000000000000000,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 97,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7200000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "withdraw",
+      "args": [],
+      "sender": "0x52754f48E95942680F727340dD4c8CfEaF0F8903",
+      "hash": "0x6c54584565065a5162fa646a8d2656fcd1858e5addb7510549e9e4b3a6e16c9f",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0x6c54584565065a5162fa646a8d2656fcd1858e5addb7510549e9e4b3a6e16c9f",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:22:45.471Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 100000000000000000,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 97,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7100000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    },
+    {
+      "method": "withdraw",
+      "args": [],
+      "sender": "0xC3A6C0d7378cC70501b8dc967afD0E0785e531d9",
+      "hash": "0xd3afd1221b322c419e439eaadd1e2e028cf88ca3d90d01ba55210f2b91739d21",
+      "explorer": "https://explorer-studio.genlayer.com/tx/0xd3afd1221b322c419e439eaadd1e2e028cf88ca3d90d01ba55210f2b91739d21",
+      "transaction_status": "FINALIZED",
+      "execution": "SUCCESS",
+      "consensus": "MAJORITY_AGREE",
+      "expected_error": null,
+      "read_back_at": "2026-11-09T19:23:26.533Z",
+      "read_back": {
+        "task": null,
+        "agents": {
+          "runbook-agent-20261109174716": {
+            "agent_id": "runbook-agent-20261109174716",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109175017": {
+            "agent_id": "runbook-agent-20261109175017",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181034": {
+            "agent_id": "runbook-agent-20261109181034",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109181701": {
+            "agent_id": "runbook-agent-20261109181701",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 900000000000000000
+          },
+          "runbook-agent-20261109182907": {
+            "agent_id": "runbook-agent-20261109182907",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          },
+          "runbook-agent-20261109190501": {
+            "agent_id": "runbook-agent-20261109190501",
+            "open_claim": "",
+            "origin": "user",
+            "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+            "skill_tags": "integrity, evidence, technical writing",
+            "stake": 1000000000000000000
+          }
+        },
+        "withdrawable": {
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+        },
+        "reputation": {
+          "0x0000000000000000000000000000000000000001": 100,
+          "0x0000000000000000000000000000000000000002": 100,
+          "0x0000000000000000000000000000000000000003": 100,
+          "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+          "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+          "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 97,
+          "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+          "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+          "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+          "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+          "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+          "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+          "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+          "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+        },
+        "treasury": 300000000000000000,
+        "contract_balance_wei": "7000000000000000000"
+      },
+      "verification": "SUCCESS",
+      "verified": true
+    }
+  ]
+}

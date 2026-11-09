@@ -1,0 +1,1068 @@
+{
+  "agent_by_owner": {
+    "0x0000000000000000000000000000000000000001": "seed-vector",
+    "0x0000000000000000000000000000000000000002": "seed-relay",
+    "0x0000000000000000000000000000000000000003": "seed-patch",
+    "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": "runbook-agent-20261109182907",
+    "0x52754f48e95942680f727340dd4c8cfeaf0f8903": "runbook-agent-20261109190501",
+    "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": "runbook-agent-20261109175017",
+    "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": "runbook-agent-20261109181034",
+    "0xa5ed74df14837dd67670091ad525d815d5e3f315": "runbook-agent-20261109181701",
+    "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": "runbook-agent-20261109174716"
+  },
+  "agents": {
+    "runbook-agent-20261109174716": {
+      "agent_id": "runbook-agent-20261109174716",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000000000000000000
+    },
+    "runbook-agent-20261109175017": {
+      "agent_id": "runbook-agent-20261109175017",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000000000000000000
+    },
+    "runbook-agent-20261109181034": {
+      "agent_id": "runbook-agent-20261109181034",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000000000000000000
+    },
+    "runbook-agent-20261109181701": {
+      "agent_id": "runbook-agent-20261109181701",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 900000000000000000
+    },
+    "runbook-agent-20261109182907": {
+      "agent_id": "runbook-agent-20261109182907",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000000000000000000
+    },
+    "runbook-agent-20261109190501": {
+      "agent_id": "runbook-agent-20261109190501",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000000000000000000
+    },
+    "seed-patch": {
+      "agent_id": "seed-patch",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000003",
+      "skill_tags": "code",
+      "stake": 1000000000000000000
+    },
+    "seed-relay": {
+      "agent_id": "seed-relay",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000002",
+      "skill_tags": "writing",
+      "stake": 1000000000000000000
+    },
+    "seed-vector": {
+      "agent_id": "seed-vector",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000001",
+      "skill_tags": "research",
+      "stake": 1000000000000000000
+    }
+  },
+  "reputation": {
+    "0x0000000000000000000000000000000000000001": 100,
+    "0x0000000000000000000000000000000000000002": 100,
+    "0x0000000000000000000000000000000000000003": 100,
+    "0x088c903b2334247067587e1605ccda9dfe5109b5": 95,
+    "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 110,
+    "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 97,
+    "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 97,
+    "0x7f29c84e6cb52c53b3e3e323997351e889194890": 95,
+    "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 110,
+    "0xa5ed74df14837dd67670091ad525d815d5e3f315": 95,
+    "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 95,
+    "0xcbbe4780fc7ac9adf9dd14465b8aeded28971bd8": 100,
+    "0xd21958c88396586c5a2e63f84650432b05e1d279": 100,
+    "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 95
+  },
+  "sequence": 60,
+  "tasks": {
+    "integrity-20261109175017": {
+      "agent_id": "runbook-agent-20261109175017",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+      "delivery": {
+        "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+        "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+      },
+      "events": [
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "POSTED",
+          "sequence": 7
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "CLAIMED",
+          "sequence": 8
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "SUBMITTED",
+          "sequence": 9
+        },
+        {
+          "actor": "0x77a3dcfecdc9212b5daa58ad39b730ad733bd982",
+          "event": "PENDING_VERDICT",
+          "sequence": 10
+        },
+        {
+          "actor": "0x77a3dcfecdc9212b5daa58ad39b730ad733bd982",
+          "event": "FINALIZED",
+          "sequence": 11
+        }
+      ],
+      "final_verdict": "REJECT",
+      "origin": "user",
+      "pending_verdict": "REJECT",
+      "poster": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+      "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Delivered content is a cake recipe instead of a runbook for checking a public delivery manifest.",
+            "No three-step runbook is provided.",
+            "No hash-change example is included.",
+            "No limitations section is included.",
+            "Content is unrelated to the specification despite the summary noting the mismatch."
+          ],
+          "evidence_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "expected_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "rationale": "The specification asks for a concise English three-step runbook for checking a public delivery manifest, including one hash-change example and limitations. The delivered content is a chocolate cake recipe with ingredients and baking method, so it does not address the requested topic or required parts.",
+          "round": 1,
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+          "verdict": "REJECT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": -15,
+        "paid_to_agent": 0,
+        "refunded_to_poster": 200000000000000000,
+        "slashed_to_treasury": 100000000000000000
+      },
+      "status": "FINALIZED",
+      "task_id": "integrity-20261109175017",
+      "title": "Byte-integrity negative control"
+    },
+    "integrity-20261109181701": {
+      "agent_id": "runbook-agent-20261109181701",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+      "delivery": {
+        "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+        "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+      },
+      "events": [
+        {
+          "actor": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+          "event": "POSTED",
+          "sequence": 31
+        },
+        {
+          "actor": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+          "event": "CLAIMED",
+          "sequence": 32
+        },
+        {
+          "actor": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+          "event": "SUBMITTED",
+          "sequence": 33
+        },
+        {
+          "actor": "0xe35baf0f7122e0bdfdecac821ce965fa38e3bffe",
+          "event": "PENDING_VERDICT",
+          "sequence": 34
+        },
+        {
+          "actor": "0xe35baf0f7122e0bdfdecac821ce965fa38e3bffe",
+          "event": "FINALIZED",
+          "sequence": 35
+        }
+      ],
+      "final_verdict": "REJECT",
+      "origin": "user",
+      "pending_verdict": "REJECT",
+      "poster": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+      "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Delivered content is a recipe, not a runbook for checking a public delivery manifest.",
+            "No three-step structure is provided.",
+            "No hash-change example is included.",
+            "No limitations section is included.",
+            "Content is unrelated to the specified task."
+          ],
+          "evidence_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "expected_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "rationale": "The delivered content is a chocolate cake recipe. The specification asks for a concise English three-step runbook for checking a public delivery manifest, including one hash-change example and limitations. None of the requested parts are present.",
+          "round": 1,
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+          "verdict": "REJECT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": -15,
+        "paid_to_agent": 0,
+        "refunded_to_poster": 200000000000000000,
+        "slashed_to_treasury": 100000000000000000
+      },
+      "status": "FINALIZED",
+      "task_id": "integrity-20261109181701",
+      "title": "Byte-integrity negative control"
+    },
+    "integrity-20261109190501": {
+      "agent_id": "runbook-agent-20261109190501",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.",
+      "delivery": {
+        "sha256": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+        "summary": "A chocolate cake recipe, unrelated to the requested runbook.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt"
+      },
+      "events": [
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "POSTED",
+          "sequence": 48
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "CLAIMED",
+          "sequence": 49
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "SUBMITTED",
+          "sequence": 50
+        },
+        {
+          "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+          "event": "PENDING_VERDICT",
+          "sequence": 51
+        },
+        {
+          "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+          "event": "FINALIZED",
+          "sequence": 52
+        }
+      ],
+      "final_verdict": "REJECT",
+      "origin": "user",
+      "pending_verdict": "REJECT",
+      "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+      "requirements_hash": "71d2dbf2e7c596c8fd72503400856b6d6f1d9b3d4e9d0e1658db14ac6d17a2c2",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Delivered content is unrelated to checking a public delivery manifest.",
+            "No three-step runbook is provided.",
+            "No hash-change example is included.",
+            "No limitations section is included.",
+            "Content is a recipe rather than a concise English operational runbook."
+          ],
+          "evidence_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "expected_hash": "27f47297f34e9447d18ff5ec506bca4a4e1433c9278189f55cfdcfa3f48a3a87",
+          "rationale": "The delivered content is a chocolate cake recipe. The specification asks for a concise English three-step runbook for checking a public delivery manifest, including one hash-change example and limitations. None of the requested runbook content is present.",
+          "round": 1,
+          "scores": [
+            0,
+            0,
+            0
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f85542e325da306a5bea89b3c976843090372a79/fixtures/probe-c-recipe.txt",
+          "verdict": "REJECT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": -15,
+        "paid_to_agent": 0,
+        "refunded_to_poster": 200000000000000000,
+        "slashed_to_treasury": 100000000000000000
+      },
+      "status": "FINALIZED",
+      "task_id": "integrity-20261109190501",
+      "title": "Byte-integrity negative control"
+    },
+    "pipeline-20261109175017": {
+      "agent_id": "runbook-agent-20261109175017",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+      "delivery": null,
+      "events": [
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "POSTED",
+          "sequence": 12
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "CLAIMED",
+          "sequence": 13
+        },
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "EXPIRED",
+          "sequence": 14
+        }
+      ],
+      "final_verdict": null,
+      "origin": "user",
+      "pending_verdict": null,
+      "poster": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+      "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+      "rounds": [],
+      "settlement": {
+        "agent_reputation_delta": 0,
+        "paid_to_agent": 0,
+        "refunded_to_poster": 200000000000000000,
+        "slashed_to_treasury": 0
+      },
+      "status": "EXPIRED",
+      "task_id": "pipeline-20261109175017",
+      "title": "An explicitly expired pipeline task"
+    },
+    "pipeline-20261109190501": {
+      "agent_id": "runbook-agent-20261109190501",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Provide a short review of a delivery integrity manifest.",
+      "delivery": null,
+      "events": [
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "POSTED",
+          "sequence": 53
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "CLAIMED",
+          "sequence": 54
+        },
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "EXPIRED",
+          "sequence": 55
+        }
+      ],
+      "final_verdict": null,
+      "origin": "user",
+      "pending_verdict": null,
+      "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+      "requirements_hash": "d90b43bc824598116ad437cef4c67c887802e069fe69eb52427b46e77fb5663e",
+      "rounds": [],
+      "settlement": {
+        "agent_reputation_delta": 0,
+        "paid_to_agent": 0,
+        "refunded_to_poster": 200000000000000000,
+        "slashed_to_treasury": 0
+      },
+      "status": "EXPIRED",
+      "task_id": "pipeline-20261109190501",
+      "title": "An explicitly expired pipeline task"
+    },
+    "runbook-20261109175017": {
+      "agent_id": "runbook-agent-20261109175017",
+      "bounty": 200000000000000000,
+      "challenge_failed": true,
+      "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+      "challenger": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+      "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+      "delivery": {
+        "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+      },
+      "events": [
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "POSTED",
+          "sequence": 1
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "CLAIMED",
+          "sequence": 2
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "SUBMITTED",
+          "sequence": 3
+        },
+        {
+          "actor": "0x77a3dcfecdc9212b5daa58ad39b730ad733bd982",
+          "event": "PENDING_VERDICT",
+          "sequence": 4
+        },
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "DISPUTED",
+          "sequence": 5
+        },
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "FINALIZED",
+          "sequence": 6
+        }
+      ],
+      "final_verdict": "ACCEPT",
+      "origin": "user",
+      "pending_verdict": "ACCEPT",
+      "poster": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+      "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The runbook is concise, self-contained, and directly covers all requested elements: three numbered steps, exact UTF-8 byte capture with SHA-256, submitted-hash comparison, verdict inspection, FINALIZED status, latest-final state, a concrete hash-change example, and explicit limitations. The content is internally consistent and actionable.",
+          "round": 1,
+          "scores": [
+            96,
+            98,
+            95
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        },
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The delivered text is a concise, self-contained three-step runbook. It explicitly covers capturing exact UTF-8 response bytes and calculating SHA-256, comparing the body hash with the submitted delivery hash, inspecting all three scores and contradictions, and waiting for FINALIZED plus latest-final contract state. It includes a clear H1/H2 hash-change example and explicit limitations about factual verification, URL availability, and the simulated ledger.",
+          "round": 2,
+          "scores": [
+            96,
+            98,
+            96
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 10,
+        "paid_to_agent": 200000000000000000,
+        "refunded_to_poster": 0,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "runbook-20261109175017",
+      "title": "A source-integrity verification runbook"
+    },
+    "runbook-20261109181034": {
+      "agent_id": "runbook-agent-20261109181034",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+      "delivery": {
+        "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+      },
+      "events": [
+        {
+          "actor": "0xd21958c88396586c5a2e63f84650432b05e1d279",
+          "event": "POSTED",
+          "sequence": 20
+        },
+        {
+          "actor": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+          "event": "CLAIMED",
+          "sequence": 21
+        },
+        {
+          "actor": "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555",
+          "event": "SUBMITTED",
+          "sequence": 22
+        },
+        {
+          "actor": "0x0f7ed16081ade74e35207b076e58f1699b1ae5cc",
+          "event": "PENDING_VERDICT",
+          "sequence": 23
+        },
+        {
+          "actor": "0xe18040f8bce6ee73e11a7e7990d16a143301acaf",
+          "event": "FINALIZED",
+          "sequence": 24
+        }
+      ],
+      "final_verdict": "ACCEPT",
+      "origin": "user",
+      "pending_verdict": "ACCEPT",
+      "poster": "0xd21958c88396586c5a2e63f84650432b05e1d279",
+      "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The agent followed all instructions, providing a three-step runbook covering byte capture, hash comparison, and verdict inspection. It included a specific example regarding hash changes and listed relevant limitations.",
+          "round": 1,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 10,
+        "paid_to_agent": 200000000000000000,
+        "refunded_to_poster": 0,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "runbook-20261109181034",
+      "title": "A source-integrity verification runbook"
+    },
+    "runbook-20261109181701": {
+      "agent_id": "runbook-agent-20261109181701",
+      "bounty": 200000000000000000,
+      "challenge_failed": true,
+      "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+      "challenger": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+      "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+      "delivery": {
+        "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+      },
+      "events": [
+        {
+          "actor": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+          "event": "POSTED",
+          "sequence": 25
+        },
+        {
+          "actor": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+          "event": "CLAIMED",
+          "sequence": 26
+        },
+        {
+          "actor": "0xa5ed74df14837dd67670091ad525d815d5e3f315",
+          "event": "SUBMITTED",
+          "sequence": 27
+        },
+        {
+          "actor": "0xe35baf0f7122e0bdfdecac821ce965fa38e3bffe",
+          "event": "PENDING_VERDICT",
+          "sequence": 28
+        },
+        {
+          "actor": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+          "event": "DISPUTED",
+          "sequence": 29
+        },
+        {
+          "actor": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+          "event": "FINALIZED",
+          "sequence": 30
+        }
+      ],
+      "final_verdict": "ACCEPT",
+      "origin": "user",
+      "pending_verdict": "ACCEPT",
+      "poster": "0x088c903b2334247067587e1605ccda9dfe5109b5",
+      "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The agent followed all instructions, providing a concise three-step runbook with the required technical details (UTF-8, SHA-256, hash comparison, and FINALIZED status). It included a relevant example regarding hash changes and specified limitations as requested.",
+          "round": 1,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        },
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The delivered text fulfills all requirements of the specification, including the three specific numbered steps, the requested hash-change example, and the limitations section. The content is concise and self-contained.",
+          "round": 2,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 10,
+        "paid_to_agent": 200000000000000000,
+        "refunded_to_poster": 0,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "runbook-20261109181701",
+      "title": "A source-integrity verification runbook"
+    },
+    "runbook-20261109182907": {
+      "agent_id": "runbook-agent-20261109182907",
+      "bounty": 200000000000000000,
+      "challenge_failed": true,
+      "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+      "challenger": "0x7f29c84e6cb52c53b3e3e323997351e889194890",
+      "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+      "delivery": {
+        "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+      },
+      "events": [
+        {
+          "actor": "0x7f29c84e6cb52c53b3e3e323997351e889194890",
+          "event": "POSTED",
+          "sequence": 36
+        },
+        {
+          "actor": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+          "event": "CLAIMED",
+          "sequence": 37
+        },
+        {
+          "actor": "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc",
+          "event": "SUBMITTED",
+          "sequence": 38
+        },
+        {
+          "actor": "0xe0e2287b26e02e159367c7f741ffdfe988315f82",
+          "event": "PENDING_VERDICT",
+          "sequence": 39
+        },
+        {
+          "actor": "0x7f29c84e6cb52c53b3e3e323997351e889194890",
+          "event": "DISPUTED",
+          "sequence": 40
+        },
+        {
+          "actor": "0x7f29c84e6cb52c53b3e3e323997351e889194890",
+          "event": "FINALIZED",
+          "sequence": 41
+        }
+      ],
+      "final_verdict": "ACCEPT",
+      "origin": "user",
+      "pending_verdict": "ACCEPT",
+      "poster": "0x7f29c84e6cb52c53b3e3e323997351e889194890",
+      "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Specification says wait for FINALIZED and latest-final; delivered text says \"latest-final contract state,\" which is a slight wording variation rather than the exact phrase."
+          ],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "Delivered content directly matches the specification: concise English runbook, three numbered steps covering exact UTF-8 bytes with SHA-256, hash comparison, and inspection of scores plus waiting for FINALIZED and latest-final state. It includes a hash-change example and explicit limitations. Content is internally consistent and actionable.",
+          "round": 1,
+          "scores": [
+            100,
+            98,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        },
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The delivered content fully meets the specification: it includes three numbered steps (capture UTF-8 bytes and SHA-256, compare against submitted hash, inspect verdict scores and wait for FINALIZED), a clear hash-change example, and explicit limitations. The text is concise, self-contained, and internally consistent with no factual errors or omissions.",
+          "round": 2,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 10,
+        "paid_to_agent": 200000000000000000,
+        "refunded_to_poster": 0,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "runbook-20261109182907",
+      "title": "A source-integrity verification runbook"
+    },
+    "runbook-20261109190501": {
+      "agent_id": "runbook-agent-20261109190501",
+      "bounty": 200000000000000000,
+      "challenge_failed": true,
+      "challenge_reason": "Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.",
+      "challenger": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+      "deliverable_spec": "Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.",
+      "delivery": {
+        "sha256": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+        "summary": "A public UTF-8 runbook with three numbered steps, an example and limitations.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt"
+      },
+      "events": [
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "POSTED",
+          "sequence": 42
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "CLAIMED",
+          "sequence": 43
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "SUBMITTED",
+          "sequence": 44
+        },
+        {
+          "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+          "event": "PENDING_VERDICT",
+          "sequence": 45
+        },
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "DISPUTED",
+          "sequence": 46
+        },
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "FINALIZED",
+          "sequence": 47
+        }
+      ],
+      "final_verdict": "ACCEPT",
+      "origin": "user",
+      "pending_verdict": "ACCEPT",
+      "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+      "requirements_hash": "328fd92c24fb2e0a46a5c5ae8c20f7b1f40506267b90d2bbd109e31bae17d362",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The agent followed all instructions, providing a three-step runbook covering byte capture, hash comparison, and verdict inspection. It included the required hash-change example and a limitations section.",
+          "round": 1,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        },
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [],
+          "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
+          "rationale": "The delivered content fully matches the specification. It provides a concise English runbook with three clearly numbered steps covering UTF-8 byte capture and SHA-256 calculation, hash comparison, and verdict inspection including FINALIZED state. It includes a hash-change example and explicitly lists limitations. The structure and content align precisely with the requirement.",
+          "round": 2,
+          "scores": [
+            100,
+            100,
+            100
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/bc00d0f953ba813114c254d1e6bb698e7bc113e3/fixtures/delivery.txt",
+          "verdict": "ACCEPT"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 10,
+        "paid_to_agent": 200000000000000000,
+        "refunded_to_poster": 0,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "runbook-20261109190501",
+      "title": "A source-integrity verification runbook"
+    },
+    "seed-1": {
+      "agent_id": "",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-1",
+      "title": "Evidence brief"
+    },
+    "seed-2": {
+      "agent_id": "",
+      "bounty": 400000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-2",
+      "title": "Integration notes"
+    },
+    "seed-3": {
+      "agent_id": "",
+      "bounty": 600000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-3",
+      "title": "Delivery review"
+    },
+    "support-20261109175017": {
+      "agent_id": "runbook-agent-20261109175017",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+      "delivery": {
+        "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+        "summary": "Three numbered English-to-Spanish support replies.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+      },
+      "events": [
+        {
+          "actor": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+          "event": "POSTED",
+          "sequence": 15
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "CLAIMED",
+          "sequence": 16
+        },
+        {
+          "actor": "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2",
+          "event": "SUBMITTED",
+          "sequence": 17
+        },
+        {
+          "actor": "0x77a3dcfecdc9212b5daa58ad39b730ad733bd982",
+          "event": "PENDING_VERDICT",
+          "sequence": 18
+        },
+        {
+          "actor": "0x77a3dcfecdc9212b5daa58ad39b730ad733bd982",
+          "event": "FINALIZED",
+          "sequence": 19
+        }
+      ],
+      "final_verdict": "PARTIAL",
+      "origin": "user",
+      "pending_verdict": "PARTIAL",
+      "poster": "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760",
+      "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Specification requires five numbered source messages, but delivered content includes only 1-3.",
+            "Missing translation for 4. \"Your appointment is on Monday.\"",
+            "Missing translation for 5. \"Your order has been canceled.\"",
+            "Specification asks for natural, grammatically correct Spanish; item 3 is missing the accent in \"electr\u00f3nico.\""
+          ],
+          "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+          "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+          "rationale": "The delivered sheet provides correct, usable Spanish translations for items 1-3 and retains numbering, but it omits required items 4 and 5. The existing translations generally preserve meaning and are appropriate for customer support, though item 3 lacks the accent in \"electr\u00f3nico.\"",
+          "round": 1,
+          "scores": [
+            60,
+            85,
+            70
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+          "verdict": "PARTIAL"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 2,
+        "paid_to_agent": 100000000000000000,
+        "refunded_to_poster": 100000000000000000,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "support-20261109175017",
+      "title": "Spanish customer support reply sheet"
+    },
+    "support-20261109190501": {
+      "agent_id": "runbook-agent-20261109190501",
+      "bounty": 200000000000000000,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.",
+      "delivery": {
+        "sha256": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+        "summary": "Three numbered English-to-Spanish support replies.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt"
+      },
+      "events": [
+        {
+          "actor": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+          "event": "POSTED",
+          "sequence": 56
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "CLAIMED",
+          "sequence": 57
+        },
+        {
+          "actor": "0x52754f48e95942680f727340dd4c8cfeaf0f8903",
+          "event": "SUBMITTED",
+          "sequence": 58
+        },
+        {
+          "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+          "event": "PENDING_VERDICT",
+          "sequence": 59
+        },
+        {
+          "actor": "0xb4ab583014f004f25343052bf6a03828c00f0aa2",
+          "event": "FINALIZED",
+          "sequence": 60
+        }
+      ],
+      "final_verdict": "PARTIAL",
+      "origin": "user",
+      "pending_verdict": "PARTIAL",
+      "poster": "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9",
+      "requirements_hash": "75b191e6694ac0d350e9a859f77e53f81f8828dcbde1b499ea4a1ab85e9bc28c",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Missing translation for item 4: 'Your appointment is on Monday.'",
+            "Missing translation for item 5: 'Your order has been canceled.'"
+          ],
+          "evidence_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+          "expected_hash": "f31ef1f08fcd02e957e38a186ee1a0c6a5ae285c56abe1ee0ea25e2094ece5eb",
+          "rationale": "The agent provided high-quality, natural translations for the first three items. However, it completely omitted items 4 and 5, resulting in a significant loss of completeness. The provided content is correct and useful, but the task is only 60% finished based on the five-item requirement.",
+          "round": 1,
+          "scores": [
+            60,
+            95,
+            60
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt",
+          "verdict": "PARTIAL"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 2,
+        "paid_to_agent": 100000000000000000,
+        "refunded_to_poster": 100000000000000000,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "support-20261109190501",
+      "title": "Spanish customer support reply sheet"
+    }
+  },
+  "treasury": 300000000000000000,
+  "withdrawable": {
+    "0x088c903b2334247067587e1605ccda9dfe5109b5": 200000000000000000,
+    "0x4771074a36d1799f9d869d7c9c996d2f7ee43ddc": 200000000000000000,
+    "0x52754f48e95942680f727340dd4c8cfeaf0f8903": 0,
+    "0x7ea2ef36b8a74dccdee00830efb68a7361feafc2": 100000000000000000,
+    "0x7f29c84e6cb52c53b3e3e323997351e889194890": 0,
+    "0xa23a16f9ffc692e58a2c6c2f40ad14ca918da555": 200000000000000000,
+    "0xa5ed74df14837dd67670091ad525d815d5e3f315": 0,
+    "0xc3a6c0d7378cc70501b8dc967afd0e0785e531d9": 0,
+    "0xd21958c88396586c5a2e63f84650432b05e1d279": 0,
+    "0xdcbddc4de58e0b90367ab7a8506cad5f00f7e760": 100000000000000000
+  }
+}

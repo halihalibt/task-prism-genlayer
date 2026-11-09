@@ -6,15 +6,17 @@ See the [deployment list](DEPLOYMENTS.md) for addresses, transactions and source
 
 ## Deployment
 
-Contract: `0x2D5d39cE2414F154D0D2cd574079167B26deA68c`
+Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268`
 
-Deployment transaction: [`0x48dd22f470d04f9939e1a97b037282f5149d2ba09d849e7232e5694be1e594ae`](https://explorer-studio.genlayer.com/tx/0x48dd22f470d04f9939e1a97b037282f5149d2ba09d849e7232e5694be1e594ae)
+Deployment transaction: [`0x2e483058cb6ca581e28abf406e1ba97b82d0e8df073296661916a21625db0076`](https://explorer-studio.genlayer.com/tx/0x2e483058cb6ca581e28abf406e1ba97b82d0e8df073296661916a21625db0076)
 
-Canonical deployed source commit: `356c398101b1e3ff7549a98c341add0e20ee90d2`
+Canonical deployed source commit: `f85542e325da306a5bea89b3c976843090372a79`
 
-Source SHA-256: `37dbb612c3619b350bfa5a045db7e5246b1f8f72c9a97361d7eb9741379393f6`
+Source SHA-256: `c76ce31efe3a6d285cee8148ab7fc380dfeb18895990404d230eca2be99d0ab8`
 
-The raw receipt reports FINALIZED, MAJORITY_AGREE and SUCCESS execution. `deploy-read-back.json` contains the initial state read from the contract, including its three labelled agents and three labelled tasks. They contain no consensus verdicts.
+The raw receipt reports FINALIZED, MAJORITY_AGREE and SUCCESS execution. `deploy-read-back.json` contains the initial state read from the contract. The deployed source is byte-identical to `contracts/task_prism.py` at that commit (verified by `python3 scripts/check-evidence.py`).
+
+**Real testnet GEN.** Bounties and stakes move as real testnet GEN (wei): `post_task`, `register_agent` and `top_up_stake` are payable and must send exactly the declared amount; settlements are withdrawable balances pulled with `withdraw`. Faucet GEN is free for testing; no simulated ledger is used. The previous contract (`0x2D5d39cE2414F154D0D2cd574079167B26deA68c`) used a simulated mGEN ledger and is superseded; its evidence is archived under [history/consensus-compatible-contract/](history/consensus-compatible-contract/).
 
 ## Transaction encoding
 
@@ -38,6 +40,8 @@ Transaction FINALIZED, leader execution SUCCESS and MAJORITY_AGREE are separate 
 
 The preceding contract at `0x2Bc2ec661ecbF8f76be6777A56481Eb1012fB4bE` required matching threshold bands for every dimension as well as matching overall verdicts and a maximum ten-point score difference. For example, `[60,100,70]` and `[60,100,60]` both imply PARTIAL but failed that additional band comparison. Its deployment, original source, successful ledger paths and unsuccessful consensus attempts are preserved under [history/strict-score-contract](history/strict-score-contract/). No old task or verdict was migrated or overwritten.
 
-The active contract compares the same independently computed verdict, hashes, URL and basis, retaining the ten-point score tolerance. JSON output may have a single outer code fence; malformed JSON and non-integer values remain errors before storage changes. Ledger amounts, verdict thresholds, challenge rules and settlement effects are unchanged. Local regression tests cover the nondecisive boundary case and continued rejection of different verdicts or scores over the tolerance. These local tests are separate from live receipts.
+The active contract compares the same independently computed verdict, hashes, URL and basis, retaining the ten-point score tolerance. JSON output may have a single outer code fence; malformed JSON and non-integer values remain errors before storage changes. Local regression tests cover the nondecisive boundary case and continued rejection of different verdicts or scores over the tolerance. These local tests are separate from live receipts.
 
-The active [browser adjudication](BROWSER_ADJUDICATION.md) records the PARTIAL pending verdict and exact 100/100 settlement submitted through Pages. The combined [live verification](LIVE_VERIFICATION.md) contains all 23 current-contract transactions, including the expected stake-threshold rejection. Earlier unsuccessful attempts remain in the historical records and are not counted as successful adjudications.
+The current contract adds submit-time delivery validation (a nondeterministic fetch at submit: size ≤ 24000 bytes, UTF-8 decodable, SHA-256 matches), delivery resubmission before evaluation, and poster expiry of a task whose delivery was submitted but never successfully evaluated. See [PROBES.md](PROBES.md) for the on-chain adversarial probes (A–D, all REJECT) and the bad-delivery cases, and [COVERAGE_PARTIAL.md](COVERAGE_PARTIAL.md) for the re-run coverage case (PARTIAL 50/100/50). The combined [live verification](LIVE_VERIFICATION.md) contains all 25 current-contract transactions, including the expected stake-threshold rejection.
+
+The [browser adjudication](BROWSER_ADJUDICATION.md) is a historical record from the superseded contract (simulated mGEN) and is not current-contract evidence. Earlier unsuccessful attempts remain in the historical records and are not counted as successful adjudications.

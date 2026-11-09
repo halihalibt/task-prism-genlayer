@@ -1,0 +1,13 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "deploy_tx": "0x2e483058cb6ca581e28abf406e1ba97b82d0e8df073296661916a21625db0076",
+  "deployer": "0x018ace363E0eF0e14E3e2864bE36C9Ebb932B077",
+  "source_commit": "f85542e325da306a5bea89b3c976843090372a79",
+  "source_path": "contracts/task_prism.py",
+  "source_sha256": "c76ce31efe3a6d285cee8148ab7fc380dfeb18895990404d230eca2be99d0ab8",
+  "submitted_at": "2026-11-09T17:46:19.654Z",
+  "contract_address": "0x0BC304C168D14B8f4928f622e971B532D30d7268",
+  "finalized_status": "FINALIZED"
+}

@@ -1,4 +1,6 @@
-# Browser delivery adjudication
+# Browser delivery adjudication — historical (superseded contract)
+
+> This records a browser-submitted adjudication on the superseded contract `0x2D5d39cE2414F154D0D2cd574079167B26deA68c` (simulated mGEN). It is retained for history, not current-contract evidence. The current contract is `0x0BC304C168D14B8f4928f622e971B532D30d7268` (real testnet GEN); see [LIVE_VERIFICATION.md](LIVE_VERIFICATION.md), [COVERAGE_PARTIAL.md](COVERAGE_PARTIAL.md) and [PROBES.md](PROBES.md). Its data files are archived under [history/consensus-compatible-contract/](history/consensus-compatible-contract/).
 
 [Open this finalized task](https://halihalibt.github.io/task-prism-genlayer/?task=support-20261109121251#adjudication).
 
