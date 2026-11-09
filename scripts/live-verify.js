@@ -1,3 +1,4 @@
+import readline from 'node:readline';
 import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';import {createAccount}from'genlayer-js';import{rpc,reader,readFinal,sendLocal,encoded,validateChain}from'./network.js';
 const d=JSON.parse(fs.readFileSync('evidence/deployment.json')),address=d.contract_address;
 assert(address);await validateChain();
@@ -8,8 +9,9 @@ const label=new Date().toISOString().replace(/\D/g,'').slice(0,14);
 const log={network:'Stable Studionet',chain_id:61999,contract:address,started_at:new Date().toISOString(),scope:'Live signed transactions with finalized receipts and latest-final read-back. No user-wallet path is implied.',public_accounts:{poster:a.address,agent:b.address,observer:c.address},transactions:[]};
 const save=()=>fs.writeFileSync('evidence/live-verification.json',JSON.stringify(log,null,2)+'\n');
 const read=async()=>JSON.parse(await readFinal(address));
-async function run(account,method,args=[],check=()=>{},expectError=false){const tx=await sendLocal(account,address,encoded(method,args));const item={method,args,sender:account.address,hash:tx,submitted_at:new Date().toISOString()};log.transactions.push(item);save();console.log(method,'submitted',tx);let receipt;for(let i=0;i<240;i++){receipt=await rpc('eth_getTransactionByHash',[tx]);if(receipt?.status==='FINALIZED')break;await new Promise(r=>setTimeout(r,6000));}item.receipt=receipt;save();assert.equal(receipt.status,'FINALIZED');const leaders=receipt.consensus_data?.leader_receipt;const leader=Array.isArray(leaders)?leaders.find(r=>r.mode==='leader')||leaders[0]:leaders;item.execution=leader?.execution_result;item.read_back=await read();item.read_back_at=new Date().toISOString();save();if(expectError){assert.notEqual(item.execution,'SUCCESS');}else{assert.equal(item.execution,'SUCCESS',JSON.stringify(leader?.genvm_result));check(item.read_back);}item.verified=true;save();console.log(method,'FINALIZED',item.execution);return item;}
+async function run(account,method,args=[],check=()=>{},expectError=false){const tx=await sendLocal(account,address,encoded(method,args));const item={method,args,sender:account.address,hash:tx,submitted_at:new Date().toISOString()};log.transactions.push(item);save();console.log(method,'submitted',tx);let receipt;for(let i=0;i<240;i++){receipt=await rpc('eth_getTransactionByHash',[tx]);if(receipt?.status==='FINALIZED')break;await new Promise(r=>setTimeout(r,6000));}item.receipt=receipt;save();assert.equal(receipt.status,'FINALIZED');const leaders=receipt.consensus_data?.leader_receipt;const leader=Array.isArray(leaders)?leaders.find(r=>r.mode==='leader')||leaders[0]:leaders;item.execution=leader?.execution_result;item.read_back=await read();item.read_back_at=new Date().toISOString();save();if(expectError){assert.equal(item.execution,'ERROR');}else{assert.equal(item.execution,'SUCCESS',JSON.stringify(leader?.genvm_result));check(item.read_back);}item.verified=true;save();console.log(method,'FINALIZED',item.execution);return item;}
 function conserved(s){const wallets=Object.values(s.balances).reduce((x,y)=>x+y,0),stakes=Object.values(s.agents).filter(x=>x.origin!=='seed_demo').reduce((x,a)=>x+a.stake,0),escrow=Object.values(s.tasks).filter(t=>t.origin!=='seed_demo'&&!['FINALIZED','EXPIRED'].includes(t.status)).reduce((x,t)=>x+t.bounty,0);assert.equal(s.issued,wallets+stakes+escrow+s.treasury);}
+async function mainFlow(){
 const agent='runbook-agent-'+label;
 await run(a,'claim_demo_funds',[],s=>assert.equal(s.balances[a.address.toLowerCase()],10000));
 await run(b,'claim_demo_funds',[],s=>assert.equal(s.balances[b.address.toLowerCase()],10000));
@@ -29,5 +31,25 @@ await run(b,'claim_task',[next,agent],()=>{},true);
 await run(b,'top_up_stake',[agent,100],s=>{assert.equal(s.agents[agent].stake,1000);conserved(s);});
 await run(b,'claim_task',[next,agent],s=>assert.equal(s.tasks[next].status,'CLAIMED'));
 await run(a,'expire_task',[next],s=>{assert.equal(s.tasks[next].status,'EXPIRED');assert.equal(s.agents[agent].open_claim,'');conserved(s);});
+const partial='coverage-'+label;
+await delivery(partial,'A two-part integrity and incident runbook','Deliver two equally important, self-contained English sections. Section A: a three-step public delivery integrity runbook, with a hash-change example and limitations. Section B: an incident response runbook for a delivery URL becoming unavailable, including a triage checklist, owner communication template, escalation plan and recovery verification. Both sections are required; citations are optional.',hash(body));
+await run(c,'finalize_delivery',[partial],s=>{assert.equal(s.tasks[partial].status,'FINALIZED');conserved(s);});
 log.completed_at=new Date().toISOString();save();console.log('LIVE VERIFICATION COMPLETE');
 
+
+}
+
+// Keep in-memory signers available after a recoverable verification failure.
+const input=readline.createInterface({input:process.stdin,output:process.stdout,terminal:false});
+let running=true;
+input.on('line',async line=>{
+ if(running){console.log('A verification action is already running.');return;}
+ try{
+  const cmd=JSON.parse(line),actors={poster:a,agent:b,observer:c};
+  if(cmd.method==='read'){const snapshot=await read();fs.writeFileSync('evidence/session-read-back.json',JSON.stringify(snapshot,null,2)+'\n');console.log(JSON.stringify({tasks:Object.fromEntries(Object.entries(snapshot.tasks).map(([k,t])=>[k,t.status])),agents:Object.keys(snapshot.agents)}));return;}
+  if(cmd.method==='close'){input.close();return;}
+  if(!actors[cmd.actor])throw Error('UNKNOWN_ACTOR');
+  running=true;await run(actors[cmd.actor],cmd.method,cmd.args||[],()=>{},!!cmd.expect_error);
+ }catch(error){console.error(String(error));}finally{running=false;}
+});
+try{await mainFlow();input.close();}catch(error){running=false;console.error(String(error));console.log('Verification paused. In-memory signers remain available for JSON retry commands.');}

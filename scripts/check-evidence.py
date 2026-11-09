@@ -17,6 +17,8 @@ assert d['contract_address']==r['to_address']
 print('Saved deployment receipt, successful execution, contract address and source bytes match.')
 if (root/'evidence/live-verification.json').exists():
  log=json.loads((root/'evidence/live-verification.json').read_text())
+ if log['contract']!=d['contract_address']:
+  print('Saved core log belongs to the historical contract; active-contract verification is separate.')
  for tx in log['transactions']:
   if not tx.get('verified'):continue
   assert tx['receipt']['status']=='FINALIZED'

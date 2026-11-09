@@ -1,0 +1,34 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "contract": "0xdbfA1b3EfFd0fcB38A5f6f208D3247a5C77Ab1b3",
+  "scope": "Historical signed transactions. Complete original receipts and read-backs are retained losslessly in the gzip archive.",
+  "archive": "account-bootstrap-history.json.gz",
+  "original_json_sha256": "a935a857b5cae85c94883bc938655dc02cc7c33310b1070fd603d2a5a874d846",
+  "transactions": [
+    {
+      "method": "claim_demo_funds",
+      "hash": "0xe834d2db2764fa9092c3e26052a08cfe983c25346d888363e303bfc35104deb4",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    },
+    {
+      "method": "claim_demo_funds",
+      "hash": "0x97e2d22075a6743ec15787de3d516df97fabaf9b0fa859425b4d99917d2c7edb",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    },
+    {
+      "method": "register_agent",
+      "hash": "0x20ee24fd0a56a9267e0d94726860046f0bebae72d3cc753f0610daa96d78fd67",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    }
+  ]
+}

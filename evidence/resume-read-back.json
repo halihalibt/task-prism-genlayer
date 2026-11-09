@@ -1,0 +1,134 @@
+{
+  "agent_by_owner": {
+    "0x0000000000000000000000000000000000000001": "seed-vector",
+    "0x0000000000000000000000000000000000000002": "seed-relay",
+    "0x0000000000000000000000000000000000000003": "seed-patch",
+    "0x41654cabb2b7316bb473d2b744889552b560d8c2": "runbook-agent-20261109063055",
+    "0xffe5b4ff7476f47b741a93fee42b8abc912492c6": "runbook-agent-20261109063704"
+  },
+  "agents": {
+    "runbook-agent-20261109063055": {
+      "agent_id": "runbook-agent-20261109063055",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0x41654cabb2b7316bb473d2b744889552b560d8c2",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000
+    },
+    "runbook-agent-20261109063704": {
+      "agent_id": "runbook-agent-20261109063704",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0xffe5b4ff7476f47b741a93fee42b8abc912492c6",
+      "skill_tags": "integrity, evidence, technical writing",
+      "stake": 1000
+    },
+    "seed-patch": {
+      "agent_id": "seed-patch",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000003",
+      "skill_tags": "code",
+      "stake": 1000
+    },
+    "seed-relay": {
+      "agent_id": "seed-relay",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000002",
+      "skill_tags": "writing",
+      "stake": 1000
+    },
+    "seed-vector": {
+      "agent_id": "seed-vector",
+      "open_claim": "",
+      "origin": "seed_demo",
+      "owner": "0x0000000000000000000000000000000000000001",
+      "skill_tags": "research",
+      "stake": 1000
+    }
+  },
+  "balances": {
+    "0x017fafa1495c401d5c04d06ef1e99526b3fdff4d": 10000,
+    "0x41654cabb2b7316bb473d2b744889552b560d8c2": 9000,
+    "0x419412253b490b7024bff71a06e69a3d9e2e85c6": 10000,
+    "0x5a0c6e3a675879d6bd29e5a3e86345921fd4f05c": 10000,
+    "0xffe5b4ff7476f47b741a93fee42b8abc912492c6": 9000
+  },
+  "funded": [
+    "0x5a0c6e3a675879d6bd29e5a3e86345921fd4f05c",
+    "0x41654cabb2b7316bb473d2b744889552b560d8c2",
+    "0x017fafa1495c401d5c04d06ef1e99526b3fdff4d",
+    "0xffe5b4ff7476f47b741a93fee42b8abc912492c6",
+    "0x419412253b490b7024bff71a06e69a3d9e2e85c6"
+  ],
+  "issued": 50000,
+  "reputation": {
+    "0x0000000000000000000000000000000000000001": 100,
+    "0x0000000000000000000000000000000000000002": 100,
+    "0x0000000000000000000000000000000000000003": 100,
+    "0x41654cabb2b7316bb473d2b744889552b560d8c2": 100,
+    "0xffe5b4ff7476f47b741a93fee42b8abc912492c6": 100
+  },
+  "sequence": 0,
+  "tasks": {
+    "seed-1": {
+      "agent_id": "",
+      "bounty": 200,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-1",
+      "title": "Evidence brief"
+    },
+    "seed-2": {
+      "agent_id": "",
+      "bounty": 400,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-2",
+      "title": "Integration notes"
+    },
+    "seed-3": {
+      "agent_id": "",
+      "bounty": 600,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Labelled fixture. Seed demo data, not consensus evidence.",
+      "delivery": null,
+      "events": [],
+      "final_verdict": null,
+      "origin": "seed_demo",
+      "pending_verdict": null,
+      "poster": "0x0000000000000000000000000000000000000000",
+      "requirements_hash": "f24eae56f429e3c4d7b89700135aeb07f4a7cd243bd0eaf7c0d353bca6c9f478",
+      "rounds": [],
+      "settlement": null,
+      "status": "OPEN",
+      "task_id": "seed-3",
+      "title": "Delivery review"
+    }
+  },
+  "treasury": 0
+}

@@ -7,10 +7,10 @@ export const chain={...studionet,rpcUrls:{default:{http:[RPC]}}};
 export const reader=createClient({chain,endpoint:RPC});
 export async function rpc(method,params=[]){
  for(let attempt=0;attempt<8;attempt++){
-  const r=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(60000)});
-  if(r.status===429){const seconds=Math.max(1,Number(r.headers.get('retry-after')||r.headers.get('x-ratelimit-reset')||60));console.warn(`RPC rate limit for ${method}; waiting ${seconds}s as requested by server.`);await new Promise(resolve=>setTimeout(resolve,Math.min(seconds,3600)*1000));continue;}
+  let r;try{r=await fetch(RPC,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({jsonrpc:'2.0',id:1,method,params}),signal:AbortSignal.timeout(60000)});}catch(error){if(method==='eth_sendRawTransaction')throw error;const seconds=Math.min(15*(attempt+1),60);if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('task-prism-network-delay',{detail:{seconds}}));await new Promise(resolve=>setTimeout(resolve,seconds*1000));continue;}
+  if(r.status===429){const seconds=Math.max(15,Number(r.headers.get('retry-after')||r.headers.get('x-ratelimit-reset')||60)+1);console.warn(`RPC rate limit for ${method}; waiting ${seconds}s as requested by server.`);if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('task-prism-rate-limit',{detail:{seconds}}));await new Promise(resolve=>setTimeout(resolve,Math.min(seconds,3600)*1000));attempt--;continue;}
   if(!r.ok)throw Error(`RPC_HTTP_${r.status}`);
-  const j=await r.json();if(j.error){if(j.error.code===-32029){const seconds=Math.max(1,Number(j.error.data?.retry_after_seconds||60));console.warn(`RPC quota for ${method}; waiting ${seconds}s.`);if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('task-prism-rate-limit',{detail:{seconds}}));await new Promise(resolve=>setTimeout(resolve,seconds*1000));continue;}throw Error(JSON.stringify(j.error));}return j.result;
+  const j=await r.json();if(j.error){if(j.error.code===-32029){const seconds=Math.max(15,Number(j.error.data?.retry_after_seconds||60)+1);console.warn(`RPC quota for ${method}; waiting ${seconds}s.`);if(typeof window!=='undefined')window.dispatchEvent(new CustomEvent('task-prism-rate-limit',{detail:{seconds}}));await new Promise(resolve=>setTimeout(resolve,seconds*1000));attempt--;continue;}throw Error(JSON.stringify(j.error));}return j.result;
  }
  throw Error('RPC_RATE_LIMIT_RETRY_LATER');
 }

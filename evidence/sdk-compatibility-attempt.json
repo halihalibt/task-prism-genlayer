@@ -1,0 +1,74 @@
+{
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "contract": "0xdbfA1b3EfFd0fcB38A5f6f208D3247a5C77Ab1b3",
+  "scope": "Historical signed transactions. Complete original receipts and read-backs are retained losslessly in the gzip archive.",
+  "archive": "sdk-compatibility-attempt.json.gz",
+  "original_json_sha256": "4ea934652121623c3a3be3624e14f5dc14ed9f1ba077989a469d6c2d808cc268",
+  "transactions": [
+    {
+      "method": "claim_demo_funds",
+      "hash": "0x359e454adde726d3c70d0650fb74dc84e9bb1936e1e64e69525ab6e2ac85de58",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    },
+    {
+      "method": "claim_demo_funds",
+      "hash": "0xc1712fe895abb3020aeb7ff7af83e987acc51cd9f6c00378dacf713ce1f94a2a",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    },
+    {
+      "method": "register_agent",
+      "hash": "0xbc3501e5e4784c0cabce580481a97a8dcf863b61328160937204beec00e3c91d",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {}
+    },
+    {
+      "method": "post_task",
+      "hash": "0x91cd288a0315f805686c0246af1863f98a7fd0a7c128a0871106176a0675fd73",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {
+        "runbook-20261109070819": "OPEN"
+      }
+    },
+    {
+      "method": "claim_task",
+      "hash": "0x087e9ffa30457e9df0619ceff490c22824610616b0b383c02cd6eca6ecbfa73c",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {
+        "runbook-20261109070819": "CLAIMED"
+      }
+    },
+    {
+      "method": "submit_delivery",
+      "hash": "0x975d9423108fc76885ae213460716c67b74f2962c4a0eaa3be165c2cdea563c6",
+      "status": "FINALIZED",
+      "execution": "SUCCESS",
+      "verified_read_back": true,
+      "read_back_task_states": {
+        "runbook-20261109070819": "SUBMITTED"
+      }
+    },
+    {
+      "method": "evaluate_delivery",
+      "hash": "0xb0b0918b68ce604c545a6c4e9f40e2ab995bb59de6444e2714d100fe1cdb24c8",
+      "status": "FINALIZED",
+      "execution": "ERROR",
+      "verified_read_back": false,
+      "read_back_task_states": {
+        "runbook-20261109070819": "SUBMITTED"
+      }
+    }
+  ]
+}
