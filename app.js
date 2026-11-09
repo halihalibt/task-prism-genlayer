@@ -9,7 +9,8 @@ const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let lang=localStorage.getItem('task-prism-language')||'en', state=null, connection=null, filter='all', busy=false, failedRead=false;
 let selectedTask=new URL(location.href).searchParams.get('task')||'', calm=matchMedia('(prefers-reduced-motion: reduce)').matches, sfx=false, audio=null;
 const providers=new Map(), watching=new Set();
-let txs=[];try{txs=JSON.parse(localStorage.getItem('task-prism-txs')||'[]');if(!Array.isArray(txs))txs=[];}catch{}
+const txStorageKey=`task-prism-txs:${CONFIG.chainId}:${CONFIG.contract.toLowerCase()}`;
+let txs=[];try{const saved=localStorage.getItem(txStorageKey);if(saved){txs=JSON.parse(saved);}else{const legacy=JSON.parse(localStorage.getItem('task-prism-txs')||'[]');txs=Array.isArray(legacy)?legacy.filter(x=>(x.contract||x.receipt?.to_address||'').toLowerCase()===CONFIG.contract.toLowerCase()).map(x=>({...x,contract:CONFIG.contract,chain_id:CONFIG.chainId})):[];}if(!Array.isArray(txs))txs=[];}catch{}
 const t=k=>translations[lang][k]||k;
 const esc=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
 const short=s=>s?`${s.slice(0,6)}…${s.slice(-4)}`:'—';
@@ -26,7 +27,7 @@ async function act(fn){try{await fn();}catch(e){toast(errorMessage(e));}}
 function requireConnection(){if(!connection){$('#wallet-dialog').showModal();throw Error(t('chooseWallet'));}if(busy)throw Error(t('waiting'));}
 function amount(v){const n=Number(v);if(!Number.isSafeInteger(n)||n<=0||n>1000000000)throw Error(t('safeNumber'));return n;}
 function tick(){if(!sfx)return;try{audio??=new AudioContext();if(audio.state==='suspended')audio.resume();const osc=audio.createOscillator(),gain=audio.createGain();osc.type='sine';osc.frequency.setValueAtTime(420,audio.currentTime);osc.frequency.exponentialRampToValueAtTime(210,audio.currentTime+.1);gain.gain.setValueAtTime(.035,audio.currentTime);gain.gain.exponentialRampToValueAtTime(.001,audio.currentTime+.13);osc.connect(gain).connect(audio.destination);osc.start();osc.stop(audio.currentTime+.15);}catch{}}
-function saveTx(){try{localStorage.setItem('task-prism-txs',JSON.stringify(txs));}catch{}renderTx();}
+function saveTx(){try{localStorage.setItem(txStorageKey,JSON.stringify(txs));}catch{}renderTx();}
 function renderTx(){const statuses={submitted:'submitted',pending:'waiting',confirmed:'finished',error:'executionFailed',readback:'refreshWarn'};$('#tx-list').innerHTML=txs.length?txs.slice().reverse().map(x=>`<article class="tx-item"><b>${esc(x.method)} · ${esc(t(statuses[x.phase]||'waiting'))}</b><time>${esc(x.created_at)}</time><a href="${CONFIG.explorer}/tx/${esc(x.hash)}" target="_blank" rel="noopener">${short(x.hash)} ↗</a>${x.error?`<code class="error">${esc(x.error)}</code>`:''}</article>`).join(''):`<p>${t('txEmpty')}</p>`;$('#tx-indicator').textContent=txs.some(x=>['submitted','pending','readback'].includes(x.phase))?'●':'↗';}
 let refreshPromise=null;
 async function refresh(quiet=false){if(refreshPromise)return refreshPromise;refreshPromise=performRefresh(quiet);try{return await refreshPromise;}finally{refreshPromise=null;}}
@@ -35,7 +36,7 @@ async function watch(x){if(watching.has(x.hash))return;watching.add(x.hash);let 
 async function write(method,args=[]){requireConnection();busy=true;renderControls();let txHash;
 try{await validateChain();if(connection.kind==='temporary'){txHash=await sendLocal(connection.account,CONFIG.contract,encoded(method,args));}else{const id=await connection.provider.request({method:'eth_chainId'});if(Number(BigInt(id))!==CONFIG.chainId)throw Error('WRONG_CHAIN');const nonce=await rpc('eth_getTransactionCount',[connection.address,'latest']);txHash=await connection.provider.request({method:'eth_sendTransaction',params:[{from:connection.address,to:chain.consensusMainContract.address,data:envelope(connection.address,CONFIG.contract,encoded(method,args)),value:'0x0',gas:'0x1312d00',gasPrice:'0x0',nonce,chainId:'0xf22f',type:'0x0'}]});}}
 catch(e){busy=false;renderControls();throw e;}
-const x={hash:txHash,method,args,phase:'submitted',created_at:new Date().toISOString()};txs.push(x);saveTx();$('#tx-body').hidden=false;$('#tx-toggle').setAttribute('aria-expanded','true');toast(`${t('submitted')} · ${short(txHash)}`);watch(x);return txHash;}
+const x={hash:txHash,contract:CONFIG.contract,chain_id:CONFIG.chainId,method,args,phase:'submitted',created_at:new Date().toISOString()};txs.push(x);saveTx();$('#tx-body').hidden=false;$('#tx-toggle').setAttribute('aria-expanded','true');toast(`${t('submitted')} · ${short(txHash)}`);watch(x);return txHash;}
 
 function taskOptions(select,tasks){const before=select.value||selectedTask;select.innerHTML=`<option value="">${esc(t('chooseTask'))}</option>`+tasks.map(x=>`<option value="${esc(x.task_id)}">${esc(x.task_id)} · ${esc(x.title)} · ${x.status}</option>`).join('');if(tasks.some(x=>x.task_id===before))select.value=before;}
 function inspect(id){selectedTask=id;$('#judge-task').value=id;$('#delivery-task').value=id;renderDetail();renderControls();$('#adjudication').scrollIntoView({behavior:calm?'instant':'smooth'});}
