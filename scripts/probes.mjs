@@ -95,6 +95,7 @@ const log = fs.existsSync(logFile)
       all_probes_passed: false,
       transactions: [],
     };
+const serArgs = (args) => args.map((a) => (typeof a === 'bigint' ? a.toString() : a));
 const save = () => fs.writeFileSync(logFile, JSON.stringify(log, null, 2) + '\n');
 const read = async () => JSON.parse(await readFinal(address));
 const readContractBalance = async () => {
@@ -132,14 +133,14 @@ function leaderOutcome(receipt) {
   const leader = list.find((r) => r.mode === 'leader') || list[0];
   return { leader, list };
 }
-async function run(account, method, args = [], check = () => {}, expectError = false, value = 0n, errorPattern = null) {
-  const matches = (x) => x.sender === account.address && x.method === method && JSON.stringify(x.args) === JSON.stringify(args) && !!x.expect_error === expectError;
+async function run(account, method, args = [], check = () => {}, expectError = false, value = 0n, errorPattern = null, tag = null) {
+  const matches = (x) => x.sender === account.address && x.method === method && JSON.stringify(x.args) === JSON.stringify(serArgs(args)) && !!x.expect_error === expectError && (x.tag || null) === (tag || null);
   const done = log.transactions.find((x) => matches(x) && x.verified);
   if (done) return done;
   let item = log.transactions.findLast((x) => matches(x) && !x.verified && (x.receipt?.status !== 'FINALIZED' || x.receipt?.result_name === 'MAJORITY_AGREE'));
   if (!item) {
     const tx = await sendLocal(account, address, encoded(method, args), value);
-    item = { method, args, sender: account.address, hash: tx, submitted_at: new Date().toISOString(), expect_error: expectError, verified: false };
+    item = { method, args: serArgs(args), sender: account.address, hash: tx, submitted_at: new Date().toISOString(), expect_error: expectError, verified: false, tag: tag || null };
     log.transactions.push(item);
     save();
     console.log(method, 'submitted', tx);
@@ -175,20 +176,20 @@ async function run(account, method, args = [], check = () => {}, expectError = f
   console.log(method, 'FINALIZED', item.execution);
   return item;
 }
-async function ensureStake() {
+async function ensureStake(key) {
   const s = await read();
   const stake = BigInt(s.agents[agentId]?.stake || 0);
   if (stake < STAKE) {
     const topup = STAKE - stake;
-    await run(agentOwner, 'top_up_stake', [agentId, topup], (st) => assert.equal(BigInt(st.agents[agentId].stake), STAKE), false, topup);
+    await run(agentOwner, 'top_up_stake', [agentId, topup], (st) => assert.equal(BigInt(st.agents[agentId].stake), STAKE), false, topup, null, 'topup-' + key);
     console.log('agent topped up by', topup.toString(), 'wei');
   }
 }
-async function withdrawAndCheck(account, expectedWei) {
+async function withdrawAndCheck(account, expectedWei, tag) {
   const before = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
   await run(account, 'withdraw', [], (s) => {
     assert.equal(BigInt(s.withdrawable[account.address.toLowerCase()] || 0), 0n);
-  });
+  }, false, 0n, null, tag);
   const after = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
   assert.equal(after - before, BigInt(expectedWei), 'WITHDRAW_EOA_DELTA');
   console.log('withdraw', account.address.slice(0, 10), 'received', expectedWei.toString(), 'wei');
@@ -223,7 +224,7 @@ async function evaluateWithRetries(taskId) {
   }
   throw Error('EVALUATION_CONSENSUS_NOT_REACHED_AFTER_3_ATTEMPTS');
 }
-async function finalizeAndSettle(taskId, verdict) {
+async function finalizeAndSettle(taskId, verdict, key) {
   const item = await run(observer, 'finalize_delivery', [taskId], (s) => {
     const t = s.tasks[taskId];
     assert.equal(t.status, 'FINALIZED');
@@ -232,8 +233,8 @@ async function finalizeAndSettle(taskId, verdict) {
   const settlement = item.read_back.tasks[taskId].settlement;
   const paid = BigInt(settlement.paid_to_agent);
   const refunded = BigInt(settlement.refunded_to_poster);
-  if (paid > 0n) await withdrawAndCheck(agentOwner, paid);
-  if (refunded > 0n) await withdrawAndCheck(poster, refunded);
+  if (paid > 0n) await withdrawAndCheck(agentOwner, paid, 'withdraw-' + key + '-agent');
+  if (refunded > 0n) await withdrawAndCheck(poster, refunded, 'withdraw-' + key + '-poster');
   return settlement;
 }
 
@@ -263,7 +264,7 @@ async function main() {
     const res = await fetch(url, { signal: AbortSignal.timeout(30000) });
     if (!res.ok) throw Error(`PROBE_${probe.key}_URL_HTTP_${res.status}: ${url}`);
     if (hash(Buffer.from(await res.arrayBuffer())) !== deliveryHash) throw Error(`PROBE_${probe.key}_BYTES_MISMATCH`);
-    await ensureStake();
+    await ensureStake(probe.key);
     await run(poster, 'post_task', [taskId, `Adversarial probe ${probe.key}`, BOUNTY, specHash, spec], (s) => assert.equal(s.tasks[taskId].status, 'OPEN'), false, BOUNTY);
     await run(agentOwner, 'claim_task', [taskId, agentId], (s) => assert.equal(s.tasks[taskId].status, 'CLAIMED'));
     await run(agentOwner, 'submit_delivery', [taskId, url, deliveryHash, `Probe ${probe.key} delivery.`], (s) => assert.equal(s.tasks[taskId].status, 'SUBMITTED'));
@@ -279,7 +280,7 @@ async function main() {
       console.error(`SEMANTIC-GATE HOLE: probe ${probe.key} got ACCEPT (scores ${JSON.stringify(ev.scores)}, evaluation tx ${ev.hash}). Stopping; no gate fix is deployed by this script.`);
       process.exit(1);
     }
-    const settlement = await finalizeAndSettle(taskId, ev.verdict);
+    const settlement = await finalizeAndSettle(taskId, ev.verdict, probe.key);
     record.settlement = settlement;
     save();
   }
@@ -294,7 +295,7 @@ async function main() {
   const validHash = hash(valid);
   const resubmitFixture = fs.readFileSync('fixtures/probe-b-generic.txt');
   const resubmitHash = hash(resubmitFixture);
-  await ensureStake();
+  await ensureStake('bad');
   await run(poster, 'post_task', [badId, 'Bad-delivery and expire-after-submit case', BOUNTY, badSpecHash, badSpec], (s) => assert.equal(s.tasks[badId].status, 'OPEN'), false, BOUNTY);
   await run(agentOwner, 'claim_task', [badId, agentId], (s) => assert.equal(s.tasks[badId].status, 'CLAIMED'));
   const badCases = {};
@@ -321,7 +322,7 @@ async function main() {
     assert.equal(BigInt(s.withdrawable[poster.address.toLowerCase()]), BOUNTY);
   });
   badCases.expire_after_submit_without_evaluation = { refunded_to_poster_wei: BOUNTY.toString(), agent_claim_released: true };
-  await withdrawAndCheck(poster, BOUNTY);
+  await withdrawAndCheck(poster, BOUNTY, 'withdraw-bad-poster');
   log.bad_delivery = badCases;
   log.all_probes_passed = true;
   log.completed_at = new Date().toISOString();

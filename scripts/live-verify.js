@@ -32,6 +32,7 @@ assert(fixtureCommit,'Pass the fixture commit SHA as the first argument: node sc
 await readFinal(address);
 const label=new Date().toISOString().replace(/\D/g,'').slice(0,14);
 const log={network:'Stable Studionet',chain_id:61999,contract:address,started_at:new Date().toISOString(),scope:'Live signed transactions with finalized receipts and latest-final read-back. Real testnet GEN (wei); no simulated ledger. No user-wallet path is implied.',public_accounts:{poster:a.address,agent:b.address,observer:c.address},all_scenarios_passed:false,transactions:[]};
+const serArgs=(args)=>args.map(a=>typeof a==='bigint'?a.toString():a);
 const save=()=>fs.writeFileSync('evidence/live-verification.json',JSON.stringify(log,null,2)+'\n');
 const read=async()=>JSON.parse(await readFinal(address));
 const readContractBalance=async()=>{const onchain=await contractBalance(address);const view=await readFinal(address,'get_contract_balance',[]);assert.equal(BigInt(onchain),BigInt(JSON.parse(view)),'CONTRACT_BALANCE_VIEW_MISMATCH');return BigInt(onchain);};
@@ -44,20 +45,20 @@ function conserved(s,contractWei){
 }
 const isIdle=(r)=>{try{return Buffer.from(r.result||'','base64').toString('utf-8').includes('idle');}catch{return false;}};
 function leaderOutcome(receipt){const leaders=receipt.consensus_data?.leader_receipt||[];const list=Array.isArray(leaders)?leaders:[leaders];return{leader:list.find((r)=>r.mode==='leader')||list[0],list};}
-async function run(account,method,args=[],check=()=>{},expectError=false,value=0n){
- const matches=x=>x.sender===account.address&&x.method===method&&JSON.stringify(x.args)===JSON.stringify(args)&&!!x.expect_error===expectError;
+async function run(account,method,args=[],check=()=>{},expectError=false,value=0n,tag=null){
+ const matches=x=>x.sender===account.address&&x.method===method&&JSON.stringify(x.args)===JSON.stringify(serArgs(args))&&!!x.expect_error===expectError&&(x.tag||null)===(tag||null);
  const done=log.transactions.find(x=>matches(x)&&x.verified);if(done)return done;
  let item=log.transactions.findLast(x=>matches(x)&&!x.verified&&(x.receipt?.status!=='FINALIZED'||x.receipt?.result_name==='MAJORITY_AGREE'));
- if(!item){const tx=await sendLocal(account,address,encoded(method,args),value);item={method,args,sender:account.address,hash:tx,submitted_at:new Date().toISOString(),expect_error:expectError,verified:false};log.transactions.push(item);save();console.log(method,'submitted',tx);}
+ if(!item){const tx=await sendLocal(account,address,encoded(method,args),value);item={method,args:serArgs(args),sender:account.address,hash:tx,submitted_at:new Date().toISOString(),expect_error:expectError,verified:false,tag:tag||null};log.transactions.push(item);save();console.log(method,'submitted',tx);}
  for(let i=0;i<240;i++){item.receipt=await rpc('eth_getTransactionByHash',[item.hash]);if(item.receipt?.status==='FINALIZED')break;await new Promise(r=>setTimeout(r,12000));}
  save();assert.equal(item.receipt.status,'FINALIZED');const {leader,list}=leaderOutcome(item.receipt);
  item.execution=leader?.execution_result;item.read_back=await read();item.read_back_at=new Date().toISOString();item.contract_balance_wei=(await readContractBalance()).toString();save();assert.equal(item.receipt.result_name,'MAJORITY_AGREE','CONSENSUS_NOT_REACHED');
  if(expectError){assert.equal(item.execution,'ERROR');assert.match(leader.genvm_result?.stderr||'',/STAKE_BELOW_MINIMUM/);}else{assert.equal(item.execution,'SUCCESS',JSON.stringify(leader?.genvm_result));check(item.read_back);conserved(item.read_back,BigInt(item.contract_balance_wei));}
  item.verified=true;save();console.log(method,'FINALIZED',item.execution);return item;
 }
-async function withdrawAndCheck(account,expectedWei){
+async function withdrawAndCheck(account,expectedWei,tag){
  const before=BigInt(await rpc('eth_getBalance',[account.address,'latest']));
- await run(account,'withdraw',[],s=>{assert.equal(BigInt(s.withdrawable[account.address.toLowerCase()]||0),0n);});
+ await run(account,'withdraw',[],s=>{assert.equal(BigInt(s.withdrawable[account.address.toLowerCase()]||0),0n);},false,0n,tag);
  const after=BigInt(await rpc('eth_getBalance',[account.address,'latest']));
  assert.equal(after-before,BigInt(expectedWei),'WITHDRAW_EOA_DELTA');
  console.log('withdraw',account.address.slice(0,10),'received',expectedWei.toString(),'wei');
@@ -72,18 +73,19 @@ async function delivery(id,title,spec,expected,resource=url,summary='A public UT
 const accept='runbook-'+label;
 await delivery(accept,'A source-integrity verification runbook','Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.',hash(body));
 await run(a,'challenge_delivery',[accept,'Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.'],s=>{assert.equal(s.tasks[accept].status,'FINALIZED');assert.equal(s.tasks[accept].rounds.length,2);assert.equal(s.tasks[accept].rounds[0].verdict,'ACCEPT');assert.equal(s.tasks[accept].final_verdict,'ACCEPT');assert.equal(s.reputation[a.address.toLowerCase()],95);assert.equal(s.reputation[b.address.toLowerCase()],110);});
-await withdrawAndCheck(b,BOUNTY);
+await withdrawAndCheck(b,BOUNTY,'withdraw-accept-agent');
 const reject='integrity-'+label;
 const recipe=fs.readFileSync('fixtures/probe-c-recipe.txt');
 await delivery(reject,'Byte-integrity negative control','Deliver a concise English three-step runbook for checking a public delivery manifest, with one hash-change example and limitations.',hash(recipe),'https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/'+fixtureCommit+'/fixtures/probe-c-recipe.txt','A chocolate cake recipe, unrelated to the requested runbook.');
-await run(c,'finalize_delivery',[reject],s=>{assert.equal(s.tasks[reject].final_verdict,'REJECT');assert.equal(BigInt(s.agents[agent].stake),STAKE-SLASH);assert.equal(BigInt(s.tasks[reject].settlement.refunded_to_poster),BOUNTY);assert.equal(BigInt(s.treasury),SLASH);assert.equal(s.reputation[b.address.toLowerCase()],95);});
+const treasuryBeforeReject=BigInt((await read()).treasury);
+await run(c,'finalize_delivery',[reject],s=>{assert.equal(s.tasks[reject].final_verdict,'REJECT');assert.equal(BigInt(s.agents[agent].stake),STAKE-SLASH);assert.equal(BigInt(s.tasks[reject].settlement.refunded_to_poster),BOUNTY);assert.equal(BigInt(s.treasury),treasuryBeforeReject+SLASH);assert.equal(s.reputation[b.address.toLowerCase()],95);});
 const next='pipeline-'+label,spec='Provide a short review of a delivery integrity manifest.';
 await run(a,'post_task',[next,'An explicitly expired pipeline task',BOUNTY,hash(spec),spec],s=>assert.equal(s.tasks[next].status,'OPEN'),false,BOUNTY);
 await run(b,'claim_task',[next,agent],()=>{},true);
 await run(b,'top_up_stake',[agent,SLASH],s=>{assert.equal(BigInt(s.agents[agent].stake),STAKE);},false,SLASH);
 await run(b,'claim_task',[next,agent],s=>assert.equal(s.tasks[next].status,'CLAIMED'));
 await run(a,'expire_task',[next],s=>{assert.equal(s.tasks[next].status,'EXPIRED');assert.equal(s.agents[agent].open_claim,'');});
-await withdrawAndCheck(a,BOUNTY*2n); // REJECT refund (0.2) + expire refund (0.2)
+await withdrawAndCheck(a,BOUNTY*2n,'withdraw-expire-poster'); // REJECT refund (0.2) + expire refund (0.2)
 const partial='support-'+label;
 const translationURL='https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/f3406aad2268e4e8070fb6e8f5bf5ae203ea1cc3/fixtures/support-es.txt';
 const translationSpec='Create an English-to-Spanish customer support reply sheet. Translate all five equally weighted source messages, retaining their numbering and meaning, with natural, grammatically correct Spanish usable by a support agent: 1. Your file is ready to download. 2. We received your request. 3. Please confirm your email address. 4. Your appointment is on Monday. 5. Your order has been canceled. Each source needs its own Spanish translation. No citations or external research are needed.';
@@ -94,8 +96,8 @@ if(browserPartial){log.awaiting_browser_adjudication={task_id:partial};log.run_f
 const pending=(await read()).tasks[partial];
 assert.equal(pending.pending_verdict,'PARTIAL','PARTIAL_SCENARIO_NOT_REACHED');
 await run(c,'finalize_delivery',[partial],s=>{const task=s.tasks[partial];assert.equal(task.status,'FINALIZED');assert.equal(task.final_verdict,'PARTIAL');assert.equal(BigInt(task.settlement.paid_to_agent),BOUNTY/2n);assert.equal(BigInt(task.settlement.refunded_to_poster),BOUNTY/2n);});
-await withdrawAndCheck(b,BOUNTY/2n);
-await withdrawAndCheck(a,BOUNTY/2n);
+await withdrawAndCheck(b,BOUNTY/2n,'withdraw-partial-agent');
+await withdrawAndCheck(a,BOUNTY/2n,'withdraw-partial-poster');
 log.all_scenarios_passed=true;
 log.completed_at=new Date().toISOString();save();console.log('LIVE VERIFICATION COMPLETE');
 }

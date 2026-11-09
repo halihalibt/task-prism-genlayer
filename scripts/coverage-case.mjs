@@ -104,6 +104,7 @@ const log = fs.existsSync(logFile)
       evaluation_attempts: [],
       transactions: [],
     };
+const serArgs = (args) => args.map((a) => (typeof a === 'bigint' ? a.toString() : a));
 const save = () => fs.writeFileSync(logFile, JSON.stringify(log, null, 2) + '\n');
 const read = async () => JSON.parse(await readFinal(address));
 const readContractBalance = async () => {
@@ -141,14 +142,14 @@ function leaderOutcome(receipt) {
   const leader = list.find((r) => r.mode === 'leader') || list[0];
   return { leader, list };
 }
-async function run(account, method, args = [], check = () => {}, value = 0n) {
-  const matches = (x) => x.sender === account.address && x.method === method && JSON.stringify(x.args) === JSON.stringify(args);
+async function run(account, method, args = [], check = () => {}, value = 0n, tag = null) {
+  const matches = (x) => x.sender === account.address && x.method === method && JSON.stringify(x.args) === JSON.stringify(serArgs(args)) && (x.tag || null) === (tag || null);
   const done = log.transactions.find((x) => matches(x) && x.verified);
   if (done) return done;
   let item = log.transactions.findLast((x) => matches(x) && !x.verified && (x.receipt?.status !== 'FINALIZED' || x.receipt?.result_name === 'MAJORITY_AGREE'));
   if (!item) {
     const tx = await sendLocal(account, address, encoded(method, args), value);
-    item = { method, args, sender: account.address, hash: tx, submitted_at: new Date().toISOString(), expect_error: false, verified: false };
+    item = { method, args: serArgs(args), sender: account.address, hash: tx, submitted_at: new Date().toISOString(), expect_error: false, verified: false, tag: tag || null };
     log.transactions.push(item);
     save();
     console.log(method, 'submitted', tx);
@@ -181,11 +182,11 @@ async function run(account, method, args = [], check = () => {}, value = 0n) {
   console.log(method, 'FINALIZED', item.execution);
   return item;
 }
-async function withdrawAndCheck(account, expectedWei) {
+async function withdrawAndCheck(account, expectedWei, tag) {
   const before = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
   await run(account, 'withdraw', [], (s) => {
     assert.equal(BigInt(s.withdrawable[account.address.toLowerCase()] || 0), 0n);
-  });
+  }, 0n, tag);
   const after = BigInt(await rpc('eth_getBalance', [account.address, 'latest']));
   assert.equal(after - before, BigInt(expectedWei), 'WITHDRAW_EOA_DELTA');
   console.log('withdraw', account.address.slice(0, 10), 'received', expectedWei.toString(), 'wei');
@@ -282,8 +283,8 @@ async function main() {
   });
 
   // Pull-payment: both parties withdraw their halves as real GEN.
-  await withdrawAndCheck(agentOwner, BOUNTY / 2n);
-  await withdrawAndCheck(poster, BOUNTY / 2n);
+  await withdrawAndCheck(agentOwner, BOUNTY / 2n, 'withdraw-coverage-agent');
+  await withdrawAndCheck(poster, BOUNTY / 2n, 'withdraw-coverage-poster');
 
   const finalState = await read();
   log.completed_at = new Date().toISOString();
