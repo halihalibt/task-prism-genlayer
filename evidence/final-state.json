@@ -3,9 +3,18 @@
     "0x0000000000000000000000000000000000000001": "seed-vector",
     "0x0000000000000000000000000000000000000002": "seed-relay",
     "0x0000000000000000000000000000000000000003": "seed-patch",
-    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": "runbook-agent-20261109121251"
+    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": "runbook-agent-20261109121251",
+    "0xd1f6e0b298558cf27065bed4886accf8f4eee980": "coverage-agent-20261109154647"
   },
   "agents": {
+    "coverage-agent-20261109154647": {
+      "agent_id": "coverage-agent-20261109154647",
+      "open_claim": "",
+      "origin": "user",
+      "owner": "0xd1f6e0b298558cf27065bed4886accf8f4eee980",
+      "skill_tags": "integration, technical writing",
+      "stake": 1000
+    },
     "runbook-agent-20261109121251": {
       "agent_id": "runbook-agent-20261109121251",
       "open_claim": "",
@@ -40,23 +49,102 @@
     }
   },
   "balances": {
+    "0x894f351bf8afd4d0266b2b2e73817e75c46e52f7": 9900,
     "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 9700,
-    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 9200
+    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 9200,
+    "0xd1f6e0b298558cf27065bed4886accf8f4eee980": 9100
   },
   "funded": [
     "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8",
-    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106"
+    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106",
+    "0x894f351bf8afd4d0266b2b2e73817e75c46e52f7",
+    "0xd1f6e0b298558cf27065bed4886accf8f4eee980"
   ],
-  "issued": 20000,
+  "issued": 40000,
   "reputation": {
     "0x0000000000000000000000000000000000000001": 100,
     "0x0000000000000000000000000000000000000002": 100,
     "0x0000000000000000000000000000000000000003": 100,
+    "0x894f351bf8afd4d0266b2b2e73817e75c46e52f7": 100,
     "0xc1bbdebab5933b2b1c4b9afb56f0555aa3f12cf8": 95,
-    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 97
+    "0xc3b7c3dc755829d4eeeb158f2b169f4d1725c106": 97,
+    "0xd1f6e0b298558cf27065bed4886accf8f4eee980": 102
   },
-  "sequence": 19,
+  "sequence": 24,
   "tasks": {
+    "coverage-20261109154647": {
+      "agent_id": "coverage-agent-20261109154647",
+      "bounty": 200,
+      "challenge_reason": "",
+      "challenger": "",
+      "deliverable_spec": "Write a two-part integration guide for the Acme Widget service. Part 1: a complete local setup guide — prerequisites (Node.js 20 and Git), install commands, a config file example, and how to verify the server starts. Part 2: a complete migration guide for moving existing data from version 1 to version 2 — backup step, migration command, rollback step, and how to verify the migration. Both parts must be present and complete; each part is equally important.",
+      "delivery": {
+        "sha256": "63db7fb3bbddc6fa14a68cdffc2cbaea80f96a268e1130b871320d26a56cfe27",
+        "summary": "Part 1 only: complete local setup guide with prerequisites, install commands, config example and verification step. Part 2 (version 1 to version 2 migration guide) is not included.",
+        "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/54c38580ffabec404e8e3ac4aeae293adc63b5e4/fixtures/coverage-partial.txt"
+      },
+      "events": [
+        {
+          "actor": "0x894f351bf8afd4d0266b2b2e73817e75c46e52f7",
+          "event": "POSTED",
+          "sequence": 20
+        },
+        {
+          "actor": "0xd1f6e0b298558cf27065bed4886accf8f4eee980",
+          "event": "CLAIMED",
+          "sequence": 21
+        },
+        {
+          "actor": "0xd1f6e0b298558cf27065bed4886accf8f4eee980",
+          "event": "SUBMITTED",
+          "sequence": 22
+        },
+        {
+          "actor": "0xc88444f27f228ae4426cf99bb4d0465ce28e688d",
+          "event": "PENDING_VERDICT",
+          "sequence": 23
+        },
+        {
+          "actor": "0xc88444f27f228ae4426cf99bb4d0465ce28e688d",
+          "event": "FINALIZED",
+          "sequence": 24
+        }
+      ],
+      "final_verdict": "PARTIAL",
+      "origin": "user",
+      "pending_verdict": "PARTIAL",
+      "poster": "0x894f351bf8afd4d0266b2b2e73817e75c46e52f7",
+      "requirements_hash": "6638b56af3589b82c7bec5222c1afd860b6d30aea69360d12d2af6e27de60c40",
+      "rounds": [
+        {
+          "basis": "CONTENT_REVIEW",
+          "contradictions": [
+            "Title claims a 'two-part integration guide' but only Part 1 is present.",
+            "Specification requires a complete Part 2 migration guide (backup step, migration command, rollback step, and migration verification), none of which appear in the delivered content."
+          ],
+          "evidence_hash": "63db7fb3bbddc6fa14a68cdffc2cbaea80f96a268e1130b871320d26a56cfe27",
+          "expected_hash": "63db7fb3bbddc6fa14a68cdffc2cbaea80f96a268e1130b871320d26a56cfe27",
+          "rationale": "The delivered bytes contain a complete Part 1 local setup guide (prerequisites, install commands, config example, and server-start verification) but omit Part 2 entirely. The heading calls it a two-part integration guide, yet no version 1-to-2 migration steps are provided, so the document does not substantively meet the full specification.",
+          "round": 1,
+          "scores": [
+            50,
+            90,
+            50
+          ],
+          "url": "https://raw.githubusercontent.com/halihalibt/task-prism-genlayer/54c38580ffabec404e8e3ac4aeae293adc63b5e4/fixtures/coverage-partial.txt",
+          "verdict": "PARTIAL"
+        }
+      ],
+      "settlement": {
+        "agent_reputation_delta": 2,
+        "paid_to_agent": 100,
+        "refunded_to_poster": 100,
+        "slashed_to_treasury": 0
+      },
+      "status": "FINALIZED",
+      "task_id": "coverage-20261109154647",
+      "title": "Two-part integration guide with missing migration section"
+    },
     "integrity-20261109121251": {
       "agent_id": "runbook-agent-20261109121251",
       "bounty": 200,
@@ -244,7 +332,7 @@
           ],
           "evidence_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
           "expected_hash": "3bc723b28c144339c11693312a42afddcb3e033763c8b3d7ced8934f4d23b2e7",
-          "rationale": "The delivered text contains all five required elements: three numbered steps matching the specification (capture UTF-8 bytes and compute SHA-256 in step 1; compare against submitted hash in step 2; inspect scores and wait for FINALIZED/latest-final in step 3), one hash-change example (H1\u2192H2 scenario), and explicit limitations covering integrity scope, URL disappearance, and simulated ledger. Language is concise English and self-contained with no external citations. Minor gap: step 1 says 'Avoid a page that changes on each request' which is advisory content not in the specification but is harmless and arguably useful. Step 3 covers 'all three scores, rationale and contradiction witnesses' and 'FINALIZED/latest-final' as required.",
+          "rationale": "The delivered text contains all five required elements: three numbered steps matching the specification (capture UTF-8 bytes and compute SHA-256 in step 1; compare against submitted hash in step 2; inspect scores and wait for FINALIZED/latest-final in step 3), one hash-change example (H1→H2 scenario), and explicit limitations covering integrity scope, URL disappearance, and simulated ledger. Language is concise English and self-contained with no external citations. Minor gap: step 1 says 'Avoid a page that changes on each request' which is advisory content not in the specification but is harmless and arguably useful. Step 3 covers 'all three scores, rationale and contradiction witnesses' and 'FINALIZED/latest-final' as required.",
           "round": 2,
           "scores": [
             97,

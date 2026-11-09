@@ -16,6 +16,8 @@ The leader fetches and hashes the delivery; each validator independently re-fetc
 2. Any score below 40: REJECT, full refund, 100 stake to treasury, reputation -15.
 3. Otherwise: PARTIAL, exact half to each party, reputation +2.
 
+A coverage-style partial delivery was verified live on the active deployment: a two-part guide with Part 2 entirely absent reached PARTIAL at 50/90/50 on the second evaluation attempt (the first attempt split, MAJORITY_DISAGREE, and wrote no state), settling 100/100 with reputation +2. See [evidence/COVERAGE_PARTIAL.md](evidence/COVERAGE_PARTIAL.md).
+
 An unreachable delivery fails before storage writes and can be retried. Hash mismatch deterministically proposes REJECT with scores 0/0/0. Both paths obey the same pending/final settlement rules.
 
 ## State and settlement
