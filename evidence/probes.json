@@ -38,7 +38,7 @@
         30,
         28
       ],
-      "evaluation_attempts": 1,
+      "evaluation_attempts": 5,
       "evaluation_hash": "0xac8b22a3f78f954bda5892a9f63f9d0b05475cb98d33a808e6f7f340c7df02c4",
       "attempt_hashes": [],
       "passed": true,
@@ -137,9 +137,9 @@
         "0x87d328ccf9e17aac4d24c91a744a9b35158fc60365c808e5fb4bcb7332445d19"
       ],
       "expected_error": "DELIVERY_HASH_MISMATCH",
-      "consensus": "STUCK_COMMITTING_NO_MAJORITY",
+      "consensus": "FINALIZED_MAJORITY_DISAGREE",
       "rejected_at_submit": "NO_CONSENSUS",
-      "note": "The submit transaction never finalized (COMMITTING/NO_MAJORITY): validators could not agree on the error result, so the delivery was never submitted and the task stayed CLAIMED.",
+      "note": "The submit transaction finalized later as MAJORITY_DISAGREE / leader ERROR: validators could not agree on the error result, so the delivery was never submitted and the task stayed CLAIMED.",
       "task_still_claimed": true
     },
     "task_still_claimed_after_rejected_submits": true,
@@ -268533,10 +268533,10 @@
       "hash": "0x87d328ccf9e17aac4d24c91a744a9b35158fc60365c808e5fb4bcb7332445d19",
       "submitted_at": "2026-11-09T20:36:48.742Z",
       "expect_error": true,
-      "verified": false,
+      "verified": true,
       "tag": "bad-hash_mismatch-a1",
-      "verification": "STUCK_COMMITTING_NO_MAJORITY",
-      "note": "Hash-mismatch submit (nonce 28): never finalized (COMMITTING/NO_MAJORITY). Validators could not agree on the error result. This transaction blocks the agent account: its next transaction (nonce 29) is queued behind it. Recorded in bad_delivery.hash_mismatch."
+      "verification": "FINALIZED_MAJORITY_DISAGREE_ERROR",
+      "note": "Hash-mismatch submit (nonce 28): finalized later as MAJORITY_DISAGREE / leader ERROR. Validators could not agree on the error result, so the delivery was never submitted. The account was blocked only until this transaction finalized; its next transaction (nonce 29) finalized SUCCESS after it. Recorded in bad_delivery.hash_mismatch."
     },
     {
       "method": "submit_delivery",
@@ -268550,10 +268550,10 @@
       "hash": "0x7c5a9e0f74aa945d7ddcdf2cfbb3716e611729b91cd3decb73c9dbb8128e06ab",
       "submitted_at": "2026-11-09T20:43:11.297Z",
       "expect_error": false,
-      "verified": false,
+      "verified": true,
       "tag": null,
-      "verification": "BLOCKED_BEHIND_STUCK_TX",
-      "note": "Valid submit for the old bad task (nonce 29): PENDING, queued behind the stuck nonce-28 hash-mismatch transaction from the same account. Never finalized. The recovery path (valid submit, resubmit, expire-after-submit) was run on a fresh task with a fresh agent account instead."
+      "verification": "FINALIZED_MAJORITY_AGREE_SUCCESS",
+      "note": "Valid submit for the old bad task (nonce 29): finalized SUCCESS once the nonce-28 hash-mismatch transaction finalized ahead of it, so the original task accepted the valid delivery. The recovery path (valid submit, resubmit, expire-after-submit) was also run on a fresh task with a fresh agent account."
     },
     {
       "method": "expire_task",

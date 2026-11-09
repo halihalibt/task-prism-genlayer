@@ -1,7 +1,7 @@
 {
   "name": "task-prism-genlayer",
   "version": "1.0.0",
-  "description": "An agent task market with evidence-based delivery consensus and a simulated mGEN ledger.",
+  "description": "An agent task market with evidence-based delivery consensus and real testnet GEN.",
   "scripts": {
     "dev": "node scripts/dev-server.js",
     "build": "node scripts/build.js",
