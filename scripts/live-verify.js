@@ -1,12 +1,13 @@
-import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';import {createAccount}from'genlayer-js';import{rpc,reader,sendLocal,encoded,validateChain}from'./network.js';
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';import {createAccount}from'genlayer-js';import{rpc,reader,readFinal,sendLocal,encoded,validateChain}from'./network.js';
 const d=JSON.parse(fs.readFileSync('evidence/deployment.json')),address=d.contract_address;
 assert(address);await validateChain();
 const hash=s=>createHash('sha256').update(s).digest('hex');
 const a=createAccount(),b=createAccount(),c=createAccount();
+await readFinal(address);
 const label=new Date().toISOString().replace(/\D/g,'').slice(0,14);
 const log={network:'Stable Studionet',chain_id:61999,contract:address,started_at:new Date().toISOString(),scope:'Live signed transactions with finalized receipts and latest-final read-back. No user-wallet path is implied.',public_accounts:{poster:a.address,agent:b.address,observer:c.address},transactions:[]};
 const save=()=>fs.writeFileSync('evidence/live-verification.json',JSON.stringify(log,null,2)+'\n');
-const read=async()=>JSON.parse(await reader.readContract({address,functionName:'get_state',args:[],transactionHashVariant:'latest-final'}));
+const read=async()=>JSON.parse(await readFinal(address));
 async function run(account,method,args=[],check=()=>{},expectError=false){const tx=await sendLocal(account,address,encoded(method,args));const item={method,args,sender:account.address,hash:tx,submitted_at:new Date().toISOString()};log.transactions.push(item);save();console.log(method,'submitted',tx);let receipt;for(let i=0;i<240;i++){receipt=await rpc('eth_getTransactionByHash',[tx]);if(receipt?.status==='FINALIZED')break;await new Promise(r=>setTimeout(r,6000));}item.receipt=receipt;save();assert.equal(receipt.status,'FINALIZED');const leaders=receipt.consensus_data?.leader_receipt;const leader=Array.isArray(leaders)?leaders.find(r=>r.mode==='leader')||leaders[0]:leaders;item.execution=leader?.execution_result;item.read_back=await read();item.read_back_at=new Date().toISOString();save();if(expectError){assert.notEqual(item.execution,'SUCCESS');}else{assert.equal(item.execution,'SUCCESS',JSON.stringify(leader?.genvm_result));check(item.read_back);}item.verified=true;save();console.log(method,'FINALIZED',item.execution);return item;}
 function conserved(s){const wallets=Object.values(s.balances).reduce((x,y)=>x+y,0),stakes=Object.values(s.agents).filter(x=>x.origin!=='seed_demo').reduce((x,a)=>x+a.stake,0),escrow=Object.values(s.tasks).filter(t=>t.origin!=='seed_demo'&&!['FINALIZED','EXPIRED'].includes(t.status)).reduce((x,t)=>x+t.bounty,0);assert.equal(s.issued,wallets+stakes+escrow+s.treasury);}
 const agent='runbook-agent-'+label;
@@ -29,3 +30,4 @@ await run(b,'top_up_stake',[agent,100],s=>{assert.equal(s.agents[agent].stake,10
 await run(b,'claim_task',[next,agent],s=>assert.equal(s.tasks[next].status,'CLAIMED'));
 await run(a,'expire_task',[next],s=>{assert.equal(s.tasks[next].status,'EXPIRED');assert.equal(s.agents[agent].open_claim,'');conserved(s);});
 log.completed_at=new Date().toISOString();save();console.log('LIVE VERIFICATION COMPLETE');
+

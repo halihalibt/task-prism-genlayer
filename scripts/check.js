@@ -6,4 +6,5 @@ await assert.rejects(()=>validateChain(async()=> '0x1'),/WRONG_CHAIN/);
 const data=encoded('post_task',['id','title',200,'0'.repeat(64),'spec']);assert.equal(typeof data,'string');
 const source=fs.readFileSync('contracts/task_prism.py','utf8');assert(!/\bfloat\s*\(/.test(source));
 for(const file of ['README.md','config.js','index.html','app.js','KNOWN_LIMITATIONS.md'])assert(!new RegExp('__REPO'+'_NAME__|xiaoyu'+'7799').test(fs.readFileSync(file,'utf8')),`${file}: placeholder residue`);
+if(fs.existsSync('evidence/deployment.json')){const {createHash}=await import('node:crypto');const deployment=JSON.parse(fs.readFileSync('evidence/deployment.json'));assert.equal(createHash('sha256').update(source).digest('hex'),deployment.source_sha256,'deployed source bytes');}
 console.log('i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.');

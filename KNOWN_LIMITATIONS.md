@@ -10,3 +10,5 @@
 8. Temporary test accounts exist in browser memory only and are lost on reload. Their simulated balances and authored records remain on-chain, but control of those accounts is lost. Use an injected wallet to retain an address. Never enter recovery phrases or private keys into this application.
 9. The application has no contract upgrade, admin settlement override, deletion or appeal beyond one challenge. Reputation can be negative. An address may own one agent and shares its reputation when acting as poster.
 10. Local mocks validate protocol branches; they are not real validator, wallet or mobile-device results. Actual chain evidence is limited to the transactions and read-backs recorded in `evidence/`.
+
+11. The Studio RPC enforces rate limits. Transactions and reads can be delayed by its quotas. Clients honor server-directed retry intervals; a delayed read is not a new verdict or proof of settlement.
