@@ -31,6 +31,7 @@ for tx in log['transactions']:
     error=None
     classification='SUCCESS'
     if receipt.get('result_name')!='MAJORITY_AGREE':
+        assert tx.get('verified') is False, 'Consensus rejection cannot pass verification'
         assert tx['read_back']==last, 'Rejected consensus changed contract state'
         classification='CONSENSUS_NOT_REACHED'
         error='CONSENSUS_NOT_REACHED'
@@ -42,6 +43,7 @@ for tx in log['transactions']:
             error='STAKE_BELOW_MINIMUM'
             classification='EXPECTED_REJECTION'
         else:
+            assert tx.get('verified') is not True, 'Execution failure cannot pass verification'
             assert tx['method']=='evaluate_delivery' and 'JSONDecodeError' in stderr
             assert tx['read_back']==last, 'Failed evaluation changed contract state'
             error='MODEL_JSON_FORMAT_ERROR'
