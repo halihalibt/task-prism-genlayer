@@ -17,8 +17,12 @@
 // fixtures; the REJECT case pins its delivery URL to it.
 // Output: evidence/live-verification.json (packaged later by
 // scripts/record-evidence.py; do not hand-edit the packaged file).
+//
+// Resumable: signer keys persist in ignored .local/ files and the log is
+// reloaded on restart, so an interrupted run resumes with the same
+// accounts, task ids and recorded transactions instead of starting over.
 import readline from 'node:readline';
-import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';import {createAccount}from'genlayer-js';import{rpc,reader,readFinal,sendLocal,encoded,validateChain,fundAccount,contractBalance}from'./network.js';
+import fs from 'node:fs';import assert from 'node:assert/strict';import {createHash}from'node:crypto';import {createAccount,generatePrivateKey}from'genlayer-js';import{rpc,reader,readFinal,sendLocal,encoded,validateChain,fundAccount,contractBalance}from'./network.js';
 const d=JSON.parse(fs.readFileSync('evidence/deployment.json')),address=d.contract_address;
 assert(address);await validateChain();
 const hash=s=>createHash('sha256').update(s).digest('hex');
@@ -26,14 +30,25 @@ const GEN=10n**18n;
 const BOUNTY=2n*10n**17n; // 0.2 GEN
 const STAKE=10n**18n; // 1 GEN
 const SLASH=10n**17n; // 0.1 GEN
-const a=createAccount(),b=createAccount(),c=createAccount();
+function loadAccountSync(name){fs.mkdirSync('.local',{recursive:true,mode:0o700});const keyPath='.local/'+name;if(!fs.existsSync(keyPath))fs.writeFileSync(keyPath,generatePrivateKey(),{mode:0o600});return createAccount(fs.readFileSync(keyPath,'utf8').trim());}
+const a=loadAccountSync('live-verify-poster-key'),b=loadAccountSync('live-verify-agent-key'),c=loadAccountSync('live-verify-observer-key');
 const fixtureCommit=process.argv.find((x)=>/^[0-9a-f]{40}$/.test(x));
 assert(fixtureCommit,'Pass the fixture commit SHA as the first argument: node scripts/live-verify.js <commit>');
 await readFinal(address);
-const label=new Date().toISOString().replace(/\D/g,'').slice(0,14);
-const log={network:'Stable Studionet',chain_id:61999,contract:address,started_at:new Date().toISOString(),scope:'Live signed transactions with finalized receipts and latest-final read-back. Real testnet GEN (wei); no simulated ledger. No user-wallet path is implied.',public_accounts:{poster:a.address,agent:b.address,observer:c.address},all_scenarios_passed:false,transactions:[]};
+const logFile='evidence/live-verification.json';
+let log,label;
+if(fs.existsSync(logFile)){
+ log=JSON.parse(fs.readFileSync(logFile,'utf8'));
+ assert(log.contract===address,'Live-verification log belongs to a different contract; archive it first.');
+ assert(log.public_accounts.poster===a.address&&log.public_accounts.agent===b.address&&log.public_accounts.observer===c.address,'Live-verification log accounts do not match persisted keys; archive it first.');
+ label=log.label;
+ console.log('Resuming live verification from',logFile,'label',label,'with',log.transactions.length,'recorded transactions.');
+}else{
+ label=new Date().toISOString().replace(/\D/g,'').slice(0,14);
+ log={network:'Stable Studionet',chain_id:61999,contract:address,label,started_at:new Date().toISOString(),scope:'Live signed transactions with finalized receipts and latest-final read-back. Real testnet GEN (wei); no simulated ledger. No user-wallet path is implied.',public_accounts:{poster:a.address,agent:b.address,observer:c.address},all_scenarios_passed:false,transactions:[]};
+}
 const serArgs=(args)=>args.map(a=>typeof a==='bigint'?a.toString():a);
-const save=()=>fs.writeFileSync('evidence/live-verification.json',JSON.stringify(log,null,2)+'\n');
+const save=()=>fs.writeFileSync(logFile,JSON.stringify(log,null,2)+'\n');
 const read=async()=>JSON.parse(await readFinal(address));
 const readContractBalance=async()=>{const onchain=await contractBalance(address);const view=await readFinal(address,'get_contract_balance',[]);assert.equal(BigInt(onchain),BigInt(JSON.parse(view)),'CONTRACT_BALANCE_VIEW_MISMATCH');return BigInt(onchain);};
 async function fund(account,amount){await fundAccount(account.address,amount);for(let i=0;i<30;i++){const bal=BigInt(await rpc('eth_getBalance',[account.address,'latest']));if(bal>=amount)return;await new Promise(r=>setTimeout(r,2000));}throw Error('FAUCET_FUND_TIMEOUT');}
@@ -72,7 +87,24 @@ const body=fs.readFileSync('fixtures/delivery.txt');
 async function delivery(id,title,spec,expected,resource=url,summary='A public UTF-8 runbook with three numbered steps, an example and limitations.',skipEvaluation=false){await run(a,'post_task',[id,title,BOUNTY,hash(spec),spec],s=>{assert.equal(s.tasks[id].status,'OPEN');},false,BOUNTY);await run(b,'claim_task',[id,agent],s=>assert.equal(s.tasks[id].status,'CLAIMED'));await run(b,'submit_delivery',[id,resource,expected,summary],s=>assert.equal(s.tasks[id].status,'SUBMITTED'));if(skipEvaluation)return;await run(c,'evaluate_delivery',[id],s=>{assert.equal(s.tasks[id].status,'EVALUATING');assert.equal(s.tasks[id].rounds.length,1);assert.equal(s.tasks[id].settlement,null);});}
 const accept='runbook-'+label;
 await delivery(accept,'A source-integrity verification runbook','Deliver a concise English runbook for public source delivery integrity. Include three numbered steps: capture exact UTF-8 bytes and calculate SHA-256; compare against the submitted hash; inspect verdict scores and wait for FINALIZED and latest-final. Include one hash-change example and explicit limitations. A short, self-contained text is sufficient; no external research or citations are required.',hash(body));
-await run(a,'challenge_delivery',[accept,'Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.'],s=>{assert.equal(s.tasks[accept].status,'FINALIZED');assert.equal(s.tasks[accept].rounds.length,2);assert.equal(s.tasks[accept].rounds[0].verdict,'ACCEPT');assert.equal(s.tasks[accept].final_verdict,'ACCEPT');assert.equal(s.reputation[a.address.toLowerCase()],95);assert.equal(s.reputation[b.address.toLowerCase()],110);});
+// Challenge round 2 is a second full consensus evaluation; validators can
+// split and leave the transaction without a majority (one attempt stayed
+// COMMITTING/NO_MAJORITY for 35+ minutes). Retry up to 3 times; a failed
+// attempt writes no state, so a retry is safe. A MAJORITY_AGREE execution
+// whose outcome differs from the expected failed-challenge shape is not a
+// consensus failure and is re-thrown for review instead of retried.
+let challenged=false;
+for(let attempt=1;attempt<=3&&!challenged;attempt++){
+ try{
+  await run(a,'challenge_delivery',[accept,'Recheck the three requested steps, the hash-change example, and the limitations against the exact delivered text.'],s=>{assert.equal(s.tasks[accept].status,'FINALIZED');assert.equal(s.tasks[accept].rounds.length,2);assert.equal(s.tasks[accept].rounds[0].verdict,'ACCEPT');assert.equal(s.tasks[accept].final_verdict,'ACCEPT');assert.equal(s.reputation[a.address.toLowerCase()],95);assert.equal(s.reputation[b.address.toLowerCase()],110);});
+  challenged=true;
+ }catch(e){
+  const item=log.transactions.findLast(x=>x.method==='challenge_delivery'&&x.args[0]===accept);
+  if(item?.receipt?.status==='FINALIZED'&&item.receipt.result_name==='MAJORITY_AGREE')throw e;
+  console.log('challenge attempt '+attempt+' did not reach consensus; retrying');
+ }
+}
+assert(challenged,'CHALLENGE_CONSENSUS_NOT_REACHED_AFTER_3_ATTEMPTS');
 await withdrawAndCheck(b,BOUNTY,'withdraw-accept-agent');
 const reject='integrity-'+label;
 const recipe=fs.readFileSync('fixtures/probe-c-recipe.txt');
