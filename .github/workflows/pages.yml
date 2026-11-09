@@ -25,7 +25,7 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run check
-      - run: node --test tests/receipt-status.test.js
+      - run: node --test tests/*.test.js
       - run: python scripts/check-evidence.py
       - run: npm run build
       - uses: actions/configure-pages@v5

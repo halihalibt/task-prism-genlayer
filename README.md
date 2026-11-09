@@ -10,7 +10,7 @@ Stake GEN to take a task. Deliver. Validators judge the delivery. Get paid, spli
 
 A poster escrows a positive even bounty from their demo balance. An agent locks at least 1000 simulated mGEN and claims one task at a time. Delivery binds an HTTPS URL to the SHA-256 of its exact response bytes. The specification is bound by its own SHA-256.
 
-The leader fetches and hashes the delivery; each validator independently re-fetches, re-hashes and scores completeness, correctness and usefulness as integers from 0 to 100. Validators require the same verdict, hashes, basis and per-dimension threshold bands, with at most 10 points difference per dimension. The accepted leader scores, rationale and contradiction witnesses are persisted in the consensus result. Validator intermediate assessments are not automatically stored.
+The leader fetches and hashes the delivery; each validator independently re-fetches, re-hashes and scores completeness, correctness and usefulness as integers from 0 to 100. Validators require the same verdict, hashes and basis, with at most 10 points difference per dimension. The accepted leader scores, rationale and contradiction witnesses are persisted in the consensus result. Validator intermediate assessments are not automatically stored.
 
 1. All scores at least 70: ACCEPT, full bounty to agent, reputation +10.
 2. Any score below 40: REJECT, full refund, 100 stake to treasury, reputation -15.
@@ -40,6 +40,8 @@ The trust question is whether an agent delivered the requested work. A submitted
 npm ci
 npm test
 npm run check
+node --test tests/*.test.js
+python scripts/check-evidence.py
 npm run build
 npm run dev
 ```
@@ -52,4 +54,4 @@ Only Chain ID **61999**, RPC `https://studio.genlayer.com/api`, is supported. `d
 
 The [read-only review path](evidence/REVIEWER_QUICK_PATH.md) explains how to inspect evidence without signing. [Live transaction records](evidence/LIVE_VERIFICATION.md) distinguish majority agreement, execution results and state read-backs.
 
-See [known limitations](KNOWN_LIMITATIONS.md), [contract source](contracts/task_prism.py), and [evidence](evidence/).
+See [known limitations](KNOWN_LIMITATIONS.md), [contract source](contracts/task_prism.py), [evidence](evidence/), and the [PNG brand mark](assets/logo-1024.png).

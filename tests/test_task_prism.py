@@ -184,6 +184,21 @@ class LocalMockTests(unittest.TestCase):
     def test_validator_rejects_forged_verdict(self):
         self.pending(); forged=copy.deepcopy(runtime.proposal); forged['verdict']='REJECT'
         self.assertFalse(runtime.validator(Return(forged)))
+    def test_partial_same_verdict_can_cross_a_nondecisive_dimension_boundary(self):
+        self.submit(); runtime.scores=[[60,100,70],[60,100,60]]
+        self.c.evaluate_delivery('task')
+        self.assertEqual(self.task()['pending_verdict'],'PARTIAL')
+        self.assertEqual(self.task()['rounds'][0]['scores'],[60,100,70])
+        self.assertIsNone(self.task()['settlement'])
+    def test_partial_still_rejects_score_distance_over_ten(self):
+        self.submit(); runtime.scores=[[60,100,70],[60,100,59]]
+        self.nochange(lambda:self.c.evaluate_delivery('task'),'CONSENSUS_REJECTED')
+    def test_json_fences_do_not_change_integer_scores(self):
+        obj={'scores':[60,100,70],'rationale':'Only three of five replies are present.','contradictions':['Two replies are missing.']}
+        for text in [json.dumps(obj),'```json\n'+json.dumps(obj)+'\n```','```\n'+json.dumps(obj)+'\n```']:
+            self.assertEqual(contract.model_object(text),obj)
+        for text in ['```json\n{"scores":[60.0,100,70]}\n```','{"scores":[NaN,100,70]}','prefix {"scores":[60,100,70]}','```json\n{"scores":[60,100,70]}']:
+            with self.assertRaises(Exception):contract.model_object(text)
     def test_sha256_vectors_and_random_payloads(self):
         rng=random.Random(99)
         for b in [b'',b'abc',b'a'*55,b'a'*56,b'a'*64,b'a'*1000,'中文交付'.encode()] + [rng.randbytes(n) for n in [1,17,63,65,512,24000]]:
