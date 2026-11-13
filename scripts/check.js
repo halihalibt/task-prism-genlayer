@@ -12,11 +12,11 @@ if(fs.existsSync('evidence/deployment.json')){
  const currentHash=createHash('sha256').update(source).digest('hex');
  const {CONFIG}=await import('../config.js');
  const candidate=fs.existsSync('evidence/timing-candidate.json')?JSON.parse(fs.readFileSync('evidence/timing-candidate.json')):null;
- if(candidate?.status==='NOT_DEPLOYED'){
+ if(candidate&&['NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING'].includes(candidate.status)){
   assert.equal(currentHash,candidate.source_sha256,'candidate source bytes');
   assert.notEqual(currentHash,deployment.source_sha256,'old deployment is not timing evidence');
   assert.equal(CONFIG.deploymentPending,true,'pending source must disable UI writes');
-  assert.equal(CONFIG.contract,deployment.contract_address,'read-only previous deployment');
+  assert.equal(CONFIG.contract,candidate.contract_address||deployment.contract_address,'read-only version identified by candidate');
   assert.equal(createHash('sha256').update(fs.readFileSync(candidate.previous_source_snapshot)).digest('hex'),deployment.source_sha256);
  }else{assert.equal(currentHash,deployment.source_sha256,'deployed source bytes');assert(!CONFIG.deploymentPending);}
 }

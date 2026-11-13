@@ -13,7 +13,7 @@ if(schema?.error)throw Error(JSON.stringify(schema));
 console.log(JSON.stringify({mode:'dry-validate',chain:61999,source_sha256:createHash('sha256').update(code).digest('hex'),wrong_chain_rejected:wrongRejected,schema}));
 if(!process.argv.includes('--dry-validate')){
  const candidate=fs.existsSync('evidence/timing-candidate.json')?JSON.parse(fs.readFileSync('evidence/timing-candidate.json')):null;
- const evidenceDir=candidate?.status==='NOT_DEPLOYED'?'evidence/timing-deployment':'evidence';
+ const evidenceDir=candidate?'evidence/timing-deployment':'evidence';
  fs.mkdirSync(evidenceDir,{recursive:true});
  if(evidenceDir!=='evidence'&&fs.existsSync(`${evidenceDir}/deployment.json`))throw Error('TIMING_DEPLOYMENT_ALREADY_RECORDED: inspect the existing attempt before signing again.');
  const account=createAccount();

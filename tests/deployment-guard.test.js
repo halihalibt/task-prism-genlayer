@@ -24,3 +24,9 @@ test('deployment without explicit signing flag stops before network or signing',
   assert.match(result.stderr,/DEPLOY_SIGNATURE_CONFIRMATION_REQUIRED/);
   assert.equal(result.stdout,'');
 });
+
+test('live timing verification without confirmation stops before network or signing',()=>{
+  const result=spawnSync(process.execPath,['scripts/timing-live.js'],{encoding:'utf8',timeout:5000});
+  assert.equal(result.status,1);assert.match(result.stderr,/LIVE_SIGNATURE_CONFIRMATION_REQUIRED/);
+  assert.equal(result.stdout,'');
+});

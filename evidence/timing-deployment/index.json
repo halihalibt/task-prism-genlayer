@@ -1,0 +1,183 @@
+{
+  "scope": "Original LIVE receipts and state snapshots; gzip is lossless, not a replacement for verification.",
+  "archives": {
+    "deploy-receipt.json": {
+      "archive": "deploy-receipt.json.gz",
+      "sha256": "5ef1e6d09dd5706b57df89ae6e5e7c3ce133f93204e8e5727a69eca5cc748d10",
+      "original_bytes": 191110
+    },
+    "live-timing.json": {
+      "archive": "live-timing.json.gz",
+      "sha256": "29986c87d9c6202ca735458acdfccc04eb772f3387e78963a51f2018617b0887",
+      "original_bytes": 1449221
+    }
+  },
+  "contract": "0x60A05E9C82801E90837BD3688636bf213B80528f",
+  "source_sha256": "44222aed4823c3c4c2ae89bedbf9b0552b30b7f976cf8d9b094f73cc1a668bac",
+  "checks": {
+    "claimed_early_expiry_blocked": true,
+    "submitted_early_expiry_blocked": true,
+    "resubmission_keeps_review_deadline": true
+  },
+  "deadlines": null,
+  "completed": false,
+  "last_observed_at": null,
+  "transactions": [
+    {
+      "tag": "claimed-register",
+      "method": "register_agent",
+      "who": "claimed",
+      "hash": "0xe5a5af7bfa500a0599cba9500491afc4005d6436e684602402e7593a796d3f1a",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T08:58:39.974Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-post",
+      "method": "post_task",
+      "who": "poster",
+      "hash": "0x7460e50fdf39de33c9dd4ec90864b87e330db683301e2e558819d342d6eeb031",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T08:59:23.154Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-claim",
+      "method": "claim_task",
+      "who": "claimed",
+      "hash": "0xecd9ee4edc52e70a26e2b17c8503a034d4b926f810226e07da72e3932f3aaaff",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:00:17.790Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-early-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x6af9e8a988ec25b6266566709163b09abc6dda71f430687d9c9cbef5664ef287",
+      "execution": "ERROR",
+      "expected_error": "DELIVERY_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:01:05.332Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-register",
+      "method": "register_agent",
+      "who": "submitted",
+      "hash": "0x876d9a73bef6981ba414162a5707516ed11a87b038e3e3aad4c7dd877d80345e",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:01:48.688Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-post",
+      "method": "post_task",
+      "who": "poster",
+      "hash": "0xe8529ab0aec3feb38f766aa5b1eb321d49d9e8e088260ee38b6a0b71ac030cbf",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:02:50.402Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-claim",
+      "method": "claim_task",
+      "who": "submitted",
+      "hash": "0x0595fc104df7894ac96e008e6038645e5897a9129ce29e15e06f8b6e275173c9",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:03:40.587Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-submit",
+      "method": "submit_delivery",
+      "who": "submitted",
+      "hash": "0xdf08d7e0876ed823b5e62a7af56e3a9f65e4347451aaf103a1a94f9a15aaa071",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:04:33.658Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-early-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x3c77a5414469c320684c2527e4bea5abbd6095f909f59bf14cc778742a218923",
+      "execution": "ERROR",
+      "expected_error": "REVIEW_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:05:14.351Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-resubmit",
+      "method": "submit_delivery",
+      "who": "submitted",
+      "hash": "0x476daf656f317ecf0e08337eedf40a4e8f6fdd7066216686c76ad6f2de8d0264",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:06:07.287Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-register",
+      "method": "register_agent",
+      "who": "pending",
+      "hash": "0xe85877791a93a1284ebd0d57d00e8d986bf651a95f8c25d5c33e37bc62dea803",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:07:26.702Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-post",
+      "method": "post_task",
+      "who": "poster",
+      "hash": "0x559c821df4bead6ad73b8924566b4a429db0d23806def5c4bc5785a0ac192d51",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:08:19.129Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-claim",
+      "method": "claim_task",
+      "who": "pending",
+      "hash": null,
+      "execution": null,
+      "expected_error": null,
+      "verified": false,
+      "read_back_at": null,
+      "status": null,
+      "consensus": null
+    }
+  ]
+}

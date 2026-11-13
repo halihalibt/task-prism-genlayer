@@ -28,7 +28,7 @@ try{
     await page.locator('#read-status').filter({hasText:'Finalized state loaded'}).waitFor({timeout:10000}).catch(async()=>{
       await page.waitForFunction(()=>document.querySelectorAll('.roster-row').length>0);
     });
-    assert.match(await page.locator('main > .ledger-notice').innerText(),/previous contract/);
+    assert.match(await page.locator('main > .ledger-notice').innerText(),/elapsed-time verification/);
     await page.locator('#connect').click();
     await page.locator('#temporary').click();
     await page.waitForFunction(()=>document.querySelector('#connect').textContent.includes('TEST'));
@@ -36,7 +36,7 @@ try{
       assert(await page.locator(selector).isDisabled(),selector+' must be disabled for the old contract');
     }
     await page.locator('#language').click();
-    assert.match(await page.locator('main > .ledger-notice').innerText(),/尚未部署/);
+    assert.match(await page.locator('main > .ledger-notice').innerText(),/尚未完成/);
     assert.match(await page.locator('[data-t=challengeNote]').innerText(),/1 小时/);
     const overflow=await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth);
     assert.equal(overflow,false,'no horizontal page overflow');

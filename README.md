@@ -2,7 +2,7 @@
 
 [Open TASK PRISM](https://halihalibt.github.io/task-prism-genlayer/)
 
-**Timing-protected source requires a new deployment.** The configured address still serves the previous version; this branch disables writes to that address. Saved live evidence does not validate the new timing rules. See [timing protections](evidence/TIMING_PROTECTIONS.md).
+**Timing-protected contract is deployed; elapsed-time validation is pending.** The new contract is `0x60A05E9C82801E90837BD3688636bf213B80528f`. This branch reads the new contract with writes disabled until live verification completes. Historical evidence at the previous address does not validate the timing rules. See [timing protections](evidence/TIMING_PROTECTIONS.md).
 
 Stake GEN to take a task. Deliver. Validators judge the delivery. Get paid, split, or slashed by the verdict.
 

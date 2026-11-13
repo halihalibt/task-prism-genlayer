@@ -1,6 +1,6 @@
 # Task deadline and challenge protections
 
-The timing-protected source is **not deployed**. `timing-candidate.json` identifies its source hash with null contract and transaction fields. The configured address `0x0BC304C168D14B8f4928f622e971B532D30d7268` is the previous, untimed deployment. Its original receipts, failed attempts, probe records and final states are retained. They are not evidence for the new rules.
+The timing-protected source is deployed at `0x60A05E9C82801E90837BD3688636bf213B80528f`. [Deployment transaction](https://explorer-studio.genlayer.com/tx/0x8b56d9fe5e2263c475996e541ea1f5e9f60c4115b843261c397a91059a77cfe7) is FINALIZED / MAJORITY_AGREE / SUCCESS, with latest-final read-back and exact deployed source-byte verification. Real elapsed-time validation is still pending; see [live timing evidence](timing-deployment/). The previous address `0x0BC304C168D14B8f4928f622e971B532D30d7268` and its receipts remain historical evidence only.
 
 ## Rules and regression coverage
 
@@ -19,7 +19,7 @@ The periods are fixed constants, not poster settings. OPEN cancellation remains 
 
 The browser displays UTC deadlines and uses `taskActions` to disable actions outside their intervals. These controls use the browser clock as guidance only; the contract remains authoritative. Missing deadlines fail closed for claimed, submitted and evaluating tasks. Contract authorization checks remain unchanged.
 
-`config.js` keeps the previous address for read-only inspection and sets `deploymentPending: true`. All writes are disabled on this branch; a visible English/Chinese notice explains that the timing version is not deployed. This branch has not been published to Pages. Existing Pages behavior is unaffected by a branch push.
+`config.js` reads the new address and keeps `deploymentPending: true` until elapsed-time checks finish. All writes are disabled on this branch; a visible English/Chinese notice explains that live elapsed-time verification is pending. This branch has not been published to Pages. Existing Pages behavior is unaffected by a branch push.
 
 `history/real-gen-untimed/task_prism.py` preserves the exact old deployed bytes. `check-evidence.py` validates the old receipt against that snapshot and the candidate hash separately, rather than treating a new local source as deployed. Historical signed workflows refuse to run against a different source hash. Deployment without an explicit `--confirm-deploy` signing flag exits before network activity or account creation.
 
@@ -62,11 +62,13 @@ The browser attempt is not reported as a pass. Local Python and JavaScript cases
 
 ## Deployment and live validation
 
-This version changes the contract and requires a new deployment. The previous address cannot be used as new-version evidence. No wallet was asked to sign, no deployment was sent, and no new transaction was broadcast for this change.
+This version changes the contract and has now been deployed after signing confirmation. It uses the existing generated test-account signing method. The previous address cannot be used as new-version evidence. New deployment and validation transaction receipts are recorded separately; the user-wallet path is not implied.
 
-The existing deploy wrapper and genlayer-js 1.1.8 encoding remain in use. A future explicitly confirmed `python3 deploy.py --confirm-deploy` creates an in-memory signing account and records its new attempt in `evidence/timing-deployment/`, without overwriting old evidence. If that directory already contains a deployment attempt, the script stops before another signature so the existing attempt can be inspected. A signed deployment must reach transaction FINALIZED, consensus agreement and successful execution, followed by a `latest-final` read-back. Verify deployed bytes and hash against `timing-candidate.json`.
+The existing deploy wrapper and genlayer-js 1.1.8 encoding remain in use. The explicitly confirmed `python3 deploy.py --confirm-deploy` invocation creates an in-memory signing account and records its new attempt in `evidence/timing-deployment/`, without overwriting old evidence. If that directory already contains a deployment attempt, the script stops before another signature so the existing attempt can be inspected. A signed deployment must reach transaction FINALIZED, consensus agreement and successful execution, followed by a `latest-final` read-back. Verify deployed bytes and hash against `timing-candidate.json`.
 
-The new deployment still needs live checks with distinct poster and agent addresses:
+The resumable `node scripts/timing-live.js --confirm-live` suite creates distinct test accounts, retains signing keys only in ignored `.local/`, and records real receipts and state snapshots. It performs the following live checks with production time periods unchanged. `--due` only runs eligible elapsed-time actions; it never changes a timestamp. Do not start a second runner while another is active. Completed operations are skipped; an uncertain broadcast stops for inspection rather than automatically submitting again.
+
+Full elapsed-time checks:
 
 1. Claim: an immediate poster expiry must fail with `DELIVERY_PERIOD_ACTIVE`; funds and the agent lock must remain unchanged. At `delivery_deadline`, expiry must refund once and unlock the agent.
 2. Submit on a separate task before its delivery deadline: immediate poster expiry must fail with `REVIEW_PERIOD_ACTIVE`. Resubmission must preserve the original review deadline. On an unevaluated task at that deadline, expiry must refund once and unlock the agent. Early attempts and later success must retain receipts and state read-backs.
@@ -113,3 +115,7 @@ Until these new-version live checks exist, this source does not establish deploy
 - `tests/test_task_prism.py`
 
 The captured command output is retained in [timing-local-validation.txt](timing-local-validation.txt). No original JSON receipt or compressed evidence archive was modified.
+
+## Additional local validation
+
+The new live-runner confirmation guard passes before network/signing (Node suite: 13 passing). Initial receipt checking exposed a local checker assumption that GEN balances were decimal; RPC returned a `0x` quantity. The checker now explicitly parses hexadecimal and decimal balances, and the rerun passes. This was a checker failure, not a failed contract execution; original receipts are unchanged.
