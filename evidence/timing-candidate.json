@@ -1,0 +1,17 @@
+{
+  "status": "NOT_DEPLOYED",
+  "network": "Stable Studionet",
+  "chain_id": 61999,
+  "rpc": "https://studio.genlayer.com/api",
+  "source_path": "contracts/task_prism.py",
+  "source_sha256": "44222aed4823c3c4c2ae89bedbf9b0552b30b7f976cf8d9b094f73cc1a668bac",
+  "contract_address": null,
+  "deploy_tx": null,
+  "previous_contract": "0x0BC304C168D14B8f4928f622e971B532D30d7268",
+  "previous_source_sha256": "c76ce31efe3a6d285cee8148ab7fc380dfeb18895990404d230eca2be99d0ab8",
+  "previous_source_snapshot": "evidence/history/real-gen-untimed/task_prism.py",
+  "challenge_period_seconds": 3600,
+  "claim_period_seconds": 86400,
+  "review_period_seconds": 86400,
+  "live_timing_verified": false
+}

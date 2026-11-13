@@ -1,3 +1,5 @@
+import {requireDeployedSource} from './deployment-source.js';
+requireDeployedSource();
 // Adversarial probes A-D + bad-delivery cases (scripts/probes.mjs).
 //
 // Purpose: attack the semantic gate of the deployed contract on-chain.

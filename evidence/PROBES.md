@@ -1,5 +1,7 @@
 # Adversarial probes A–D and bad-delivery cases
 
+> Version scope: the recorded live results below belong to the previous, untimed contract. They do not validate the timing-protected source. See [TIMING_PROTECTIONS.md](TIMING_PROTECTIONS.md).
+
 Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chain ID 61999. Real testnet GEN (1 GEN = 10^18 wei); no simulated ledger. Completed 2026-11-09T21:17:14Z. Full log with receipts and read-backs: [probes.json](probes.json) (60 transactions). Runner: `scripts/probes.mjs`.
 
 ## Purpose

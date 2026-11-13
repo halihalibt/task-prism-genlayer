@@ -1,0 +1,214 @@
+{
+  "mode": "dry-validate",
+  "chain": 61999,
+  "source_sha256": "44222aed4823c3c4c2ae89bedbf9b0552b30b7f976cf8d9b094f73cc1a668bac",
+  "wrong_chain_rejected": true,
+  "schema": {
+    "ctor": {
+      "params": [],
+      "kwparams": {}
+    },
+    "methods": {
+      "challenge_delivery": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ],
+          [
+            "reason",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "claim_task": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ],
+          [
+            "agent_id",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "evaluate_delivery": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "expire_task": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "finalize_delivery": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "get_account": {
+        "params": [
+          [
+            "address",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": true,
+        "ret": "string"
+      },
+      "get_contract_balance": {
+        "params": [],
+        "kwparams": {},
+        "readonly": true,
+        "ret": "string"
+      },
+      "get_state": {
+        "params": [],
+        "kwparams": {},
+        "readonly": true,
+        "ret": "string"
+      },
+      "get_task": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": true,
+        "ret": "string"
+      },
+      "post_task": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ],
+          [
+            "title",
+            "string"
+          ],
+          [
+            "bounty",
+            "int"
+          ],
+          [
+            "requirements_hash",
+            "string"
+          ],
+          [
+            "deliverable_spec",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": true
+      },
+      "register_agent": {
+        "params": [
+          [
+            "agent_id",
+            "string"
+          ],
+          [
+            "stake_amount",
+            "int"
+          ],
+          [
+            "skill_tags",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": true
+      },
+      "submit_delivery": {
+        "params": [
+          [
+            "task_id",
+            "string"
+          ],
+          [
+            "delivery_url",
+            "string"
+          ],
+          [
+            "delivery_hash",
+            "string"
+          ],
+          [
+            "summary",
+            "string"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      },
+      "top_up_stake": {
+        "params": [
+          [
+            "agent_id",
+            "string"
+          ],
+          [
+            "amount",
+            "int"
+          ]
+        ],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": true
+      },
+      "withdraw": {
+        "params": [],
+        "kwparams": {},
+        "readonly": false,
+        "ret": "any",
+        "payable": false
+      }
+    }
+  },
+  "scope": "READ-ONLY RPC chain and source-schema checks; no signature, deployment or transaction",
+  "recorded_at": "2026-11-13T08:47:38.959722+00:00",
+  "runtime_timing_verified": false
+}

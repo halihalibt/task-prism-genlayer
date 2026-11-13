@@ -1,5 +1,7 @@
 # Live contract verification
 
+> Version scope: the recorded live results below belong to the previous, untimed contract. They do not validate the timing-protected source. See [TIMING_PROTECTIONS.md](TIMING_PROTECTIONS.md).
+
 Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chain ID 61999.
 
 25 signed transactions have FINALIZED receipts and latest-final read-backs. These include 24 consensus-accepted successful executions, 1 intentional stake-threshold rejection and 0 consensus-rejected evaluation attempts with unchanged state. Amounts are real testnet GEN in wei (1 GEN = 10^18 wei); settlements are withdrawable balances pulled by the parties with `withdraw`. No simulated ledger is used.

@@ -13,7 +13,23 @@ leaders=r['consensus_data']['leader_receipt']
 leader=next(x for x in leaders if x['mode']=='leader') if isinstance(leaders,list) else leaders
 assert leader['execution_result']=='SUCCESS'
 code=base64.b64decode(r['data']['contract_code'])
-assert code==(root/'contracts/task_prism.py').read_bytes()
+candidate_path=root/'evidence/timing-candidate.json'
+current=(root/'contracts/task_prism.py').read_bytes()
+if candidate_path.exists():
+ candidate=json.loads(candidate_path.read_text())
+ if candidate['status']=='NOT_DEPLOYED':
+  assert candidate['contract_address'] is None and candidate['deploy_tx'] is None
+  assert candidate['live_timing_verified'] is False
+  assert hashlib.sha256(current).hexdigest()==candidate['source_sha256']
+  assert candidate['previous_contract']==d['contract_address']
+  assert candidate['previous_source_sha256']==d['source_sha256']
+  assert code==(root/candidate['previous_source_snapshot']).read_bytes()
+  assert hashlib.sha256(current).hexdigest()!=d['source_sha256']
+  print('Timing source is NOT_DEPLOYED. Saved live receipts validate only the previous source snapshot.')
+ else:
+  assert code==current
+else:
+ assert code==current
 assert hashlib.sha256(code).hexdigest()==d['source_sha256']
 assert d['contract_address']==r['to_address']
 print('Saved deployment receipt, successful execution, contract address and source bytes match.')

@@ -1,0 +1,111 @@
+LOCAL AND OFFLINE VALIDATION — 2026-11-13
+No signed transactions; no new deployment.
+
+COMMAND: npm test
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> task-prism-genlayer@1.0.0 test
+> python3 -m unittest discover -s tests -v
+
+test_accept_full_settlement_and_withdraw (test_task_prism.LocalMockTests.test_accept_full_settlement_and_withdraw) ... ok
+test_challenge_at_or_after_deadline_cannot_race_finalization (test_task_prism.LocalMockTests.test_challenge_at_or_after_deadline_cannot_race_finalization) ... ok
+test_challenge_binding_and_unreachable_no_partial_write (test_task_prism.LocalMockTests.test_challenge_binding_and_unreachable_no_partial_write) ... ok
+test_challenge_last_second_survives_early_finalize_attempt (test_task_prism.LocalMockTests.test_challenge_last_second_survives_early_finalize_attempt) ... ok
+test_claim_has_full_delivery_period_and_no_early_poster_refund (test_task_prism.LocalMockTests.test_claim_has_full_delivery_period_and_no_early_poster_refund) ... ok
+test_claim_owner_binding (test_task_prism.LocalMockTests.test_claim_owner_binding) ... ok
+test_duplicate_task (test_task_prism.LocalMockTests.test_duplicate_task) ... ok
+test_evaluated_task_cannot_be_expired_even_after_all_deadlines (test_task_prism.LocalMockTests.test_evaluated_task_cannot_be_expired_even_after_all_deadlines) ... ok
+test_event_timestamps_record_transaction_time (test_task_prism.LocalMockTests.test_event_timestamps_record_transaction_time) ... ok
+test_expire_after_evaluation_forbidden (test_task_prism.LocalMockTests.test_expire_after_evaluation_forbidden) ... ok
+test_expire_claimed_unlocks_agent (test_task_prism.LocalMockTests.test_expire_claimed_unlocks_agent) ... ok
+test_expire_open_refunds_once (test_task_prism.LocalMockTests.test_expire_open_refunds_once) ... ok
+test_expire_submitted_without_rounds_refunds (test_task_prism.LocalMockTests.test_expire_submitted_without_rounds_refunds) ... ok
+test_failed_agent_challenge_combines_penalty (test_task_prism.LocalMockTests.test_failed_agent_challenge_combines_penalty) ... ok
+test_failed_challenge_poster_reputation_and_two_rounds (test_task_prism.LocalMockTests.test_failed_challenge_poster_reputation_and_two_rounds) ... ok
+test_failed_challenge_preserves_original_window_for_retry (test_task_prism.LocalMockTests.test_failed_challenge_preserves_original_window_for_retry) ... ok
+test_failed_consensus_does_not_create_or_extend_any_deadline (test_task_prism.LocalMockTests.test_failed_consensus_does_not_create_or_extend_any_deadline) ... ok
+test_finalized_immutable (test_task_prism.LocalMockTests.test_finalized_immutable) ... ok
+test_first_round_pending_without_settlement (test_task_prism.LocalMockTests.test_first_round_pending_without_settlement) ... ok
+test_first_verdict_blocks_all_early_finalizers (test_task_prism.LocalMockTests.test_first_verdict_blocks_all_early_finalizers) ... ok
+test_hash_mismatch_is_pending_reject (test_task_prism.LocalMockTests.test_hash_mismatch_is_pending_reject) ... ok
+test_json_fences_do_not_change_integer_scores (test_task_prism.LocalMockTests.test_json_fences_do_not_change_integer_scores) ... ok
+test_last_second_delivery_starts_independent_full_review_period (test_task_prism.LocalMockTests.test_last_second_delivery_starts_independent_full_review_period) ... ok
+test_late_delivery_rejected_before_fetch_and_no_deadline_reset (test_task_prism.LocalMockTests.test_late_delivery_rejected_before_fetch_and_no_deadline_reset) ... ok
+test_late_evaluation_cannot_remove_poster_expiry_right (test_task_prism.LocalMockTests.test_late_evaluation_cannot_remove_poster_expiry_right) ... ok
+test_no_third_round_or_double_finalize (test_task_prism.LocalMockTests.test_no_third_round_or_double_finalize) ... ok
+test_nonposter_cannot_expire_before_or_after_deadlines (test_task_prism.LocalMockTests.test_nonposter_cannot_expire_before_or_after_deadlines) ... ok
+test_one_open_claim_and_locked_stake (test_task_prism.LocalMockTests.test_one_open_claim_and_locked_stake) ... ok
+test_partial_exact_split (test_task_prism.LocalMockTests.test_partial_exact_split) ... ok
+test_partial_same_verdict_can_cross_a_nondecisive_dimension_boundary (test_task_prism.LocalMockTests.test_partial_same_verdict_can_cross_a_nondecisive_dimension_boundary) ... ok
+test_partial_still_rejects_score_distance_over_ten (test_task_prism.LocalMockTests.test_partial_still_rejects_score_distance_over_ten) ... ok
+test_positive_even_bounty_and_noninteger_rejection (test_task_prism.LocalMockTests.test_positive_even_bounty_and_noninteger_rejection) ... ok
+test_post_escrow (test_task_prism.LocalMockTests.test_post_escrow) ... ok
+test_registration_locks_stake_and_reputation (test_task_prism.LocalMockTests.test_registration_locks_stake_and_reputation) ... ok
+test_reject_refund_slash_reputation (test_task_prism.LocalMockTests.test_reject_refund_slash_reputation) ... ok
+test_requirements_hash_mismatch (test_task_prism.LocalMockTests.test_requirements_hash_mismatch) ... ok
+test_resubmission_cannot_grief_poster_by_extending_review (test_task_prism.LocalMockTests.test_resubmission_cannot_grief_poster_by_extending_review) ... ok
+test_resubmit_after_evaluation_forbidden (test_task_prism.LocalMockTests.test_resubmit_after_evaluation_forbidden) ... ok
+test_resubmit_before_evaluation_replaces_delivery (test_task_prism.LocalMockTests.test_resubmit_before_evaluation_replaces_delivery) ... ok
+test_sdk_response_uses_status_field_and_rejects_http_errors (test_task_prism.LocalMockTests.test_sdk_response_uses_status_field_and_rejects_http_errors) ... ok
+test_seed_fixtures_are_not_consensus_evidence (test_task_prism.LocalMockTests.test_seed_fixtures_are_not_consensus_evidence) ... ok
+test_sha256_vectors_and_random_payloads (test_task_prism.LocalMockTests.test_sha256_vectors_and_random_payloads) ... ok
+test_submit_owner_binding (test_task_prism.LocalMockTests.test_submit_owner_binding) ... ok
+test_submit_validates_delivery_before_write (test_task_prism.LocalMockTests.test_submit_validates_delivery_before_write) ... ok
+test_submitted_expiry_protects_review_and_refunds_once_at_deadline (test_task_prism.LocalMockTests.test_submitted_expiry_protects_review_and_refunds_once_at_deadline) ... ok
+test_successful_challenge_no_penalty (test_task_prism.LocalMockTests.test_successful_challenge_no_penalty) ... ok
+test_threshold_boundaries (test_task_prism.LocalMockTests.test_threshold_boundaries) ... ok
+test_top_up_after_slash_enables_next_claim (test_task_prism.LocalMockTests.test_top_up_after_slash_enables_next_claim) ... ok
+test_transaction_time_uses_context_and_integer_utc_seconds (test_task_prism.LocalMockTests.test_transaction_time_uses_context_and_integer_utc_seconds) ... ok
+test_unreachable_before_write_retryable (test_task_prism.LocalMockTests.test_unreachable_before_write_retryable) ... ok
+test_validator_refetch_and_hash_disagreement (test_task_prism.LocalMockTests.test_validator_refetch_and_hash_disagreement) ... ok
+test_validator_rejects_forged_verdict (test_task_prism.LocalMockTests.test_validator_rejects_forged_verdict) ... ok
+test_validator_score_tolerance_and_threshold_gate (test_task_prism.LocalMockTests.test_validator_score_tolerance_and_threshold_gate) ... ok
+test_value_must_equal_stake_and_bounty (test_task_prism.LocalMockTests.test_value_must_equal_stake_and_bounty) ... ok
+
+----------------------------------------------------------------------
+Ran 54 tests in 0.209s
+
+OK
+
+COMMAND: node --test tests/*.test.js
+✔ pending source cannot be used by historical signed verification flows (5.1417ms)
+✔ deployment without explicit signing flag stops before network or signing (374.072658ms)
+✔ transient read failures retry; uncertain writes never resubmit (7.329241ms)
+✔ both real rejected evaluations fail, including the successful leader execution (1.047427ms)
+✔ accepted consensus requires successful execution (0.188467ms)
+✔ accepted successful receipt needs read-back before confirmation (0.125767ms)
+✔ missing or non-finalized receipt cannot keep cached confirmation (0.12289ms)
+✔ missing consensus result or leader fails closed (0.334705ms)
+✔ first verdict challenge and finalize have disjoint boundary permissions (1.152134ms)
+✔ claimed and submitted work cannot expire early; late submissions are disabled (0.307412ms)
+✔ legacy missing deadlines, finalized tasks and seed fixtures fail closed (0.340085ms)
+✔ second round and an already challenged verdict cannot be challenged again (0.175393ms)
+ℹ tests 12
+ℹ suites 0
+ℹ pass 12
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 559.042938
+
+COMMAND: npm run check
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> task-prism-genlayer@1.0.0 check
+> node scripts/check.js
+
+i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.
+
+COMMAND: python3 scripts/check-evidence.py
+Timing source is NOT_DEPLOYED. Saved live receipts validate only the previous source snapshot.
+Saved deployment receipt, successful execution, contract address and source bytes match.
+Saved verified core transactions: 25
+
+COMMAND: npm run build
+npm warn Unknown env config "http-proxy". This will stop working in the next major version of npm.
+
+> task-prism-genlayer@1.0.0 build
+> node scripts/build.js
+
+Built static Pages assets with content-hashed cache paths.

@@ -1,6 +1,7 @@
 # { "Depends": "py-genlayer:1jb45aa8ynh2a9c9xn3b7qqh8sm5q93hwfp7jqmwsfhh8jpz09h6" }
 from genlayer import *
 import json
+from datetime import datetime, timezone
 
 # SHA-256 implemented with Python integers, bytes, and bitwise operations only.
 K = (0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2)
@@ -12,6 +13,17 @@ WEI_PER_GEN = 10 ** 18
 MIN_STAKE_WEI = 10 ** 18
 SLASH_WEI = 10 ** 17
 MAX_AMOUNT_WEI = 10 ** 21
+
+CHALLENGE_PERIOD_SECONDS = 3600
+CLAIM_PERIOD_SECONDS = 86400
+REVIEW_PERIOD_SECONDS = 86400
+
+def transaction_time() -> int:
+    # GenVM supplies this timestamp; no caller-supplied time or host clock.
+    dt = datetime.fromisoformat(gl.message_raw['datetime'].replace('Z', '+00:00'))
+    need(dt.tzinfo is not None, 'TRANSACTION_TIME_REQUIRES_TIMEZONE')
+    delta = dt - datetime(1970, 1, 1, tzinfo=timezone.utc)
+    return delta.days * 86400 + delta.seconds
 
 def rr(x: int, n: int) -> int:
     return ((x >> n) | (x << (32 - n))) & 0xffffffff
@@ -111,7 +123,7 @@ class TaskPrism(gl.Contract):
 
     def _event(self, s: dict, task: dict, name: str):
         s['sequence'] += 1
-        task['events'].append({'sequence':s['sequence'],'event':name,'actor':self._sender()})
+        task['events'].append({'sequence':s['sequence'],'event':name,'actor':self._sender(),'timestamp':transaction_time()})
 
     def _task(self, s: dict, task_id: str) -> dict:
         need(task_id in s['tasks'], 'TASK_NOT_FOUND')
@@ -195,6 +207,7 @@ class TaskPrism(gl.Contract):
         need(task_id not in s['tasks'], 'TASK_ALREADY_EXISTS')
         self._participant(s,owner)
         t = {'task_id':task_id,'title':title,'bounty':bounty,'poster':owner,'requirements_hash':requirements_hash,'deliverable_spec':deliverable_spec,'status':'OPEN','agent_id':'','delivery':None,'rounds':[],'pending_verdict':None,'final_verdict':None,'challenger':'','challenge_reason':'','settlement':None,'origin':'user','events':[]}
+        t.update({'claimed_at':None,'delivery_deadline':None,'submitted_at':None,'review_deadline':None,'evaluated_at':None,'challenge_deadline':None})
         self._event(s,t,'POSTED')
         s['tasks'][task_id] = t
         self._save(s)
@@ -208,6 +221,8 @@ class TaskPrism(gl.Contract):
         need(not a['open_claim'], 'AGENT_HAS_OPEN_CLAIM')
         need(t['poster']!=a['owner'], 'SELF_CLAIM_FORBIDDEN')
         a['open_claim'], t['agent_id'], t['status'] = task_id, agent_id, 'CLAIMED'
+        t['claimed_at'] = transaction_time()
+        t['delivery_deadline'] = t['claimed_at'] + CLAIM_PERIOD_SECONDS
         self._event(s,t,'CLAIMED')
         self._save(s)
 
@@ -222,8 +237,14 @@ class TaskPrism(gl.Contract):
         need(t['status'] in ('CLAIMED','SUBMITTED'), 'TASK_NOT_CLAIMABLE_FOR_DELIVERY')
         need(not t['rounds'], 'EVALUATION_ALREADY_STARTED')
         self._agent(s,t['agent_id'])
+        now = transaction_time()
+        deadline = t['delivery_deadline'] if t['status']=='CLAIMED' else t['review_deadline']
+        need(now < deadline, 'DELIVERY_DEADLINE_PASSED')
         self._validate_delivery(delivery_url,delivery_hash)
         resubmitted = t['status']=='SUBMITTED'
+        if not resubmitted:
+            t['submitted_at'] = now
+            t['review_deadline'] = now + REVIEW_PERIOD_SECONDS
         t['delivery'] = {'url':delivery_url,'sha256':delivery_hash,'summary':summary}
         t['status'] = 'SUBMITTED'
         self._event(s,t,'DELIVERY_RESUBMITTED' if resubmitted else 'SUBMITTED')
@@ -277,10 +298,13 @@ class TaskPrism(gl.Contract):
         s = self._load()
         t = self._task(s,task_id)
         need(t['status']=='SUBMITTED', 'TASK_NOT_SUBMITTED')
+        need(transaction_time() < t['review_deadline'], 'REVIEW_DEADLINE_PASSED')
         result = self._evaluate(t,'')  # No storage changes before fetch and consensus succeed.
         result['round'] = 1
         t['rounds'].append(result)
         t['pending_verdict'], t['status'] = result['verdict'], 'EVALUATING'
+        t['evaluated_at'] = transaction_time()
+        t['challenge_deadline'] = t['evaluated_at'] + CHALLENGE_PERIOD_SECONDS
         self._event(s,t,'PENDING_VERDICT')
         self._save(s)
 
@@ -310,6 +334,7 @@ class TaskPrism(gl.Contract):
         s = self._load()
         t = self._task(s,task_id)
         need(t['status']=='EVALUATING', 'TASK_NOT_EVALUATING')
+        need(transaction_time() >= t['challenge_deadline'], 'CHALLENGE_PERIOD_ACTIVE')
         self._settle(s,t,t['pending_verdict'])
         self._save(s)
 
@@ -320,6 +345,7 @@ class TaskPrism(gl.Contract):
         t = self._task(s,task_id)
         need(t['status']=='EVALUATING' and len(t['rounds'])==1 and not t['challenger'], 'CHALLENGE_NOT_AVAILABLE')
         need(owner==t['poster'] or owner==s['agents'][t['agent_id']]['owner'], 'CALLER_ADDRESS_MISMATCH')
+        need(transaction_time() < t['challenge_deadline'], 'CHALLENGE_DEADLINE_PASSED')
         result = self._evaluate(t,reason)
         result['round'] = 2
         t['status'] = 'DISPUTED'  # Atomic transition, witnessed in events, never a waiting state.
@@ -351,11 +377,13 @@ class TaskPrism(gl.Contract):
         s = self._load()
         t = self._task(s,task_id)
         need(t['poster']==self._sender(), 'CALLER_ADDRESS_MISMATCH')
-        # OPEN / CLAIMED with no delivery, or SUBMITTED but never
-        # successfully evaluated (no rounds): the bounty is refundable and
-        # the agent claim is released. A task with a recorded round has a
-        # pending verdict and must go through finalize / challenge instead.
+        # An unclaimed OPEN task can be cancelled. Active work receives a
+        # fixed delivery or review interval; no poster-controlled early exit.
         need(t['status'] in ['OPEN','CLAIMED'] or (t['status']=='SUBMITTED' and not t['rounds']), 'TASK_NOT_EXPIRABLE')
+        if t['status']=='CLAIMED':
+            need(transaction_time() >= t['delivery_deadline'], 'DELIVERY_PERIOD_ACTIVE')
+        elif t['status']=='SUBMITTED':
+            need(transaction_time() >= t['review_deadline'], 'REVIEW_PERIOD_ACTIVE')
         s['withdrawable'][t['poster']] = s['withdrawable'].get(t['poster'],0)+t['bounty']
         if t['agent_id']:
             s['agents'][t['agent_id']]['open_claim'] = ''

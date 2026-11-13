@@ -1,10 +1,10 @@
 # Stable Studionet evidence
 
-This directory records actual signed transactions submitted to Stable Studionet, Chain ID 61999, and reads from `latest-final` state. Test-only fixtures and LOCAL MOCK results are not deployment evidence.
+The timing-protected source is **NOT_DEPLOYED**. [Timing protections](TIMING_PROTECTIONS.md) and [candidate manifest](timing-candidate.json) describe local tests and remaining live checks. This directory records actual signed transactions submitted to Stable Studionet, Chain ID 61999, and reads from `latest-final` state. Test-only fixtures and LOCAL MOCK results are not deployment evidence.
 
 See the [deployment list](DEPLOYMENTS.md) for addresses, transactions and source identities across versions.
 
-## Deployment
+## Previous deployment
 
 Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268`
 
@@ -14,7 +14,7 @@ Canonical deployed source commit: `f85542e325da306a5bea89b3c976843090372a79`
 
 Source SHA-256: `c76ce31efe3a6d285cee8148ab7fc380dfeb18895990404d230eca2be99d0ab8`
 
-The raw receipt reports FINALIZED, MAJORITY_AGREE and SUCCESS execution. `deploy-read-back.json` contains the initial state read from the contract. The deployed source is byte-identical to `contracts/task_prism.py` at that commit (verified by `python3 scripts/check-evidence.py`).
+The raw receipt reports FINALIZED, MAJORITY_AGREE and SUCCESS execution. `deploy-read-back.json` contains the initial state read from the contract. The deployed source is byte-identical to `history/real-gen-untimed/task_prism.py` and `contracts/task_prism.py` at that commit (verified by `python3 scripts/check-evidence.py`).
 
 **Real testnet GEN.** Bounties and stakes move as real testnet GEN (wei): `post_task`, `register_agent` and `top_up_stake` are payable and must send exactly the declared amount; settlements are withdrawable balances pulled with `withdraw`. Faucet GEN is free for testing; no simulated ledger is used. The previous contract (`0x2D5d39cE2414F154D0D2cd574079167B26deA68c`) used a simulated mGEN ledger and is superseded; its evidence is archived under [history/consensus-compatible-contract/](history/consensus-compatible-contract/).
 
