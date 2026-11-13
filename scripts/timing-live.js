@@ -125,8 +125,9 @@ async function withdraw(tag,who){
  const s=await read(),amount=BigInt(s.withdrawable[actors[who].address.toLowerCase()]||0);
  if(!amount)return;
  const before=BigInt(await rpc('eth_getBalance',[actors[who].address,'latest']));
- await run(tag,who,'withdraw',[],0n,null,state=>assert.equal(BigInt(state.withdrawable[actors[who].address.toLowerCase()]||0),0n));
+ const item=await run(tag,who,'withdraw',[],0n,null,state=>assert.equal(BigInt(state.withdrawable[actors[who].address.toLowerCase()]||0),0n));
  const after=BigInt(await rpc('eth_getBalance',[actors[who].address,'latest']));assert.equal(after-before,amount);
+ item.eoa_balance_before_wei=before.toString();item.eoa_balance_after_wei=after.toString();item.withdrawal_delta_wei=(after-before).toString();save();
 }
 async function due(){
  let s=await read();

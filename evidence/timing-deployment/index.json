@@ -8,8 +8,8 @@
     },
     "live-timing.json": {
       "archive": "live-timing.json.gz",
-      "sha256": "29986c87d9c6202ca735458acdfccc04eb772f3387e78963a51f2018617b0887",
-      "original_bytes": 1449221
+      "sha256": "7f2994dbd9101805cda9fa8d6bbc2d2dbfb3d3d327590d3687eb960ec9d82c60",
+      "original_bytes": 3450549
     }
   },
   "contract": "0x60A05E9C82801E90837BD3688636bf213B80528f",
@@ -17,11 +17,42 @@
   "checks": {
     "claimed_early_expiry_blocked": true,
     "submitted_early_expiry_blocked": true,
-    "resubmission_keeps_review_deadline": true
+    "resubmission_keeps_review_deadline": true,
+    "early_finalize_blocked": true,
+    "challenge_during_window_settled": true
   },
-  "deadlines": null,
+  "deadlines": {
+    "claimed": {
+      "task_id": "timing-claimed-20261113085754",
+      "status": "CLAIMED",
+      "delivery_deadline": 1794646774,
+      "review_deadline": null,
+      "challenge_deadline": null
+    },
+    "submitted": {
+      "task_id": "timing-submitted-20261113085754",
+      "status": "SUBMITTED",
+      "delivery_deadline": 1794646975,
+      "review_deadline": 1794647032,
+      "challenge_deadline": null
+    },
+    "pending": {
+      "task_id": "timing-pending-20261113085754",
+      "status": "EVALUATING",
+      "delivery_deadline": 1794647309,
+      "review_deadline": 1794647363,
+      "challenge_deadline": 1794564662
+    },
+    "challenged": {
+      "task_id": "timing-challenged-20261113085754",
+      "status": "FINALIZED",
+      "delivery_deadline": 1794647652,
+      "review_deadline": 1794647703,
+      "challenge_deadline": 1794565025
+    }
+  },
   "completed": false,
-  "last_observed_at": null,
+  "last_observed_at": "2026-11-13T09:20:59.437Z",
   "transactions": [
     {
       "tag": "claimed-register",
@@ -171,13 +202,169 @@
       "tag": "pending-claim",
       "method": "claim_task",
       "who": "pending",
-      "hash": null,
-      "execution": null,
+      "hash": "0x20ac2619a6aace6f9d671a02e404cf679789d2172c9cff668178f6b2832905ba",
+      "execution": "SUCCESS",
       "expected_error": null,
-      "verified": false,
-      "read_back_at": null,
-      "status": null,
-      "consensus": null
+      "verified": true,
+      "read_back_at": "2026-11-13T09:09:11.908Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-submit",
+      "method": "submit_delivery",
+      "who": "pending",
+      "hash": "0x0fb2512202472d4c36aae5fb327ffd2e24da6ef61cbe8ca3ac6ecd19eb36ce86",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:10:03.917Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-early-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x4aaf0bae2bff3cdf5b3c26f7436316c3f8ee78fff8eba91f9ac3e30705a33d64",
+      "execution": "ERROR",
+      "expected_error": "REVIEW_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:10:53.383Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-evaluate",
+      "method": "evaluate_delivery",
+      "who": "observer",
+      "hash": "0xe426a29971cec8631bedf8f69446c572ec8653506ab33ec848490e4c181fa48f",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:11:48.901Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-early-finalize",
+      "method": "finalize_delivery",
+      "who": "observer",
+      "hash": "0x40c26a5d1980f92fb8f7b1c55240b74304bbcc4efd269741174d8d495b87fad1",
+      "execution": "ERROR",
+      "expected_error": "CHALLENGE_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:12:31.047Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-register",
+      "method": "register_agent",
+      "who": "challenged",
+      "hash": "0x7b6169be453606ca3642116f9eafb80d6f0a1b86c37807e90cf74c9370c7e4f1",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:13:19.723Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-post",
+      "method": "post_task",
+      "who": "poster",
+      "hash": "0x37222fc0d7fc6cab6e92a2eba433347036865b089c88c820521ad45fecdbc711",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:14:02.428Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-claim",
+      "method": "claim_task",
+      "who": "challenged",
+      "hash": "0x72da75608d8c21c0f71b9969a0bd883bcd92f21c018ca235f6d86de0f848ea78",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:14:52.581Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-submit",
+      "method": "submit_delivery",
+      "who": "challenged",
+      "hash": "0x3c08ed7dee9998c63482d7aea3898893f58bc30e1189fe80761d6622be409143",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:16:11.635Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-early-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0xdbdc151831df64c0ecde7ab5368776fcdd5e84c9914029ed14e0a4e79afbbe20",
+      "execution": "ERROR",
+      "expected_error": "REVIEW_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:17:00.973Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-evaluate",
+      "method": "evaluate_delivery",
+      "who": "observer",
+      "hash": "0x557c77dbc7b27721352a9f4564baf87cd5297fe35cc0943e0015d256cfa657a6",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:18:10.004Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-early-finalize",
+      "method": "finalize_delivery",
+      "who": "observer",
+      "hash": "0x3b54ec9a0f2639bb22d0e6451769be79bedd94258e333b63ddadda5c87d0da3e",
+      "execution": "ERROR",
+      "expected_error": "CHALLENGE_PERIOD_ACTIVE",
+      "verified": true,
+      "read_back_at": "2026-11-13T09:19:00.480Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-challenge",
+      "method": "challenge_delivery",
+      "who": "poster",
+      "hash": "0x3bc3d523412b8fd86ae6d7d4a06af3bb145ecea49505df8d212f813ca5c1a049",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:20:09.309Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "challenged-withdraw",
+      "method": "withdraw",
+      "who": "challenged",
+      "hash": "0xe7520c47ce6d7d882356d8710726e82449b6b8f4044dc399a53ccee704854280",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-13T09:20:55.759Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
     }
   ]
 }
