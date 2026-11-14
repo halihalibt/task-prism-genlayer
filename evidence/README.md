@@ -1,6 +1,6 @@
 # Stable Studionet evidence
 
-The timing-protected source is deployed at `0x60A05E9C82801E90837BD3688636bf213B80528f`; full elapsed-time verification is pending. New receipts are kept separately under [timing-deployment/](timing-deployment/). [Timing protections](TIMING_PROTECTIONS.md) and [candidate manifest](timing-candidate.json) describe local tests and remaining live checks. This directory records actual signed transactions submitted to Stable Studionet, Chain ID 61999, and reads from `latest-final` state. Test-only fixtures and LOCAL MOCK results are not deployment evidence.
+The timing-protected source is deployed at `0x60A05E9C82801E90837BD3688636bf213B80528f`; full elapsed-time verification passed with 37 FINALIZED / MAJORITY_AGREE transactions (25 successful executions and 12 expected rejections). New receipts are kept separately under [timing-deployment/](timing-deployment/). [Timing protections](TIMING_PROTECTIONS.md) and [candidate manifest](timing-candidate.json) describe local tests, deployed source identity and completed live checks. This directory records actual signed transactions submitted to Stable Studionet, Chain ID 61999, and reads from `latest-final` state. Test-only fixtures and LOCAL MOCK results are not deployment evidence.
 
 See the [deployment list](DEPLOYMENTS.md) for addresses, transactions and source identities across versions.
 
