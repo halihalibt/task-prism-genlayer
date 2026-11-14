@@ -1,0 +1,15 @@
+{
+  "scope": "LOCAL browser validation attempt; no signed transactions",
+  "status": "BLOCKED_ENVIRONMENT",
+  "attempts": [
+    {
+      "result": "Playwright bundled browser unavailable",
+      "detail": "chromium_headless_shell-1234 executable not installed"
+    },
+    {
+      "result": "System Chromium launch blocked",
+      "detail": "/usr/bin/chromium failed before page load: process_singleton_posix socket() failed: Operation not permitted (1)"
+    }
+  ],
+  "functional_assertions_executed": false
+}

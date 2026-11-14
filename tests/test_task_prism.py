@@ -7,6 +7,7 @@ accounting sum (escrow + stakes + withdrawable + treasury), which the
 conservation check ties to value in minus value out.
 """
 import copy
+from datetime import datetime, timezone
 from dataclasses import dataclass
 import hashlib
 import importlib.util
@@ -76,7 +77,7 @@ class _Write:
     def payable(self, f):
         return f
 
-gl = types.SimpleNamespace(Contract=object,public=types.SimpleNamespace(write=_Write(),view=lambda f:f),message=types.SimpleNamespace(sender_address='0x'+ 'a'*40, value=0),vm=types.SimpleNamespace(Return=Return,run_nondet_unsafe=lambda a,b:runtime.run(a,b)),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:runtime.get(url)),exec_prompt=lambda prompt:runtime.prompt(prompt)),evm=types.SimpleNamespace(contract_interface=_contract_interface))
+gl = types.SimpleNamespace(message_raw={'datetime':'2026-11-13T00:00:00Z'},Contract=object,public=types.SimpleNamespace(write=_Write(),view=lambda f:f),message=types.SimpleNamespace(sender_address='0x'+ 'a'*40, value=0),vm=types.SimpleNamespace(Return=Return,run_nondet_unsafe=lambda a,b:runtime.run(a,b)),nondet=types.SimpleNamespace(web=types.SimpleNamespace(get=lambda url:runtime.get(url)),exec_prompt=lambda prompt:runtime.prompt(prompt)),evm=types.SimpleNamespace(contract_interface=_contract_interface))
 sys.modules['genlayer'] = types.SimpleNamespace(gl=gl, Address=Address, u256=int)
 spec = importlib.util.spec_from_file_location('contract',Path(__file__).parents[1]/'contracts/task_prism.py')
 contract = importlib.util.module_from_spec(spec)
@@ -99,6 +100,7 @@ class LocalMockTests(unittest.TestCase):
     def setUp(self):
         global runtime
         runtime=Runtime()
+        self.at(1794528000)
         self.c=contract.TaskPrism()
         gl.message.value = 0
         self.pay(STAKE); self.as_(B).register_agent('agent',STAKE,'research'); runtime.value_in += STAKE
@@ -109,6 +111,11 @@ class LocalMockTests(unittest.TestCase):
         # after the call returns.
         gl.message.value = amount
         return self.c
+    def at(self,seconds):
+        gl.message_raw['datetime']=datetime.fromtimestamp(seconds,timezone.utc).isoformat()
+    def finalize(self):
+        self.at(self.task()['challenge_deadline'])
+        self.c.finalize_delivery('task')
     def state(self): return json.loads(self.c.get_state())
     def task(self,name='task'): return json.loads(self.c.get_task(name))
     def account(self,addr): return json.loads(self.c.get_account(addr))
@@ -202,7 +209,7 @@ class LocalMockTests(unittest.TestCase):
     def test_first_round_pending_without_settlement(self):
         self.pending(); t=self.task(); self.assertEqual(t['status'],'EVALUATING'); self.assertIsNone(t['settlement']); self.assertEqual(self.state()['withdrawable'].get(B,0),0); self.conserve()
     def test_accept_full_settlement_and_withdraw(self):
-        self.pending(); self.as_(C).finalize_delivery('task'); s=self.state()
+        self.pending(); self.as_(C); self.finalize(); s=self.state()
         self.assertEqual(s['withdrawable'][B],BOUNTY); self.assertEqual(s['reputation'][B],110); self.assertEqual(s['agents']['agent']['stake'],STAKE); self.conserve()
         self.as_(B).withdraw()
         self.assertEqual(self.state()['withdrawable'].get(B,0),0)
@@ -210,15 +217,15 @@ class LocalMockTests(unittest.TestCase):
         self.assertEqual(runtime.eoa_balances[B],BOUNTY); self.conserve()
         self.nochange(lambda:self.c.withdraw(),'NOTHING_WITHDRAWABLE')
     def test_partial_exact_split(self):
-        self.pending([70,69,40]); self.c.finalize_delivery('task'); s=self.state()
+        self.pending([70,69,40]); self.finalize(); s=self.state()
         self.assertEqual(s['withdrawable'][B],BOUNTY//2); self.assertEqual(s['withdrawable'][A],BOUNTY//2); self.assertEqual(s['reputation'][B],102); self.conserve()
     def test_reject_refund_slash_reputation(self):
-        self.pending([100,39,100]); self.c.finalize_delivery('task'); s=self.state()
+        self.pending([100,39,100]); self.finalize(); s=self.state()
         self.assertEqual(s['withdrawable'][A],BOUNTY); self.assertEqual(s['treasury'],SLASH); self.assertEqual(s['agents']['agent']['stake'],STAKE-SLASH); self.assertEqual(s['reputation'][B],85); self.conserve()
     def test_hash_mismatch_is_pending_reject(self):
         self.submit(); runtime.bodies=[b'Changed bytes']; self.c.evaluate_delivery('task'); t=self.task()
         self.assertEqual(t['status'],'EVALUATING'); self.assertEqual(t['rounds'][0]['scores'],[0,0,0]); self.assertIsNone(t['settlement'])
-        self.c.finalize_delivery('task'); self.conserve()
+        self.finalize(); self.conserve()
     def test_failed_challenge_poster_reputation_and_two_rounds(self):
         self.pending(); before=copy.deepcopy(self.task()['rounds'][0]); self.as_(A).challenge_delivery('task','Please reassess completeness.')
         t=self.task(); self.assertEqual(t['status'],'FINALIZED'); self.assertEqual(t['rounds'][0],before); self.assertEqual(len(t['rounds']),2); self.assertTrue(t['challenge_failed']); self.assertEqual(self.state()['reputation'][A],95); self.conserve()
@@ -233,13 +240,13 @@ class LocalMockTests(unittest.TestCase):
         self.nochange(lambda:self.c.challenge_delivery('task','Again.'),'CHALLENGE_NOT_AVAILABLE')
         self.nochange(lambda:self.c.finalize_delivery('task'),'TASK_NOT_EVALUATING')
     def test_finalized_immutable(self):
-        self.pending(); self.c.finalize_delivery('task')
+        self.pending(); self.finalize()
         for fn,error in [(lambda:self.c.evaluate_delivery('task'),'TASK_NOT_SUBMITTED'),(lambda:self.c.expire_task('task'),'CALLER_ADDRESS_MISMATCH'),(lambda:self.c.finalize_delivery('task'),'TASK_NOT_EVALUATING')]: self.nochange(fn,error)
     def test_challenge_binding_and_unreachable_no_partial_write(self):
         self.pending(); self.as_(C); self.nochange(lambda:self.c.challenge_delivery('task','Reassess.'),'CALLER_ADDRESS_MISMATCH')
         self.as_(A); runtime.unreachable=True; self.nochange(lambda:self.c.challenge_delivery('task','Reassess.'),'UNREACHABLE_RETRYABLE')
     def test_top_up_after_slash_enables_next_claim(self):
-        self.pending([0,0,0]); self.c.finalize_delivery('task'); self.post('next'); self.as_(B)
+        self.pending([0,0,0]); self.finalize(); self.post('next'); self.as_(B)
         self.nochange(lambda:self.c.claim_task('next','agent'),'STAKE_BELOW_MINIMUM')
         self.pay(SLASH); self.c.top_up_stake('agent',SLASH); runtime.value_in += SLASH; self.assertEqual(self.state()['agents']['agent']['stake'],STAKE)
         self.c.claim_task('next','agent'); self.assertEqual(self.task('next')['status'],'CLAIMED'); self.conserve()
@@ -247,10 +254,10 @@ class LocalMockTests(unittest.TestCase):
         self.post(); self.c.expire_task('task'); self.assertEqual(self.task()['status'],'EXPIRED'); self.assertEqual(self.state()['withdrawable'][A],BOUNTY); self.conserve()
         self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
     def test_expire_claimed_unlocks_agent(self):
-        self.post(); self.as_(B).claim_task('task','agent'); self.as_(A).expire_task('task')
+        self.post(); self.as_(B).claim_task('task','agent'); self.at(self.task()['delivery_deadline']); self.as_(A).expire_task('task')
         self.assertEqual(self.state()['agents']['agent']['open_claim'],''); self.assertEqual(self.state()['withdrawable'][A],BOUNTY); self.conserve()
     def test_expire_submitted_without_rounds_refunds(self):
-        self.submit(); self.as_(A).expire_task('task')
+        self.submit(); self.at(self.task()['review_deadline']); self.as_(A).expire_task('task')
         self.assertEqual(self.task()['status'],'EXPIRED'); self.assertEqual(self.state()['withdrawable'][A],BOUNTY)
         self.assertEqual(self.state()['agents']['agent']['open_claim'],''); self.conserve()
     def test_expire_after_evaluation_forbidden(self):
@@ -293,6 +300,128 @@ class LocalMockTests(unittest.TestCase):
             self.assertEqual(contract.model_object(text),obj)
         for text in ['```json\n{"scores":[60.0,100,70]}\n```','{"scores":[NaN,100,70]}','prefix {"scores":[60,100,70]}','```json\n{"scores":[60,100,70]}']:
             with self.assertRaises(Exception):contract.model_object(text)
+    def test_transaction_time_uses_context_and_integer_utc_seconds(self):
+        gl.message_raw['datetime']='2026-11-13T08:00:00.999999+08:00'
+        self.assertEqual(contract.transaction_time(),1794528000)
+        gl.message_raw['datetime']='2026-11-13T00:00:00Z'
+        self.assertEqual(contract.transaction_time(),1794528000)
+        gl.message_raw['datetime']='2026-11-13T00:00:00'
+        with self.assertRaisesRegex(Exception,'TRANSACTION_TIME_REQUIRES_TIMEZONE'):
+            contract.transaction_time()
+        gl.message_raw={}
+        self.nochange(self.post,'datetime')
+    def test_first_verdict_blocks_all_early_finalizers(self):
+        for scores in [[90,90,90],[60,60,60],[0,0,0]]:
+            with self.subTest(scores=scores):
+                self.setUp()
+                self.pending(scores); t=self.task()
+                self.assertEqual(t['challenge_deadline']-t['evaluated_at'],3600)
+                for now in [t['evaluated_at'],t['challenge_deadline']-1]:
+                    self.at(now)
+                    for who in [A,B,C]:
+                        self.as_(who)
+                        self.nochange(lambda:self.c.finalize_delivery('task'),'CHALLENGE_PERIOD_ACTIVE')
+                        self.conserve()
+                self.at(t['challenge_deadline']); self.as_(C).finalize_delivery('task')
+                self.nochange(lambda:self.c.finalize_delivery('task'),'TASK_NOT_EVALUATING')
+                self.conserve()
+    def test_challenge_last_second_survives_early_finalize_attempt(self):
+        self.pending(); first=copy.deepcopy(self.task()['rounds'][0])
+        self.as_(A); self.nochange(lambda:self.c.finalize_delivery('task'),'CHALLENGE_PERIOD_ACTIVE')
+        self.at(self.task()['challenge_deadline']-1)
+        self.as_(B).challenge_delivery('task','Reassess within the protected window.')
+        self.assertEqual(self.task()['rounds'][0],first)
+        self.assertEqual(len(self.task()['rounds']),2)
+        self.assertEqual(self.task()['status'],'FINALIZED'); self.conserve()
+    def test_challenge_at_or_after_deadline_cannot_race_finalization(self):
+        for offset in [0,1,86400]:
+            with self.subTest(offset=offset):
+                self.setUp(); self.pending(); self.at(self.task()['challenge_deadline']+offset)
+                self.as_(A); self.nochange(lambda:self.c.challenge_delivery('task','Late challenge.'),'CHALLENGE_DEADLINE_PASSED')
+                self.as_(C).finalize_delivery('task'); self.conserve()
+    def test_claim_has_full_delivery_period_and_no_early_poster_refund(self):
+        self.post(); self.as_(B).claim_task('task','agent'); t=self.task()
+        self.assertEqual(t['delivery_deadline']-t['claimed_at'],86400)
+        for now in [t['claimed_at'],t['delivery_deadline']-1]:
+            self.at(now); self.as_(A)
+            self.nochange(lambda:self.c.expire_task('task'),'DELIVERY_PERIOD_ACTIVE')
+            self.assertEqual(self.state()['agents']['agent']['open_claim'],'task')
+            self.assertIsNone(self.task()['settlement']); self.conserve()
+        self.at(t['delivery_deadline']); self.as_(A).expire_task('task')
+        self.assertEqual(self.state()['agents']['agent']['open_claim'],''); self.conserve()
+        self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
+    def test_last_second_delivery_starts_independent_full_review_period(self):
+        self.post(); self.as_(B).claim_task('task','agent'); old=self.task()['delivery_deadline']
+        self.at(old-1)
+        self.c.submit_delivery('task','https://example.com/evidence.txt',hashlib.sha256(runtime.bodies[0]).hexdigest(),'Manifest.')
+        t=self.task(); self.assertEqual(t['submitted_at'],old-1)
+        self.assertEqual(t['review_deadline'],old-1+86400)
+        for now in [old,t['review_deadline']-1]:
+            self.at(now); self.as_(A)
+            self.nochange(lambda:self.c.expire_task('task'),'REVIEW_PERIOD_ACTIVE')
+        self.as_(C).evaluate_delivery('task'); self.conserve()
+    def test_late_delivery_rejected_before_fetch_and_no_deadline_reset(self):
+        self.post(); self.as_(B).claim_task('task','agent')
+        for offset in [0,1]:
+            self.at(self.task()['delivery_deadline']+offset); fetched=runtime.fetches
+            self.nochange(lambda:self.c.submit_delivery('task','https://example.com','0'*64,'Late.'),'DELIVERY_DEADLINE_PASSED')
+            self.assertEqual(runtime.fetches,fetched)
+        self.as_(A).expire_task('task'); self.conserve()
+    def test_submitted_expiry_protects_review_and_refunds_once_at_deadline(self):
+        self.submit(); t=self.task()
+        for now in [t['submitted_at'],t['review_deadline']-1]:
+            self.at(now); self.as_(A)
+            self.nochange(lambda:self.c.expire_task('task'),'REVIEW_PERIOD_ACTIVE')
+            self.conserve()
+        self.at(t['review_deadline']); self.c.expire_task('task')
+        self.assertEqual(self.task()['status'],'EXPIRED')
+        self.assertEqual(self.state()['withdrawable'][A],BOUNTY)
+        self.assertEqual(self.state()['agents']['agent']['stake'],STAKE)
+        self.assertEqual(self.state()['reputation'][B],100)
+        self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE'); self.conserve()
+    def test_resubmission_cannot_grief_poster_by_extending_review(self):
+        self.submit(); t=self.task(); self.at(t['review_deadline']-1)
+        self.as_(B).submit_delivery('task','https://example.com/revised',hashlib.sha256(runtime.bodies[0]).hexdigest(),'Revised.')
+        self.assertEqual(self.task()['submitted_at'],t['submitted_at'])
+        self.assertEqual(self.task()['review_deadline'],t['review_deadline'])
+        self.at(t['review_deadline'])
+        self.nochange(lambda:self.c.submit_delivery('task','https://example.com/revised','0'*64,'Too late.'),'DELIVERY_DEADLINE_PASSED')
+        self.as_(A).expire_task('task'); self.conserve()
+    def test_late_evaluation_cannot_remove_poster_expiry_right(self):
+        self.submit(); self.at(self.task()['review_deadline']); self.as_(C)
+        fetched=runtime.fetches
+        self.nochange(lambda:self.c.evaluate_delivery('task'),'REVIEW_DEADLINE_PASSED')
+        self.assertEqual(runtime.fetches,fetched)
+        self.as_(A).expire_task('task'); self.conserve()
+    def test_evaluated_task_cannot_be_expired_even_after_all_deadlines(self):
+        self.pending(); self.at(self.task()['review_deadline']+86400); self.as_(A)
+        self.nochange(lambda:self.c.expire_task('task'),'TASK_NOT_EXPIRABLE')
+        self.as_(C).finalize_delivery('task'); self.conserve()
+    def test_nonposter_cannot_expire_before_or_after_deadlines(self):
+        self.submit()
+        for now in [self.task()['submitted_at'],self.task()['review_deadline']]:
+            self.at(now)
+            for who in [B,C]:
+                self.as_(who); self.nochange(lambda:self.c.expire_task('task'),'CALLER_ADDRESS_MISMATCH')
+        self.conserve()
+    def test_failed_consensus_does_not_create_or_extend_any_deadline(self):
+        self.submit(); self.at(self.task()['review_deadline']-1)
+        runtime.scores=[[90,90,90],[40,40,40]]
+        self.nochange(lambda:self.c.evaluate_delivery('task'),'CONSENSUS_REJECTED')
+        self.assertIsNone(self.task()['challenge_deadline'])
+        self.at(self.task()['review_deadline']); self.as_(A).expire_task('task'); self.conserve()
+    def test_failed_challenge_preserves_original_window_for_retry(self):
+        self.pending(); deadline=self.task()['challenge_deadline']
+        self.at(deadline-2); runtime.unreachable=True; self.as_(A)
+        self.nochange(lambda:self.c.challenge_delivery('task','Retryable failure.'),'UNREACHABLE_RETRYABLE')
+        self.assertEqual(self.task()['challenge_deadline'],deadline)
+        self.at(deadline-1); runtime.unreachable=False
+        self.c.challenge_delivery('task','Retry before original deadline.')
+        self.assertEqual(self.task()['status'],'FINALIZED'); self.conserve()
+    def test_event_timestamps_record_transaction_time(self):
+        self.submit(); t=self.task()
+        self.assertEqual([x['timestamp'] for x in t['events']],[1794528000]*3)
+
     def test_sha256_vectors_and_random_payloads(self):
         rng=random.Random(99)
         for b in [b'',b'abc',b'a'*55,b'a'*56,b'a'*64,b'a'*1000,'中文交付'.encode()] + [rng.randbytes(n) for n in [1,17,63,65,512,24000]]:

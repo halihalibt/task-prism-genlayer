@@ -1,3 +1,5 @@
+import {requireDeployedSource} from './deployment-source.js';
+requireDeployedSource();
 // Live verification of the real-GEN contract (scripts/live-verify.js).
 //
 // Core evidence flow on the ACTIVE deployment (see evidence/deployment.json):

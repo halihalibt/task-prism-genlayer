@@ -6,5 +6,22 @@ await assert.rejects(()=>validateChain(async()=> '0x1'),/WRONG_CHAIN/);
 const data=encoded('post_task',['id','title',200,'0'.repeat(64),'spec']);assert.equal(typeof data,'string');
 const source=fs.readFileSync('contracts/task_prism.py','utf8');assert(!/\bfloat\s*\(/.test(source));
 for(const file of ['README.md','config.js','index.html','app.js','KNOWN_LIMITATIONS.md'])assert(!new RegExp('__REPO'+'_NAME__|xiaoyu'+'7799').test(fs.readFileSync(file,'utf8')),`${file}: placeholder residue`);
-if(fs.existsSync('evidence/deployment.json')){const {createHash}=await import('node:crypto');const deployment=JSON.parse(fs.readFileSync('evidence/deployment.json'));assert.equal(createHash('sha256').update(source).digest('hex'),deployment.source_sha256,'deployed source bytes');}
+if(fs.existsSync('evidence/deployment.json')){
+ const {createHash}=await import('node:crypto');
+ const deployment=JSON.parse(fs.readFileSync('evidence/deployment.json'));
+ const currentHash=createHash('sha256').update(source).digest('hex');
+ const {CONFIG}=await import('../config.js');
+ const candidate=fs.existsSync('evidence/timing-candidate.json')?JSON.parse(fs.readFileSync('evidence/timing-candidate.json')):null;
+ if(candidate&&['NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING'].includes(candidate.status)){
+  assert.equal(currentHash,candidate.source_sha256,'candidate source bytes');
+  assert.notEqual(currentHash,deployment.source_sha256,'old deployment is not timing evidence');
+  assert.equal(CONFIG.deploymentPending,true,'pending source must disable UI writes');
+  assert.equal(CONFIG.contract,candidate.contract_address||deployment.contract_address,'read-only version identified by candidate');
+  assert.equal(createHash('sha256').update(fs.readFileSync(candidate.previous_source_snapshot)).digest('hex'),deployment.source_sha256);
+ }else if(candidate?.status==='DEPLOYED_TIMING_VALIDATED'){
+ const timing=JSON.parse(fs.readFileSync(candidate.deployment_manifest));
+ const index=JSON.parse(fs.readFileSync('evidence/timing-deployment/index.json'));
+ assert.equal(currentHash,timing.source_sha256);assert.equal(CONFIG.contract,timing.contract_address);assert.equal(index.completed,true);assert.equal(candidate.live_timing_verified,true);assert.equal(CONFIG.deploymentPending,false);
+ }else{assert.equal(currentHash,deployment.source_sha256,'deployed source bytes');assert(!CONFIG.deploymentPending);}
+}
 console.log('i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.');

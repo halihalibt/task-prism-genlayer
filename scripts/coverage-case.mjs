@@ -1,3 +1,5 @@
+import {requireDeployedSource} from './deployment-source.js';
+requireDeployedSource();
 // Coverage-style partial-delivery case (scripts/coverage-case.mjs).
 //
 // The relaxed consensus rule (same verdict + at most 10 points per

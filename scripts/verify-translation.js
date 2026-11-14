@@ -1,3 +1,5 @@
+import {requireDeployedSource} from './deployment-source.js';
+requireDeployedSource();
 // Live setup of a bounded translation task. Signers exist only in memory.
 // Real testnet GEN (wei): the poster locks a 0.2 GEN bounty, the agent
 // stakes 1 GEN. No simulated ledger is used.

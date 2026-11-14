@@ -1,5 +1,7 @@
 # Coverage-style partial delivery
 
+> Version scope: the recorded live results below belong to the previous, untimed contract. They do not validate the timing-protected source. See [TIMING_PROTECTIONS.md](TIMING_PROTECTIONS.md).
+
 [Open this finalized task](https://halihalibt.github.io/task-prism-genlayer/?task=coverage-20261109192338#adjudication).
 
 Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chain ID 61999. Real testnet GEN (1 GEN = 10^18 wei); no simulated ledger.
