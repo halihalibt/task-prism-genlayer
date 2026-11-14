@@ -8,8 +8,8 @@
     },
     "live-timing.json": {
       "archive": "live-timing.json.gz",
-      "sha256": "7f2994dbd9101805cda9fa8d6bbc2d2dbfb3d3d327590d3687eb960ec9d82c60",
-      "original_bytes": 3450549
+      "sha256": "1aedb105ed9ab63942b08dbb95c96dc67dc70485c874142fbd776c371fffb862",
+      "original_bytes": 5114136
     }
   },
   "contract": "0x60A05E9C82801E90837BD3688636bf213B80528f",
@@ -19,26 +19,29 @@
     "submitted_early_expiry_blocked": true,
     "resubmission_keeps_review_deadline": true,
     "early_finalize_blocked": true,
-    "challenge_during_window_settled": true
+    "challenge_during_window_settled": true,
+    "elapsed_finalize_and_late_challenge": true,
+    "claimed_elapsed_expiry": true,
+    "submitted_elapsed_expiry": true
   },
   "deadlines": {
     "claimed": {
       "task_id": "timing-claimed-20261113085754",
-      "status": "CLAIMED",
+      "status": "EXPIRED",
       "delivery_deadline": 1794646774,
       "review_deadline": null,
       "challenge_deadline": null
     },
     "submitted": {
       "task_id": "timing-submitted-20261113085754",
-      "status": "SUBMITTED",
+      "status": "EXPIRED",
       "delivery_deadline": 1794646975,
       "review_deadline": 1794647032,
       "challenge_deadline": null
     },
     "pending": {
       "task_id": "timing-pending-20261113085754",
-      "status": "EVALUATING",
+      "status": "FINALIZED",
       "delivery_deadline": 1794647309,
       "review_deadline": 1794647363,
       "challenge_deadline": 1794564662
@@ -51,8 +54,8 @@
       "challenge_deadline": 1794565025
     }
   },
-  "completed": false,
-  "last_observed_at": "2026-11-13T09:20:59.437Z",
+  "completed": true,
+  "last_observed_at": "2026-11-14T09:40:58.895Z",
   "transactions": [
     {
       "tag": "claimed-register",
@@ -363,6 +366,138 @@
       "expected_error": null,
       "verified": true,
       "read_back_at": "2026-11-13T09:20:55.759Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-late-challenge",
+      "method": "challenge_delivery",
+      "who": "poster",
+      "hash": "0x386f74a1063d3b364959b5115a46170ae86082494b6e4a1a57533e222f572f16",
+      "execution": "ERROR",
+      "expected_error": "CHALLENGE_DEADLINE_PASSED",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:29:26.742Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-elapsed-finalize",
+      "method": "finalize_delivery",
+      "who": "observer",
+      "hash": "0xc8af7cff98054bd7e1f4ed6cd1a151d8c3ac6265a42dfcc8ac453f70f57cf902",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-14T09:30:26.535Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-duplicate-finalize",
+      "method": "finalize_delivery",
+      "who": "observer",
+      "hash": "0xfbe0617d2a608a38df8116d8c276a78ae781edac34a3663679109d2c06c45094",
+      "execution": "ERROR",
+      "expected_error": "TASK_NOT_EVALUATING",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:31:34.879Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-late-submit",
+      "method": "submit_delivery",
+      "who": "claimed",
+      "hash": "0x704a4830f922974b4e120a6504be520a3b4bb20fb04f9c503b35561561a290d1",
+      "execution": "ERROR",
+      "expected_error": "DELIVERY_DEADLINE_PASSED",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:32:39.554Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-elapsed-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x2668692e1b1509ccddea933f1558ecd9cebb583edfe8f510f6f8ea7ffdd91a9e",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-14T09:33:37.560Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "claimed-duplicate-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x8b41d694d02a9961d263410b7faa488a50a7ba447db11ef433061c30c335c252",
+      "execution": "ERROR",
+      "expected_error": "TASK_NOT_EXPIRABLE",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:34:39.892Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-late-evaluate",
+      "method": "evaluate_delivery",
+      "who": "observer",
+      "hash": "0x6034968cf43e0846745f26b8d37c703159e96a1e23ac8f6efe5eb13591cfc102",
+      "execution": "ERROR",
+      "expected_error": "REVIEW_DEADLINE_PASSED",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:35:53.488Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-elapsed-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x72e98a4b942273d3e06400be742f28b5ddc8e29460a9be2ed4b5b1fa63d6f205",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-14T09:37:01.617Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "submitted-duplicate-expire",
+      "method": "expire_task",
+      "who": "poster",
+      "hash": "0x6151954496e4ef832b4c9ae2b6ce75ba362b2fc56eed8956942b803ed8f16e64",
+      "execution": "ERROR",
+      "expected_error": "TASK_NOT_EXPIRABLE",
+      "verified": true,
+      "read_back_at": "2026-11-14T09:38:02.111Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "pending-withdraw",
+      "method": "withdraw",
+      "who": "pending",
+      "hash": "0xf6837d6500e71fa2b68c9a7a051a52923d2222e342cedf58639df1b4fa654350",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-14T09:39:26.710Z",
+      "status": "FINALIZED",
+      "consensus": "MAJORITY_AGREE"
+    },
+    {
+      "tag": "poster-withdraw-final",
+      "method": "withdraw",
+      "who": "poster",
+      "hash": "0xfd2ce00eee433608f99ba6c3ad7a8af42858b3552ec69c9c63220afa6bbe594f",
+      "execution": "SUCCESS",
+      "expected_error": null,
+      "verified": true,
+      "read_back_at": "2026-11-14T09:40:44.417Z",
       "status": "FINALIZED",
       "consensus": "MAJORITY_AGREE"
     }

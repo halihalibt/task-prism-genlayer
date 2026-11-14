@@ -4,7 +4,7 @@ Contract: `0x60A05E9C82801E90837BD3688636bf213B80528f`; Chain ID 61999.
 
 [Deployment transaction](https://explorer-studio.genlayer.com/tx/0x8b56d9fe5e2263c475996e541ea1f5e9f60c4115b843261c397a91059a77cfe7) is FINALIZED / MAJORITY_AGREE / SUCCESS. Exact deployed bytes match SHA-256 `44222aed4823c3c4c2ae89bedbf9b0552b30b7f976cf8d9b094f73cc1a668bac` and source commit `fcb4d1e0574d3da52d7c4c1f62c4a50267ba7216`. `deploy-read-back.json` is the initial latest-final state.
 
-The initial live verification phase has 26 FINALIZED / MAJORITY_AGREE transactions: 20 successful executions and 6 expected rejections. Every verified transaction has a latest-final read-back and GEN conservation check. These are signed real testnet transactions; no timestamp overrides or shortened periods were used.
+The initial live verification phase retained 26 FINALIZED / MAJORITY_AGREE transactions: 20 successful executions and 6 expected rejections. Every verified transaction has a latest-final read-back and GEN conservation check. These are signed real testnet transactions; no timestamp overrides or shortened periods were used.
 
 | Check | Observed result |
 | --- | --- |
@@ -16,23 +16,17 @@ The initial live verification phase has 26 FINALIZED / MAJORITY_AGREE transactio
 
 The challenged task finalized as **ACCEPT** with 2 retained rounds and settlement `{"agent_reputation_delta": 10, "paid_to_agent": 200000000000000000, "refunded_to_poster": 0, "slashed_to_treasury": 0}`. The agent's subsequent signed `withdraw` succeeded. The runner asserted the EOA balance increase against the withdrawable amount; this initial run did not serialize the separate EOA before/after read values. Receipts and contract-state snapshots are preserved. Future withdrawal checks record those reads as well.
 
-## Remaining actual elapsed-time checks
+## Elapsed-time verification complete
 
-| Case | Earliest eligible time (Asia/Shanghai) | Remaining action |
-| --- | --- | --- |
-| pending | 2026-11-13T18:11:02+08:00 | Reject late challenge, finalize the unchallenged first verdict, reject duplicate finalization |
-| claimed | 2026-11-14T16:59:34+08:00 | Reject late delivery; expire, refund and unlock once |
-| submitted | 2026-11-14T17:03:52+08:00 | Reject late first evaluation; expire, refund and unlock once |
+On 2026-11-14, all remaining cases passed using actual elapsed time. Late challenge, duplicate finalization, late delivery, late evaluation and duplicate expiry were rejected without state changes. First-round finalization succeeded after the challenge deadline. CLAIMED and SUBMITTED expiry refunded the full bounty, cleared agent locks and preserved stake and reputation. Pending-agent and poster withdrawals succeeded with recorded EOA before/after balances equal to the withdrawn amounts. Every new receipt is FINALIZED / MAJORITY_AGREE, with latest-final state and GEN conservation assertions.
 
-These future successful expiry/finalization paths are **not yet verified live**. The suite is not marked complete. A manual continuation after 2026-11-14 17:10 Asia/Shanghai can execute all remaining time-dependent cases in one run. No automatic continuation is configured. The frontend remains read-only on this branch; public Pages is not updated yet.
+The complete suite contains 37 verified transactions: 25 SUCCESS and 12 expected ERROR. Full original receipts, new transaction hashes, state snapshots and withdrawal balances are in the lossless archive and index below. No redeployment or time override was used.
 
 ```sh
 node scripts/timing-live.js --confirm-live --due
 python3 scripts/pack-timing-evidence.py
 python3 scripts/check-evidence.py
 ```
-
-The original source and periods remain unchanged. The deployment script refuses to overwrite the already-recorded timing deployment. Temporary generated signer keys are excluded from Git; resumption requires the same test accounts.
 
 ## Receipts
 

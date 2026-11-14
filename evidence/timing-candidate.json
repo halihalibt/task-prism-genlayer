@@ -1,5 +1,5 @@
 {
-  "status": "DEPLOYED_TIMING_VALIDATION_PENDING",
+  "status": "DEPLOYED_TIMING_VALIDATED",
   "network": "Stable Studionet",
   "chain_id": 61999,
   "rpc": "https://studio.genlayer.com/api",
@@ -13,6 +13,6 @@
   "challenge_period_seconds": 3600,
   "claim_period_seconds": 86400,
   "review_period_seconds": 86400,
-  "live_timing_verified": false,
+  "live_timing_verified": true,
   "deployment_manifest": "evidence/timing-deployment/deployment.json"
 }

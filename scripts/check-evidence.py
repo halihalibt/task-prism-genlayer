@@ -17,12 +17,14 @@ candidate_path=root/'evidence/timing-candidate.json'
 current=(root/'contracts/task_prism.py').read_bytes()
 if candidate_path.exists():
  candidate=json.loads(candidate_path.read_text())
- if candidate['status'] in ('NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING'):
+ if candidate['status'] in ('NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING','DEPLOYED_TIMING_VALIDATED'):
   if candidate['status']=='NOT_DEPLOYED':
    assert candidate['contract_address'] is None and candidate['deploy_tx'] is None
   else:
    assert candidate['contract_address'] and candidate['deploy_tx']
-  assert candidate['live_timing_verified'] is False
+  assert candidate['live_timing_verified'] is (candidate['status']=='DEPLOYED_TIMING_VALIDATED')
+  if candidate['live_timing_verified']:
+   assert json.loads((root/'evidence/timing-deployment/index.json').read_text())['completed'] is True
   assert hashlib.sha256(current).hexdigest()==candidate['source_sha256']
   assert candidate['previous_contract']==d['contract_address']
   assert candidate['previous_source_sha256']==d['source_sha256']

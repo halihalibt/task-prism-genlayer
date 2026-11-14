@@ -33,7 +33,7 @@ jobs:
         with:
           path: dist
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/fix/steward-time-protections'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

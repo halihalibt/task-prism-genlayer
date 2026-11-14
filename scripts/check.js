@@ -18,6 +18,10 @@ if(fs.existsSync('evidence/deployment.json')){
   assert.equal(CONFIG.deploymentPending,true,'pending source must disable UI writes');
   assert.equal(CONFIG.contract,candidate.contract_address||deployment.contract_address,'read-only version identified by candidate');
   assert.equal(createHash('sha256').update(fs.readFileSync(candidate.previous_source_snapshot)).digest('hex'),deployment.source_sha256);
+ }else if(candidate?.status==='DEPLOYED_TIMING_VALIDATED'){
+ const timing=JSON.parse(fs.readFileSync(candidate.deployment_manifest));
+ const index=JSON.parse(fs.readFileSync('evidence/timing-deployment/index.json'));
+ assert.equal(currentHash,timing.source_sha256);assert.equal(CONFIG.contract,timing.contract_address);assert.equal(index.completed,true);assert.equal(candidate.live_timing_verified,true);assert.equal(CONFIG.deploymentPending,false);
  }else{assert.equal(currentHash,deployment.source_sha256,'deployed source bytes');assert(!CONFIG.deploymentPending);}
 }
 console.log('i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.');
