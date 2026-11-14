@@ -52,7 +52,7 @@ npm run build
 npm run dev
 ```
 
-The source snapshot in `evidence/history/real-gen-untimed/` is checked against the previous deployment receipt; the pending source has its own hash in `evidence/timing-candidate.json`. Historical live scripts refuse to sign when local source differs from the deployment manifest.
+The source snapshot in `evidence/history/real-gen-untimed/` is checked against the previous deployment receipt; the timing-protected source has its own hash in `evidence/timing-candidate.json`. Historical live scripts refuse to sign when local source differs from the deployment manifest.
 
 Tests in `tests/test_task_prism.py` are **LOCAL MOCK** tests, not on-chain consensus evidence. Three reserved agents and three read-only tasks are labelled `seed_demo` / “Seed demo data, not consensus evidence.” They have no adjudicated verdicts. Locally mocked ACCEPT, PARTIAL and REJECT tests create separate task records. JavaScript regressions run offline against saved receipts and LOCAL MOCK HTTP responses; they do not submit transactions.
 

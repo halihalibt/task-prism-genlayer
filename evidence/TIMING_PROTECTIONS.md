@@ -1,6 +1,6 @@
 # Task deadline and challenge protections
 
-The timing-protected source is deployed at `0x60A05E9C82801E90837BD3688636bf213B80528f`. [Deployment transaction](https://explorer-studio.genlayer.com/tx/0x8b56d9fe5e2263c475996e541ea1f5e9f60c4115b843261c397a91059a77cfe7) is FINALIZED / MAJORITY_AGREE / SUCCESS, with latest-final read-back and exact deployed source-byte verification. Real elapsed-time validation is still pending; see [live timing evidence](timing-deployment/). The previous address `0x0BC304C168D14B8f4928f622e971B532D30d7268` and its receipts remain historical evidence only.
+The timing-protected source is deployed at `0x60A05E9C82801E90837BD3688636bf213B80528f`. [Deployment transaction](https://explorer-studio.genlayer.com/tx/0x8b56d9fe5e2263c475996e541ea1f5e9f60c4115b843261c397a91059a77cfe7) is FINALIZED / MAJORITY_AGREE / SUCCESS, with latest-final read-back and exact deployed source-byte verification. Real elapsed-time validation passed: 37 FINALIZED / MAJORITY_AGREE transactions, comprising 25 successful executions and 12 expected rejections; see [live timing evidence](timing-deployment/LIVE_TIMING.md). The previous address `0x0BC304C168D14B8f4928f622e971B532D30d7268` and its receipts remain historical evidence only.
 
 ## Rules and regression coverage
 
@@ -19,7 +19,7 @@ The periods are fixed constants, not poster settings. OPEN cancellation remains 
 
 The browser displays UTC deadlines and uses `taskActions` to disable actions outside their intervals. These controls use the browser clock as guidance only; the contract remains authoritative. Missing deadlines fail closed for claimed, submitted and evaluating tasks. Contract authorization checks remain unchanged.
 
-`config.js` reads the new address and keeps `deploymentPending: true` until elapsed-time checks finish. All writes are disabled on this branch; a visible English/Chinese notice explains that live elapsed-time verification is pending. This branch has not been published to Pages. Existing Pages behavior is unaffected by a branch push.
+`config.js` reads the verified new address with `deploymentPending: false`. Writes are enabled subject to connection, role, state and deadline checks. The published app is built from `main`; the previous deployment remains historical evidence.
 
 `history/real-gen-untimed/task_prism.py` preserves the exact old deployed bytes. `check-evidence.py` validates the old receipt against that snapshot and the candidate hash separately, rather than treating a new local source as deployed. Historical signed workflows refuse to run against a different source hash. Deployment without an explicit `--confirm-deploy` signing flag exits before network activity or account creation.
 

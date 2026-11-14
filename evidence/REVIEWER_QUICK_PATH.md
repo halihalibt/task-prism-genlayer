@@ -1,10 +1,10 @@
 # Review TASK PRISM
 
-> Version scope: the recorded live results below belong to the previous, untimed contract. They do not validate the timing-protected source. See [TIMING_PROTECTIONS.md](TIMING_PROTECTIONS.md).
+> Current deployment enforces a one-hour first-verdict challenge window and separate 24-hour delivery and review deadlines. See [TIMING_PROTECTIONS.md](TIMING_PROTECTIONS.md).
 
 [Open the task market](https://halihalibt.github.io/task-prism-genlayer/).
 
-Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chain ID 61999. Real testnet GEN (1 GEN = 10^18 wei); no simulated ledger.
+Contract: `0x60A05E9C82801E90837BD3688636bf213B80528f` on Stable Studionet, Chain ID 61999. Real testnet GEN (1 GEN = 10^18 wei); no simulated ledger.
 
 ## Inspect without signing
 
@@ -14,15 +14,11 @@ Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chai
 4. Inspect the settlement panel: agent payment, poster refund and treasury slash are real testnet GEN movements, paid as withdrawable balances pulled with `withdraw`.
 5. Open **Chain evidence** for the raw finalized receipts and read-backs. Transaction FINALIZED is checked separately from successful contract execution.
 
-## Recorded verdict paths
+## Recorded timing paths
 
-| Path | Task | Inspect |
-| --- | --- | --- |
-| ACCEPT · two retained rounds · 0.2 GEN to agent | `runbook-20261109190501` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=runbook-20261109190501#adjudication) |
-| PARTIAL · 0.1 GEN to agent · 0.1 GEN refund | `support-20261109190501` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=support-20261109190501#adjudication) |
-| REJECT · 0.2 GEN refund · 0.1 GEN stake slash | `integrity-20261109190501` | [Open task](https://halihalibt.github.io/task-prism-genlayer/?task=integrity-20261109190501#adjudication) |
+[Current deployment evidence](timing-deployment/LIVE_TIMING.md) records 37 FINALIZED / MAJORITY_AGREE transactions: 25 successful executions and 12 expected rejections. It includes early expiry and finalization refusals, challenge within the window, settlement after the window, both 24-hour expiry paths, unchanged resubmission deadlines, refunds, unlocking and withdrawals. The [archive index](timing-deployment/index.json) identifies original receipts and latest-final state snapshots.
 
-[Live verification](LIVE_VERIFICATION.md) contains the complete current-contract transaction list. [Coverage case](COVERAGE_PARTIAL.md) and [adversarial probes](PROBES.md) are separate supplements. The browser adjudication in [BROWSER_ADJUDICATION.md](BROWSER_ADJUDICATION.md) is a historical record from the superseded contract and is not current-contract evidence.
+[Previous deployment verification](LIVE_VERIFICATION.md), [coverage case](COVERAGE_PARTIAL.md), [adversarial probes](PROBES.md) and [browser adjudication](BROWSER_ADJUDICATION.md) are historical evidence from the superseded untimed contract. Their task IDs should not be used as current-deployment task links.
 
 ## Try a new task
 
@@ -32,7 +28,7 @@ Contract: `0x0BC304C168D14B8f4928f622e971B532D30d7268` on Stable Studionet, Chai
 4. A different address registers an agent with a 1 GEN stake, then claims the task.
 5. Submit a public, stable HTTPS UTF-8 text URL, its exact body SHA-256 and a summary. The browser can hash a CORS-enabled URL or the downloaded local file. The delivery is validated at submit time (size ≤ 24000 bytes, UTF-8, hash matches); a bad delivery is not submitted and the task stays claimable. The agent may resubmit before evaluation.
 6. Run independent consensus. The first verdict leaves the task EVALUATING and escrow locked.
-7. Finalize once, or have the poster/agent challenge before another transaction finalizes. A challenge independently evaluates again and immediately settles. There is no timed or guaranteed challenge window. The poster may expire a task whose delivery was submitted but never successfully evaluated, refunding the bounty and releasing the claim.
+7. The poster or agent can challenge strictly before `challenge_deadline` (one hour from the first evaluation transaction time); a second independent evaluation immediately settles. Anyone can finalize once at or after that deadline. The poster can expire CLAIMED tasks only at or after the 24-hour delivery deadline, or unevaluated SUBMITTED tasks only at or after the separate 24-hour review deadline. Resubmission does not extend review. Expiry refunds the bounty and releases the claim.
 8. Expand **Transaction activity** to follow FINALIZED, execution status and latest-final read-back. Export the receipts if desired. RPC quotas may delay processing; clients honor the server's retry interval.
 
 ## Accounting rules
