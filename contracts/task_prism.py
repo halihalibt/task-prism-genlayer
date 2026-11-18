@@ -192,6 +192,19 @@ class TaskPrism(gl.Contract):
         a['stake'] += amount
         self._save(s)
 
+    @gl.public.write
+    def withdraw_stake(self, agent_id: str, expected_stake: int):
+        s, owner = self._load(), self._sender()
+        agent = self._agent(s, agent_id)
+        need(agent['origin'] != 'seed_demo', 'SEED_DEMO_READ_ONLY')
+        need(not agent['open_claim'], 'STAKE_LOCKED')
+        amount = agent['stake']
+        need(amount > 0, 'NO_STAKE_TO_WITHDRAW')
+        need(expected_stake == amount, 'STAKE_CHANGED')
+        agent['stake'] = 0
+        self._save(s)
+        _EoaRecipient(Address(owner)).emit_transfer(value=u256(amount))
+
     @gl.public.write.payable
     def post_task(self, task_id: str, title: str, bounty: int, requirements_hash: str, deliverable_spec: str):
         integer(bounty,2)

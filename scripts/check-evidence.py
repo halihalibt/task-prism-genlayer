@@ -14,7 +14,7 @@ leader=next(x for x in leaders if x['mode']=='leader') if isinstance(leaders,lis
 assert leader['execution_result']=='SUCCESS'
 code=base64.b64decode(r['data']['contract_code'])
 candidate_path=root/'evidence/timing-candidate.json'
-current=(root/'contracts/task_prism.py').read_bytes()
+current=(root/'evidence/stake-exit/timing-source.py').read_bytes()
 if candidate_path.exists():
  candidate=json.loads(candidate_path.read_text())
  if candidate['status'] in ('NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING','DEPLOYED_TIMING_VALIDATED'):

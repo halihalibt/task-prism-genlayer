@@ -139,6 +139,36 @@ class LocalMockTests(unittest.TestCase):
         before=self.c.state_json
         with self.assertRaisesRegex(Exception,error): call()
         self.assertEqual(self.c.state_json,before)
+    def test_idle_stake_exit_preserves_registration_and_can_reactivate(self):
+        self.nochange(lambda: self.as_(A).withdraw_stake('agent', STAKE), 'CALLER_ADDRESS_MISMATCH')
+        self.nochange(lambda: self.as_(B).withdraw_stake('agent', STAKE - 1), 'STAKE_CHANGED')
+        self.c.withdraw_stake('agent', STAKE)
+        self.assertEqual(self.account(B)['agent']['stake'], 0)
+        self.assertEqual(runtime.external_transfers, [{'to': B, 'value': STAKE}])
+        self.nochange(lambda: self.c.withdraw_stake('agent', STAKE), 'NO_STAKE_TO_WITHDRAW')
+        self.post()
+        self.nochange(lambda: self.as_(B).claim_task('task', 'agent'), 'STAKE_BELOW_MINIMUM')
+        self.pay(STAKE)
+        self.c.top_up_stake('agent', STAKE)
+        runtime.value_in += STAKE
+        self.c.claim_task('task', 'agent')
+        self.conserve()
+
+    def test_exit_locked_until_rejection_and_only_remaining_principal_leaves(self):
+        self.pending([10, 10, 10])
+        self.as_(B)
+        self.nochange(lambda: self.c.withdraw_stake('agent', STAKE), 'STAKE_LOCKED')
+        self.finalize()
+        self.assertEqual(self.task()['final_verdict'], 'REJECT')
+        self.c.withdraw_stake('agent', STAKE - SLASH)
+        self.assertEqual(runtime.external_transfers, [{'to': B, 'value': STAKE - SLASH}])
+        self.assertEqual(self.account(A)['withdrawable'], BOUNTY)
+        self.assertEqual(self.state()['treasury'], SLASH)
+        self.conserve()
+
+    def test_seed_stake_has_no_funded_principal(self):
+        self.nochange(lambda: self.as_('0x' + '1'.rjust(40, '0')).withdraw_stake('seed-vector', STAKE), 'SEED_DEMO_READ_ONLY')
+
     def test_positive_even_bounty_and_noninteger_rejection(self):
         for n in [-2,0,1,3,True,'200']:
             self.nochange(lambda:self.post('x',n),'INVALID_INTEGER|BOUNTY_MUST_BE_POSITIVE_EVEN')

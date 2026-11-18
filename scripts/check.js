@@ -21,7 +21,7 @@ if(fs.existsSync('evidence/deployment.json')){
  }else if(candidate?.status==='DEPLOYED_TIMING_VALIDATED'){
  const timing=JSON.parse(fs.readFileSync(candidate.deployment_manifest));
  const index=JSON.parse(fs.readFileSync('evidence/timing-deployment/index.json'));
- assert.equal(currentHash,timing.source_sha256);assert.equal(CONFIG.contract,timing.contract_address);assert.equal(index.completed,true);assert.equal(candidate.live_timing_verified,true);assert.equal(CONFIG.deploymentPending,false);
+ assert.equal(createHash('sha256').update(fs.readFileSync('evidence/stake-exit/timing-source.py')).digest('hex'),timing.source_sha256);if(CONFIG.stakeExit){const release=JSON.parse(fs.readFileSync('evidence/stake-exit/deployment.json'));const live=JSON.parse(fs.readFileSync('evidence/stake-exit/live.json'));assert.equal(currentHash,release.source_sha256);assert.equal(CONFIG.contract,release.contract_address);assert.equal(live.contract,CONFIG.contract);assert.equal(live.completed,true);}else assert.equal(CONFIG.contract,timing.contract_address);assert.equal(index.completed,true);assert.equal(candidate.live_timing_verified,true);assert.equal(CONFIG.deploymentPending,false);
  }else{assert.equal(currentHash,deployment.source_sha256,'deployed source bytes');assert(!CONFIG.deploymentPending);}
 }
 console.log('i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.');
