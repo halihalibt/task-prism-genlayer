@@ -10,7 +10,7 @@ if(fs.existsSync('evidence/deployment.json')){
  const {createHash}=await import('node:crypto');
  const deployment=JSON.parse(fs.readFileSync('evidence/deployment.json'));
  const currentHash=createHash('sha256').update(source).digest('hex');
- const {CONFIG}=await import('../config.js');
+ const {CONFIG,TIMING_CONFIG}=await import('../config.js');
  const candidate=fs.existsSync('evidence/timing-candidate.json')?JSON.parse(fs.readFileSync('evidence/timing-candidate.json')):null;
  if(candidate&&['NOT_DEPLOYED','DEPLOYED_TIMING_VALIDATION_PENDING'].includes(candidate.status)){
   assert.equal(currentHash,candidate.source_sha256,'candidate source bytes');
@@ -21,7 +21,24 @@ if(fs.existsSync('evidence/deployment.json')){
  }else if(candidate?.status==='DEPLOYED_TIMING_VALIDATED'){
  const timing=JSON.parse(fs.readFileSync(candidate.deployment_manifest));
  const index=JSON.parse(fs.readFileSync('evidence/timing-deployment/index.json'));
- assert.equal(createHash('sha256').update(fs.readFileSync('evidence/stake-exit/timing-source.py')).digest('hex'),timing.source_sha256);if(CONFIG.stakeExit){const release=JSON.parse(fs.readFileSync('evidence/stake-exit/deployment.json'));const live=JSON.parse(fs.readFileSync('evidence/stake-exit/live.json'));assert.equal(currentHash,release.source_sha256);assert.equal(CONFIG.contract,release.contract_address);assert.equal(live.contract,CONFIG.contract);assert.equal(live.completed,true);}else assert.equal(CONFIG.contract,timing.contract_address);assert.equal(index.completed,true);assert.equal(candidate.live_timing_verified,true);assert.equal(CONFIG.deploymentPending,false);
+ const snapshot=fs.readFileSync('evidence/stake-exit/timing-source.py');
+ assert.equal(createHash('sha256').update(snapshot).digest('hex'),timing.source_sha256);
+ assert.equal(TIMING_CONFIG.contract,timing.contract_address);
+ assert.equal(index.completed,true);
+ assert.equal(candidate.live_timing_verified,true);
+ assert.equal(CONFIG.deploymentPending,false);
+ if(CONFIG.stakeExit){
+  const release=JSON.parse(fs.readFileSync('evidence/stake-exit/deployment.json'));
+  const live=JSON.parse(fs.readFileSync('evidence/stake-exit/live.json'));
+  assert.equal(release.finalized_status,'FINALIZED');
+  assert.equal(currentHash,release.source_sha256);
+  assert.equal(CONFIG.contract,release.contract_address);
+  assert.equal(live.source_sha256,currentHash);
+  assert.equal(live.contract,CONFIG.contract);
+  assert.equal(live.completed,true);
+ }else{
+  assert.equal(CONFIG.contract,timing.contract_address);
+ }
  }else{assert.equal(currentHash,deployment.source_sha256,'deployed source bytes');assert(!CONFIG.deploymentPending);}
 }
 console.log('i18n parity, five-colour styles, wrong-chain guard, integer source and placeholder checks passed.');

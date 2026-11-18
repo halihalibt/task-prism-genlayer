@@ -200,3 +200,38 @@ if stake_manifest_path.exists():
         leader = next(entry for entry in leaders if entry['mode'] == 'leader') if isinstance(leaders, list) else leaders
         assert leader['execution_result'] == 'SUCCESS'
         print('Stake-exit deployment receipt and source bytes match.')
+    stake_live_path = stake_dir / 'live.json'
+    if stake_live_path.exists():
+        live = json.loads(stake_live_path.read_text())
+        assert live['chain_id'] == 61999
+        assert live['contract'] == stake_deployment['contract_address']
+        assert live['source_sha256'] == stake_deployment['source_sha256']
+        verified_tags = set()
+        for entry in live['transactions']:
+            if not entry['verified']:
+                continue
+            receipt = entry['receipt']
+            assert receipt['hash'] == entry['hash'] and receipt['status'] == 'FINALIZED'
+            assert receipt['result_name'] == 'MAJORITY_AGREE'
+            assert receipt['to_address'].lower() == live['contract'].lower()
+            assert receipt['from_address'].lower() == live['public_accounts'][entry['who']].lower()
+            leaders = receipt['consensus_data']['leader_receipt']
+            leader = next(x for x in leaders if x['mode'] == 'leader') if isinstance(leaders, list) else leaders
+            if entry['expected_error']:
+                assert leader['execution_result'] == 'ERROR'
+                assert entry['expected_error'] in leader['genvm_result']['stderr']
+                assert entry['before'] == entry['read_back']
+            else:
+                assert leader['execution_result'] == 'SUCCESS'
+                if entry['method'] == 'withdraw_stake':
+                    received = int(entry['recipient_after_wei'], 0) - int(entry['recipient_before_wei'], 0)
+                    assert received == int(entry['args'][1])
+                    assert entry['read_back']['agents'][entry['args'][0]]['stake'] == 0
+            verified_tags.add(entry['tag'])
+        if live['completed']:
+            assert verified_tags == {
+                'register', 'idle-exit', 'duplicate-exit', 'reactivate', 'post', 'claim',
+                'locked-exit', 'submit', 'evaluate', 'pending-exit', 'challenge',
+                'wrong-principal', 'post-slash-exit',
+            }
+        print('Stake-exit verified receipts:', len(verified_tags), '; lifecycle complete:', live['completed'])

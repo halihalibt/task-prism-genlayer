@@ -19,3 +19,12 @@ npm run build
 The deployment script supports a separate record for this contract with `node scripts/deploy.js --confirm-deploy --stake-exit`. After deployment is FINALIZED with successful execution, `node scripts/stake-exit-live.js --confirm-live` exercises the Studionet lifecycle and records transaction hashes, receipts, readbacks and balance checks. Continue an interrupted run with the same local signer files and journal.
 
 Any balances, escrow and reputation on the earlier deployment stay on that contract. This release adds a withdrawal path to the new deployment.
+
+## Finalized Studionet evidence
+
+- [Deployment manifest](deployment.json) and [deployment receipt](deploy-receipt.json).
+- [Live verification journal](live.json) with 13 finalized calls, including 9 successful executions and 4 intended contract rejections.
+- Idle withdrawal credited the owner exactly 1 GEN. A repeat call was rejected, then the same agent topped up and successfully claimed a task.
+- Both an active claim and a pending verdict blocked withdrawal. Independent GenLayer evaluation and a real challenge settled a rejected delivery and slashed 0.1 GEN.
+- The stale 1 GEN request was rejected. The subsequent withdrawal credited exactly 0.9 GEN, while the poster refund and treasury slash remained on the contract ledger.
+- [Open the previous deployment](https://halihalibt.github.io/task-prism-genlayer/?deployment=timing) to continue existing tasks and settlement withdrawals there.

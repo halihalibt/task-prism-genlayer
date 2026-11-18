@@ -2,7 +2,9 @@ import * as THREE from 'three';
 import {gsap} from 'gsap';
 import {ScrollTrigger} from 'gsap/ScrollTrigger';
 import {createAccount} from 'genlayer-js';
-import {CONFIG} from './config.js';
+import {CONFIG as releaseConfig, TIMING_CONFIG} from './config.js';
+const legacyView = new URLSearchParams(location.search).get('deployment') === 'timing';
+const CONFIG = legacyView ? TIMING_CONFIG : releaseConfig;
 import {taskActions} from './scripts/task-timing.js';
 import {translations} from './i18n_and_styles.js';
 import {reader,readFinal,rpc,validateChain,encoded,sendLocal,envelope,chain} from './scripts/network.js';
@@ -13,6 +15,10 @@ let selectedTask=new URL(location.href).searchParams.get('task')||'', calm=match
 const providers=new Map(), watching=new Set();
 const txStorageKey=`task-prism-txs:${CONFIG.chainId}:${CONFIG.contract.toLowerCase()}`;
 let txs=[];try{const saved=localStorage.getItem(txStorageKey);if(saved){txs=JSON.parse(saved);}else{const legacy=JSON.parse(localStorage.getItem('task-prism-txs')||'[]');txs=Array.isArray(legacy)?legacy.filter(x=>(x.contract||x.receipt?.to_address||'').toLowerCase()===CONFIG.contract.toLowerCase()).map(x=>({...x,contract:CONFIG.contract,chain_id:CONFIG.chainId})):[];}if(!Array.isArray(txs))txs=[];txs=txs.map(reconcileTransaction);localStorage.setItem(txStorageKey,JSON.stringify(txs));}catch{}
+const deploymentLink = $('#deployment-switch');
+deploymentLink.hidden = releaseConfig.stakeExit !== true;
+deploymentLink.href = legacyView ? './' : '?deployment=timing';
+deploymentLink.dataset.t = legacyView ? 'currentDeployment' : 'previousDeployment';
 const t=k=>translations[lang][k]||k;
 const esc=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
 const short=s=>s?`${s.slice(0,6)}…${s.slice(-4)}`:'—';

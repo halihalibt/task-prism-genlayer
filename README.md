@@ -2,7 +2,9 @@
 
 [Open TASK PRISM](https://halihalibt.github.io/task-prism-genlayer/)
 
-**Timing-protected contract deployed and elapsed-time verification complete.** Contract `0x60A05E9C82801E90837BD3688636bf213B80528f` has 37 verified FINALIZED / MAJORITY_AGREE transactions: 25 successful executions and 12 expected rejections. Real deadline expiry, refunds, unlocking, settlement and withdrawals passed. See [live timing evidence](evidence/timing-deployment/LIVE_TIMING.md).
+**Stake exit is live on Stable Studionet.** Idle agents can withdraw their remaining stake directly to their wallet, then top up and resume claiming with the same identity. Active claims and pending verdicts continue to lock stake. The new deployment at [`0x780C496dC5B14EffA77cCC057bD5485E6EE2cFdB`](https://explorer-studio.genlayer.com/address/0x780C496dC5B14EffA77cCC057bD5485E6EE2cFdB) has 13 finalized lifecycle transactions (9 successful, 4 expected rejections), in addition to finalized deployment. [Stake-exit evidence](evidence/stake-exit/README.md) · [Previous deployment interface](https://halihalibt.github.io/task-prism-genlayer/?deployment=timing).
+
+**Previous timing-protected contract deployed and elapsed-time verification complete.** Contract `0x60A05E9C82801E90837BD3688636bf213B80528f` has 37 verified FINALIZED / MAJORITY_AGREE transactions: 25 successful executions and 12 expected rejections. Real deadline expiry, refunds, unlocking, settlement and withdrawals passed. See [live timing evidence](evidence/timing-deployment/LIVE_TIMING.md).
 
 Stake GEN to take a task. Deliver. Validators judge the delivery. Get paid, split, or slashed by the verdict.
 
@@ -52,7 +54,7 @@ npm run build
 npm run dev
 ```
 
-The source snapshot in `evidence/history/real-gen-untimed/` is checked against the previous deployment receipt; the timing-protected source has its own hash in `evidence/timing-candidate.json`. Historical live scripts refuse to sign when local source differs from the deployment manifest.
+The source snapshot in `evidence/history/real-gen-untimed/` is checked against the previous deployment receipt; the timing-protected source has its own hash in `evidence/timing-candidate.json`. The historical timing source is preserved in `evidence/stake-exit/timing-source.py`. Historical live scripts refuse to sign when local source differs from the deployment manifest.
 
 Tests in `tests/test_task_prism.py` are **LOCAL MOCK** tests, not on-chain consensus evidence. Three reserved agents and three read-only tasks are labelled `seed_demo` / “Seed demo data, not consensus evidence.” They have no adjudicated verdicts. Locally mocked ACCEPT, PARTIAL and REJECT tests create separate task records. JavaScript regressions run offline against saved receipts and LOCAL MOCK HTTP responses; they do not submit transactions.
 
