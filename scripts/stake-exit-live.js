@@ -45,6 +45,9 @@ async function run(tag,who,method,args=[],value=0n,error=null,check=()=>{}){
   const before=await read();
   item={tag,who,method,args:args.map(x=>typeof x==='bigint'?x.toString():x),value_wei:value.toString(),expected_error:error,before,verified:false};
   // Broadcast failures are recorded; an uncertain signature is never blindly replayed.
+  if(method==='withdraw_stake'&&!error){
+   item.recipient_before_wei=String(await rpc('eth_getBalance',[actors[who].address,'latest']));
+  }
   log.transactions.push(item);save();
   try{item.hash=await sendLocal(actors[who],address,encoded(method,args),value);item.submitted_at=new Date().toISOString();save();}
   catch(e){item.broadcast_error=String(e);save();throw e;}
@@ -67,11 +70,16 @@ async function run(tag,who,method,args=[],value=0n,error=null,check=()=>{}){
   if(attempts<3){item.superseded=true;save();return run(tag,who,method,args,value,error,check);}
   throw Error('CONSENSUS_NOT_REACHED_AFTER_THREE_FINALIZED_ATTEMPTS: '+tag);
  }
+ assert.equal(item.receipt.from_address.toLowerCase(),actors[who].address.toLowerCase());
  assert.equal(item.receipt.to_address.toLowerCase(),address.toLowerCase());
  if(error){
   assert.equal(item.execution,'ERROR');assert.match(leader.genvm_result?.stderr||'',new RegExp(error));
   assert.deepEqual(item.read_back,item.before,'REJECTED_CALL_CHANGED_STATE');
  }else{assert.equal(receiptOutcome(item.receipt),'readback',JSON.stringify(leader?.genvm_result));check(item.read_back,item.before);}
+ if(method==='withdraw_stake'&&!error){
+  item.recipient_after_wei=String(await rpc('eth_getBalance',[actors[who].address,'latest']));
+  assert.equal(BigInt(item.recipient_after_wei)-BigInt(item.recipient_before_wei),BigInt(args[1]),'PRINCIPAL_TRANSFER_DELTA');
+ }
  conserved(item.read_back,item.contract_balance_wei);
  item.verified=true;save();console.log(tag,'FINALIZED',item.execution,item.hash);return item;
 }
