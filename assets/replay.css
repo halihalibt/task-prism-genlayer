@@ -22,3 +22,69 @@
  #prism canvas{display:block}
  #prism canvas+img{display:none}
 }
+
+/* Shared glass surfaces for the operational site and the replay. */
+:root{
+ --glass-fill:linear-gradient(145deg,rgba(141,229,205,.12),rgba(12,28,29,.36));
+ --glass-border:rgba(179,239,222,.28);
+ --glass-ink:#f2f0e9;
+ --glass-secondary:#c2d8d1;
+}
+.chapter:not(.market){
+ --bg:var(--graphite);
+ --ink:var(--glass-ink);
+ --accent:var(--green);
+ color-scheme:dark;
+ background:radial-gradient(ellipse at 50% 45%,#254646 0,transparent 67%),#131c20;
+}
+body>header{
+ background:rgba(16,25,27,.68);
+ backdrop-filter:blur(7px);
+ border-color:var(--glass-border);
+ color:var(--glass-ink);
+ --ink:var(--glass-ink);
+}
+:is(.opening-note,.ledger-notice,.roster-row,.data-band,.panel,.account-card,.thresholds,.rank-row,#tx-panel,dialog,.case-card,.case-top){
+ background:var(--glass-fill);
+ border:1px solid var(--glass-border);
+ border-radius:14px;
+ box-shadow:inset 0 1px rgba(234,255,248,.09),0 14px 36px rgba(0,0,0,.18);
+ backdrop-filter:blur(4px);
+ color:var(--glass-ink);
+}
+:is(.roster-row,.rank-row,.data-band){z-index:3;position:relative}
+.roster-row,.rank-row{padding-inline:clamp(14px,2.3vw,34px);margin-bottom:12px}
+.roster-row .roster-meta h3,.roster-row .roster-action strong{color:var(--glass-ink)}
+.roster-row .roster-center{min-width:0}
+.data-band{padding-inline:18px}
+.opening-note,.thresholds{padding:15px 18px}
+.thresholds p:last-child{border-bottom:0}
+.chapter-top,.chapter-copy>p,.opening .tagline{background:transparent}
+.chapter-copy>p,.account-card p,.case-card p{color:var(--glass-secondary)}
+.chapter-copy>p,.roster-meta,.roster-action,.panel label,.thresholds,.rank-row>div,.case-card{
+ text-shadow:0 1px 3px rgba(0,0,0,.68);
+}
+.panel,.account-card,dialog,#tx-panel{
+ --bg:#18282a;
+ --ink:var(--glass-ink);
+ --accent:var(--green);
+ color-scheme:dark;
+}
+:is(.panel,.account-card,dialog) :is(input,textarea,select){
+ background:rgba(8,22,24,.55);
+ border-color:var(--glass-border);
+ border-radius:7px;
+ color:var(--glass-ink);
+}
+select option{background:#172729;color:var(--glass-ink)}
+dialog::backdrop{background:rgba(8,18,19,.30);opacity:1}
+.panel-label,.cockpit-bar{border-color:var(--glass-border)}
+.judge-actions{position:relative;z-index:5}
+@media(min-width:1200px){
+ .chapter-grid,.workbench{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(240px,29vw,570px)}
+ .cockpit{width:min(100%,680px);margin-inline:auto 0}
+}
+@media(max-width:767px){
+ .roster-row,.rank-row,.panel,.account-card{border-radius:12px}
+ body>header{background:rgba(16,25,27,.87)}
+}
