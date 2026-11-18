@@ -8,6 +8,6 @@ await build({entryPoints:['app.js'],bundle:true,minify:true,format:'esm',target:
 fs.rmSync('dist',{recursive:true,force:true});fs.mkdirSync('dist',{recursive:true});
 for(const name of ['index.html','assets','KNOWN_LIMITATIONS.md','config.js'])fs.cpSync(name,`dist/${name}`,{recursive:true});
 let html=fs.readFileSync('dist/index.html','utf8');
-for(const [old,ext]of [['app.bundle.js','js'],['app.css','css']]){const data=fs.readFileSync(`dist/assets/${old}`),digest=createHash('sha256').update(data).digest('hex').slice(0,12),next=`app-${digest}.${ext}`;fs.writeFileSync(`dist/assets/${next}`,data);fs.unlinkSync(`dist/assets/${old}`);html=html.replace(`./assets/${old}`,`./assets/${next}`);}
+for(const [old,ext]of [['app.bundle.js','js'],['app.css','css'],['replay.css','css']]){const data=fs.readFileSync(`dist/assets/${old}`),digest=createHash('sha256').update(data).digest('hex').slice(0,12),next=`${old==='replay.css'?'replay':'app'}-${digest}.${ext}`;fs.writeFileSync(`dist/assets/${next}`,data);fs.unlinkSync(`dist/assets/${old}`);html=html.replace(`./assets/${old}`,`./assets/${next}`);}
 fs.writeFileSync('dist/index.html',html);
 console.log('Built static Pages assets with content-hashed cache paths.');
