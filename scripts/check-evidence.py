@@ -182,3 +182,21 @@ if (timing/'deployment.json').exists():
     assert t['settlement']=={'paid_to_agent':paid,'refunded_to_poster':refund,'slashed_to_treasury':slash,'agent_reputation_delta':rep}
    verified+=1
   print('Timing-version verified transactions:',verified,'; full elapsed-time suite complete:',live['completed'])
+
+# Verify the stake-exit deployment independently of the historical releases.
+stake_dir = root / 'evidence/stake-exit'
+stake_manifest_path = stake_dir / 'deployment.json'
+if stake_manifest_path.exists():
+    stake_deployment = json.loads(stake_manifest_path.read_text())
+    stake_source = (root / 'contracts/task_prism.py').read_bytes()
+    assert hashlib.sha256(stake_source).hexdigest() == stake_deployment['source_sha256']
+    if stake_deployment.get('finalized_status') == 'FINALIZED':
+        receipt = json.loads((stake_dir / 'deploy-receipt.json').read_text())
+        assert receipt['status'] == 'FINALIZED' and receipt['result_name'] == 'MAJORITY_AGREE'
+        assert receipt['hash'] == stake_deployment['deploy_tx']
+        assert receipt['to_address'] == stake_deployment['contract_address']
+        assert base64.b64decode(receipt['data']['contract_code']) == stake_source
+        leaders = receipt['consensus_data']['leader_receipt']
+        leader = next(entry for entry in leaders if entry['mode'] == 'leader') if isinstance(leaders, list) else leaders
+        assert leader['execution_result'] == 'SUCCESS'
+        print('Stake-exit deployment receipt and source bytes match.')
