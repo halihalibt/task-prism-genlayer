@@ -88,3 +88,32 @@ dialog::backdrop{background:rgba(8,18,19,.30);opacity:1}
  .roster-row,.rank-row,.panel,.account-card{border-radius:12px}
  body>header{background:rgba(16,25,27,.87)}
 }
+
+/* The leaderboard wrappers must stay clear behind the glass cards. */
+#leaderboard :is(.ranking,.rank-heading p,.next-link){
+ background:none;
+}
+#leaderboard .next-link{
+ padding:clamp(18px,4vw,50px);
+ border:1px solid var(--glass-border);
+ border-radius:14px;
+ background:var(--glass-fill);
+ backdrop-filter:blur(3px);
+}
+footer{
+ background:rgba(14,28,30,.32);
+ border-top:1px solid var(--glass-border);
+ backdrop-filter:blur(3px);
+}
+
+/* One family across both languages, with weight and spacing for hierarchy. */
+:root{
+ --prism-font:"Inter","Segoe UI Variable","Segoe UI","PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+}
+body,body :is(button,input,textarea,select,.mono,.eyebrow,.chapter-top,.panel-label,.fine,.roster-heading,.network,.filter,.data-band small,.score small,.rank-label,.footer-links,.ledger-notice,.account-card>span,.thresholds b,.case-card small,.proof-hash){
+ font-family:var(--prism-font);
+}
+:is(.mono,.ledger-line strong,.account-card strong,.rank-row>strong,.score strong){
+ font-variant-numeric:tabular-nums;
+}
+:is(.eyebrow,.chapter-top,.panel-label,.network,.rank-label){letter-spacing:.075em}

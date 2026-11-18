@@ -97,7 +97,7 @@ const animate=now=>{
  unfold+=(THREE.MathUtils.smoothstep(scroll,.015,.34)-unfold)*damp;
  glass+=(THREE.MathUtils.smoothstep(1-replayTop/innerHeight,.12,.75)-glass)*damp;
  core.scale.z=edges.scale.z=.045+.955*unfold;
- root.rotation.set(-.015+unfold*.38-glass*.12,unfold*2.05+glass*.51,-unfold*.19+glass*.31);
+ root.rotation.set(-.015+unfold*.38-glass*.12,scroll*Math.PI*3,-unfold*.19+glass*.31);
  root.scale.setScalar(1+unfold*.14);
  ring.rotation.set(1.04+unfold*.34,unfold*.25,-.4+unfold*.66);
  ticks.rotation.copy(ring.rotation);

@@ -23,7 +23,7 @@ export function createCanvasPrism(){
   const unfold=smooth((p-.015)/.325);
   const glass=smooth((1-document.getElementById('case-replay').getBoundingClientRect().top/innerHeight-.12)/.63);
   const thickness=.045+.955*unfold;
-  const yaw=unfold*2.05+glass*.51,tilt=-.015+unfold*.38-glass*.12;
+  const yaw=p*Math.PI*3,tilt=-.015+unfold*.38-glass*.12;
   const cy=Math.cos(yaw),sy=Math.sin(yaw),cx=Math.cos(tilt),sx=Math.sin(tilt),scale=Math.min(w/4.65,h/3.9);
   function project([x,y,z]){
    z*=thickness;
